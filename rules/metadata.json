@@ -1,0 +1,4 @@
+{
+  "role": "marksman",
+  "priority_stats": ["positioning", "damage_dealt", "death_count"]
+}

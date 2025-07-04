@@ -1,0 +1,76 @@
+# MLBB Coach AI - Performance Thresholds Configuration
+# All values can be scaled by match duration or other factors
+
+# Default thresholds (fallback values)
+defaults:
+  kda:
+    low: 2.0
+    high: 4.0
+  gpm_base: 500 # Will be scaled by match duration
+  damage_base: 3000 # Per minute
+  teamfight_participation: 50
+
+# Role-specific thresholds
+roles:
+  marksman:
+    kda:
+      low: 4.0
+      high: 6.0
+    gpm_base: 700
+    damage_base: 5000
+    turret_damage_base: 800 # Per minute
+
+  assassin:
+    kda:
+      low: 4.0
+      high: 6.0
+    gpm_base: 750
+    damage_base: 4500
+
+  mage:
+    kda:
+      low: 3.0
+      high: 5.0
+    gpm_base: 600
+    damage_base: 5500
+
+  tank:
+    kda:
+      low: 2.5
+      high: 4.0
+    gpm_base: 450
+    damage_taken_base: 4000 # Per minute
+
+  support:
+    kda:
+      low: 3.5
+      high: 5.0
+    gpm_base: 500
+
+  fighter:
+    kda:
+      low: 3.0
+      high: 5.0
+    gpm_base: 650
+    damage_base: 4000
+
+# Hero-specific overrides (these take precedence)
+heroes:
+  franco:
+    hooks_landed_min: 4
+    team_engages_min: 3
+    vision_score_min: 5
+
+  chou:
+    damage_base: 3750 # Slightly lower than generic fighter
+    teamfight_participation: 60
+
+  kagura:
+    damage_base: 6000 # Higher burst potential
+
+# Severity levels for feedback
+severity_levels:
+  critical: "🚨"
+  warning: "⚠️"
+  info: "💡"
+  success: "✅"
