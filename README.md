@@ -11,6 +11,7 @@ MLBB Coach AI is an advanced AI-powered coaching tool that analyzes Mobile Legen
 ## ⚡ Key Features
 
 - **🎮 Role-Specific Analysis** - Tailored evaluation for all 6 MLBB roles (Marksman, Assassin, Mage, Tank, Support, Fighter)
+- **🧠 Mental Boost Feedback** - Contextual encouragement based on performance trends
 - **⏱️ Dynamic Scaling** - Performance thresholds adjust based on match duration
 - **🎯 Severity Levels** - Prioritized feedback (Critical → Warning → Info → Success)
 - **📊 Comprehensive Metrics** - KDA, GPM, damage ratios, positioning, teamfight participation
@@ -31,30 +32,41 @@ MLBB Coach AI is an advanced AI-powered coaching tool that analyzes Mobile Legen
 - **Configuration-Driven**: No hardcoded thresholds—everything in YAML
 - **Type Safety**: Full type hints for reliability
 
+### Mental Boost Feedback
+
+The system now includes a `MentalCoach` that analyzes your performance trend over recent matches. It determines if you're on an upward, downward, or consistent trajectory and provides tailored psychological encouragement. This goes beyond stats to support the mental aspect of competitive gaming.
+
 ## 📁 Current Architecture
 
 ```
 mlbb-coach-ai/
-├── main.py                    # CLI interface
-├── coach.py                   # Dynamic module loading & feedback generation
+├── main.py                    # Main script to run the coach
+├── coach.py                   # Handles dynamic rule loading and evaluation
+├── requirements.txt           # Project dependencies
 ├── core/
-│   └── base_evaluator.py      # Shared evaluation logic with inheritance
+│   ├── base_evaluator.py      # Core class with shared evaluation logic
+│   ├── data_collector.py      # Handles loading and validating match data
+│   ├── mental_coach.py        # Provides encouragement based on history
+│   └── schemas.py             # Pydantic schemas for data validation
 ├── config/
 │   └── thresholds.yml         # Role/hero-specific performance thresholds
 ├── data/
-│   └── sample_match.json      # Test data for 6 different heroes
-├── rules/roles/               # Organized by MLBB roles
+│   ├── player_history.json    # Simulated player performance history
+│   └── sample_match.json      # Test data for multiple heroes
+├── rules/roles/               # Hero-specific evaluation logic
 │   ├── assassin/lancelot.py
 │   ├── fighter/chou.py
 │   ├── mage/kagura.py
 │   ├── marksman/miya.py
 │   ├── support/estes.py
-│   └── tank/franco.py
+│   └── tank/
+│       ├── franco.py
+│       └── tigreal.py
 ├── tests/
-│   └── test_chou.py           # Unit tests preventing regressions
-├── docs/
-│   └── refactoring_summary.md # Architecture documentation
-└── utils.py                   # Data validation
+│   ├── test_chou.py           # Unit tests for Chou
+│   └── test_franco.py         # Unit tests for Franco
+└── docs/
+    └── refactoring_summary.md # Architecture and refactoring details
 ```
 
 ## 🤖 Tech Stack
@@ -62,6 +74,7 @@ mlbb-coach-ai/
 **Current Implementation:**
 
 - **Python 3.x** with type hints
+- **Pydantic** for data validation
 - **YAML** for configuration management
 - **Dynamic imports** for modular hero evaluation
 - **Inheritance patterns** for code reuse
@@ -81,6 +94,9 @@ mlbb-coach-ai/
 - warning: GPM 580 (< 650). Clear side waves between ganks.
 - warning: Low fight presence (58% < 60%). Collapse faster on ally engages.
 - critical: 7 deaths is too high. Chou has great mobility—use Shunpo to disengage after combos.
+
+멘탈 코칭:
+- Your KDA is trending up (3.8 -> 4.5). Keep up the great work! Your map awareness is clearly improving.
 ```
 
 ## ⚙️ Configuration Example
@@ -103,19 +119,21 @@ roles:
 ## 🧪 Testing & Quality
 
 ```bash
-# Run comprehensive tests
-python tests/test_chou.py
+# Install dependencies
+pip install -r requirements.txt
 
-✓ test_kda_low passed
-✓ test_damage_scaling passed
-✓ test_severity_levels passed
-✅ All tests passed!
+# Run comprehensive tests
+python -m unittest discover tests
+
+# Example for a single test file
+python tests/test_franco.py
 ```
 
 ## 📌 Current Status
 
 - ✅ **Production-Ready Core** - Advanced evaluation engine with dynamic thresholds
-- ✅ **6 Hero Implementations** - Complete coverage of major MLBB roles
+- ✅ **7 Hero Implementations** - Coverage of major MLBB roles and heroes
+- ✅ **Contextual Encouragement** - Mental coaching based on performance trends
 - ✅ **Comprehensive Testing** - Unit tests prevent regressions
 - ✅ **Professional Architecture** - Inheritance, configuration, modularity
 - 🔜 **Next Phase**: Web UI and ML integration
@@ -141,10 +159,11 @@ Traditional MLBB tools provide raw statistics without context. This system provi
 # Clone and run
 git clone [your-repo]
 cd mlbb-coach-ai
+pip install -r requirements.txt
 python main.py
 
 # Run tests
-python tests/test_chou.py
+python -m unittest discover tests
 ```
 
 _Ready for production use with plans for web deployment and ML enhancement._
