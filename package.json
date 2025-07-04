@@ -1,0 +1,13 @@
+{
+  "name": "mlbb-coach-ai-schemas",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Zod schemas for the MLBB Coach AI project",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5",
+    "zod": "^3.23.8"
+  }
+}

@@ -85,5 +85,19 @@
     "positioning_rating": "low",
     "ult_usage": "low",
     "match_duration": 17
+  },
+  {
+    "hero": "tigreal",
+    "kills": 1,
+    "deaths": 9,
+    "assists": 22,
+    "gold_per_min": 420,
+    "hero_damage": 15000,
+    "turret_damage": 800,
+    "damage_taken": 85000,
+    "teamfight_participation": 85,
+    "positioning_rating": "average",
+    "ult_usage": "high",
+    "match_duration": 21
   }
 ]

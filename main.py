@@ -1,14 +1,34 @@
-import json
 from coach import generate_feedback
+from core.data_collector import DataCollector
 
-with open("data/sample_match.json", "r") as f:
-    matches = json.load(f)
 
-for i, match_data in enumerate(matches):
-    feedback = generate_feedback(match_data)
-    hero = match_data.get("hero", "Unknown")
+def main():
+    """
+    Main function to run the coaching analysis.
+    """
+    # Instantiate the data collector
+    collector = DataCollector()
 
-    print(f"🧠 Match {i + 1} Coaching Report (Hero: {hero.title()})")
-    for line in feedback:
-        print(f"- {line}")
-    print()  # Add a blank line for readability
+    # Use the collector to load and validate data from the JSON file
+    try:
+        matches = collector.from_json_upload("data/sample_match.json")
+    except (FileNotFoundError, ValueError) as e:
+        print(f"Error: {e}")
+        return
+
+    # Process each match and print the feedback
+    for i, match_data in enumerate(matches):
+        feedback = generate_feedback(match_data, include_severity=True)
+        hero = match_data.get("hero", "Unknown")
+
+        print(f"🧠 Match {i + 1} Coaching Report (Hero: {hero.title()})")
+        # Print feedback with severity icons from config
+        for severity, line in feedback:
+            # This is a placeholder for where you'd get icons
+            # For now, we just show the severity level
+            print(f"- {severity.upper()}: {line}")
+        print()  # Add a blank line for readability
+
+
+if __name__ == "__main__":
+    main()

@@ -2,8 +2,10 @@
 import os
 # For advanced control over the import system.
 import importlib.util
-# Imports our custom data validation function.
-from utils import validate_data
+# Import Pydantic for data validation and to catch validation errors.
+from pydantic import ValidationError
+# Import our new Pydantic schemas.
+from core.schemas import AnyMatch
 
 
 # A dictionary to act as a cache for our loaded rule modules.
@@ -55,57 +57,73 @@ def _discover_rules():
 
 def generate_feedback(match_data, include_severity=False):
     """
-    Generates coaching feedback by validating data and finding the correct rule module.
+    Generates coaching feedback by validating data and finding the correct
+    rule module.
     
     Args:
-        match_data: Dictionary containing match statistics
+        match_data: Dictionary containing match statistics.
         include_severity: If True, returns tuples of (severity, message).
-                         If False, returns just messages for backward compatibility.
+                         If False, returns just messages.
     
     Returns:
-        List of feedback messages or (severity, message) tuples
+        List of feedback messages or (severity, message) tuples.
     """
 
-    # Validate the incoming match data using the function from utils.py.
-    if not validate_data(match_data):
+    # Validate the incoming match data using the new Pydantic schema.
+    try:
+        # Pydantic will parse and validate the raw dict. If successful,
+        # 'validated_data' is a type-safe Pydantic model.
+        validated_data = AnyMatch.model_validate(match_data)
+    except ValidationError as e:
+        # If validation fails, return a detailed error message.
+        error_message = f"Invalid match data: {e.errors()[0]['msg']}"
         if include_severity:
-            return [("error", "Invalid match data format. Please check your input.")]
-        return ["Invalid match data format. Please check your input."]
+            return [("error", error_message)]
+        return [error_message]
 
-    # Get the hero's name from the match data.
-    hero = match_data.get("hero")
+    # Get the hero's name from the validated data object.
+    hero = validated_data.hero
+
+    # The rest of the function now works with the validated_data model.
+    match_dict = validated_data.model_dump()
 
     # Check if a rule module for this hero was found and loaded.
     if hero in _rule_modules:
         # Get match duration if available
-        minutes = match_data.get('match_duration')
+        minutes = match_dict.get('match_duration')
         
         # Check if the module has an evaluate function
         if hasattr(_rule_modules[hero], 'evaluate'):
             # Call the evaluate function with match duration support
             try:
                 # Try calling with minutes parameter (new format)
-                feedback = _rule_modules[hero].evaluate(match_data, minutes)
+                feedback = _rule_modules[hero].evaluate(match_dict, minutes)
             except TypeError:
                 # Fall back to old format without minutes
-                feedback = _rule_modules[hero].evaluate(match_data)
+                feedback = _rule_modules[hero].evaluate(match_dict)
             
             # Handle different return formats
             if feedback and isinstance(feedback[0], tuple):
                 # New format with severity levels
-                return feedback if include_severity else [msg for _, msg in feedback]
+                return (
+                    feedback
+                    if include_severity
+                    else [msg for _, msg in feedback]
+                )
             else:
                 # Old format - just messages
                 return feedback
         else:
+            message = f"No evaluate function found for hero: {hero}"
             if include_severity:
-                return [("error", f"No evaluate function found for hero: {hero}")]
-            return [f"No evaluate function found for hero: {hero}"]
+                return [("error", message)]
+            return [message]
     else:
         # If no matching rule is found, return a helpful message.
+        message = f"No coaching logic found for hero: {hero}"
         if include_severity:
-            return [("warning", f"No coaching logic found for hero: {hero}")]
-        return [f"No coaching logic found for hero: {hero}"]
+            return [("warning", message)]
+        return [message]
 
 
 # Run the discovery process once when the application first starts.

@@ -68,6 +68,11 @@ heroes:
   kagura:
     damage_base: 6000 # Higher burst potential
 
+  tigreal:
+    damage_taken_base: 4500 # Higher than default tank; he's an initiator
+    kda:
+      low: 2.0 # Lower KDA is acceptable for a set-up tank
+
 # Severity levels for feedback
 severity_levels:
   critical: "🚨"
