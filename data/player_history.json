@@ -1,0 +1,62 @@
+{
+  "player_id": "Lesz-Xi",
+  "player_defined_goal": "improve_early_game",
+  "match_history": [
+    {
+      "hero": "miya",
+      "kills": 7,
+      "deaths": 6,
+      "assists": 8,
+      "gold_per_min": 720,
+      "match_duration": 19
+    },
+    {
+      "hero": "franco",
+      "kills": 3,
+      "deaths": 7,
+      "assists": 18,
+      "gold_per_min": 460,
+      "match_duration": 18
+    },
+    {
+      "hero": "estes",
+      "kills": 1,
+      "deaths": 3,
+      "assists": 25,
+      "gold_per_min": 520,
+      "match_duration": 22
+    },
+    {
+      "hero": "kagura",
+      "kills": 8,
+      "deaths": 4,
+      "assists": 9,
+      "gold_per_min": 780,
+      "match_duration": 20
+    },
+    {
+      "hero": "lancelot",
+      "kills": 10,
+      "deaths": 3,
+      "assists": 6,
+      "gold_per_min": 830,
+      "match_duration": 19
+    },
+    {
+      "hero": "chou",
+      "kills": 6,
+      "deaths": 6,
+      "assists": 10,
+      "gold_per_min": 610,
+      "match_duration": 21
+    },
+    {
+      "hero": "tigreal",
+      "kills": 2,
+      "deaths": 7,
+      "assists": 20,
+      "gold_per_min": 430,
+      "match_duration": 20
+    }
+  ]
+}
