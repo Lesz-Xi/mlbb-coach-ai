@@ -81,4 +81,107 @@ class MentalCoach:
                 "attention to GPM next match."
             )
         
-        return boost 
+        return boost
+
+    def get_progress_journal(self) -> str:
+        """
+        Analyzes the entire match history to generate a reflective summary
+        of a player's progress and tendencies.
+        """
+        if len(self.history) < 5:
+            return (
+                "Play a few more games to unlock your first Progress Journal entry!"
+            )
+
+        # --- Analysis ---
+        roles = [self._get_role(m['hero']) for m in self.history]
+        most_common_role = max(set(roles), key=roles.count)
+
+        high_gpm_matches = sorted(
+            self.history, key=lambda m: m.get('gold_per_min', 0), reverse=True
+        )
+        best_gpm_hero = high_gpm_matches[0]['hero']
+
+        # --- Narrative Generation ---
+        part1 = (
+            f"Looking at your last {len(self.history)} games, a few patterns "
+            f"are emerging. You seem to be gravitating towards the "
+            f"**{most_common_role}** role, showing a real desire to "
+            f"control the flow of the game."
+        )
+        part2 = (
+            f"Your standout strength is farming efficiency, especially on "
+            f"resource-hungry heroes like **{best_gpm_hero.title()}**. "
+            f"This ability to build a gold lead is a massive asset."
+        )
+        part3 = (
+            "A recurring theme is your proactive engagement in teamfights. "
+            "This shows great map awareness, but let's ensure every fight "
+            "is for a key objective."
+        )
+
+        # --- Goal-Oriented Feedback ---
+        goal_feedback = self._generate_goal_focused_feedback()
+
+        part4 = (
+            "You're evolving into a decisive, impactful player. "
+            "Keep focusing on that a tactical decision-making."
+        )
+
+        return f"{part1}\n\n{part2}\n\n{part3}\n\n{goal_feedback}\n\n{part4}"
+
+    def _generate_goal_focused_feedback(self) -> str:
+        """Analyzes history to provide feedback on the player's goal."""
+        if self.goal == "improve_early_game" and len(self.history) >= 4:
+            # Split history for trend analysis
+            mid_point = len(self.history) // 2
+            first_half = self.history[:mid_point]
+            second_half = self.history[mid_point:]
+
+            gpm_first_half = sum(
+                m.get('gold_per_min', 0) for m in first_half
+            ) / len(first_half)
+            gpm_second_half = sum(
+                m.get('gold_per_min', 0) for m in second_half
+            ) / len(second_half)
+
+            trend_narrative = ""
+            # 5% increase in GPM
+            if gpm_second_half > gpm_first_half * 1.05:
+                trend_narrative = (
+                    f"Your GPM is trending up from an average of "
+                    f"**{gpm_first_half:.0f}** to **{gpm_second_half:.0f}** "
+                    f"in recent games. This is great progress."
+                )
+            # 5% decrease
+            elif gpm_second_half < gpm_first_half * 0.95:
+                trend_narrative = (
+                    f"Your average GPM has slightly dipped from "
+                    f"**{gpm_first_half:.0f}** to **{gpm_second_half:.0f}**. "
+                    f"Let's refocus on that early game farm."
+                )
+            else:
+                trend_narrative = (
+                    f"You are maintaining a consistent GPM around "
+                    f"**{gpm_second_half:.0f}**. This stability is a strong "
+                    "foundation to build on."
+                )
+
+            return (
+                "**Progress on Your Goal (Improve Early Game):**\n"
+                "You're focused on improving your early game, which hinges on "
+                f"farming. {trend_narrative} To accelerate this, try to "
+                "secure at least one jungle camp after clearing each minion "
+                "wave in the first 5 minutes."
+            )
+        return ""
+
+    def _get_role(self, hero: str) -> str:
+        """Helper to determine role from hero name."""
+        role_map = {
+            'miya': 'marksman', 'layla': 'marksman', 'franco': 'tank',
+            'tigreal': 'tank', 'kagura': 'mage', 'eudora': 'mage',
+            'lancelot': 'assassin', 'fanny': 'assassin', 'estes': 'support',
+            'angela': 'support', 'chou': 'fighter', 'zilong': 'fighter'
+        }
+        return role_map.get(hero, 'fighter') 

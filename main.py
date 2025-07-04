@@ -48,6 +48,14 @@ def main():
         print(f"💡 Mental Boost: {mental_boost}")
         print()  # Add a blank line for readability
 
+    # After processing all matches, generate a progress journal summary.
+    print("\n" + "="*40)
+    print("📖 Player Progress Journal")
+    print("="*40)
+    journal_entry = mental_coach.get_progress_journal()
+    print(journal_entry)
+    print("="*40)
+
 
 if __name__ == "__main__":
     main()
