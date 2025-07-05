@@ -1,0 +1,18 @@
+{
+  "good_ocr_result": [
+    ["10 / 2 / 8", 0.98],
+    ["Hero Damage 95000", 0.99],
+    ["Turret Damage 8000", 0.97],
+    ["Damage Taken 30000", 0.96],
+    ["Teamfight 65%", 0.95],
+    ["GPM 850", 0.98],
+    ["Gold Earned 25000", 0.99],
+    ["some other text lancelot hero", 0.99]
+  ],
+  "bad_ocr_result": [
+    ["1 / 9 / 3", 0.98],
+    ["Hero Dmage 15000", 0.85],
+    ["GPM 420", 0.98],
+    ["Hero tigrol", 0.75]
+  ]
+}

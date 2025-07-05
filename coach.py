@@ -5,7 +5,7 @@ import importlib.util
 # Import Pydantic for data validation and to catch validation errors.
 from pydantic import ValidationError
 # Import our new Pydantic schemas.
-from core.schemas import AnyMatch
+from core.schemas import Matches
 
 
 # A dictionary to act as a cache for our loaded rule modules.
@@ -73,7 +73,8 @@ def generate_feedback(match_data, include_severity=False):
     try:
         # Pydantic will parse and validate the raw dict. If successful,
         # 'validated_data' is a type-safe Pydantic model.
-        validated_data = AnyMatch.model_validate(match_data)
+        validated_matches = Matches(data=[match_data])
+        validated_data = validated_matches.data[0]
     except ValidationError as e:
         # If validation fails, return a detailed error message.
         error_message = f"Invalid match data: {e.errors()[0]['msg']}"

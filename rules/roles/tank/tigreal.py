@@ -1,4 +1,4 @@
-from ...core.base_evaluator import BaseEvaluator
+from core.base_evaluator import BaseEvaluator
 from typing import List, Dict, Tuple
 
 

@@ -61,7 +61,7 @@ class MentalCoach:
         Provides contextual encouragement based on the most recent match.
         """
         k = current_match.get("kills", 0)
-        d = current_match.get("deaths", 1)
+        d = max(1, current_match.get("deaths", 1))  # Ensure d is at least 1
         a = current_match.get("assists", 0)
         current_kda = (k + a) / d
 
@@ -182,6 +182,7 @@ class MentalCoach:
             'miya': 'marksman', 'layla': 'marksman', 'franco': 'tank',
             'tigreal': 'tank', 'kagura': 'mage', 'eudora': 'mage',
             'lancelot': 'assassin', 'fanny': 'assassin', 'estes': 'support',
-            'angela': 'support', 'chou': 'fighter', 'zilong': 'fighter'
+            'angela': 'support', 'chou': 'fighter', 'zilong': 'fighter',
+            'fredrinn': 'fighter', 'hayabusa': 'assassin'
         }
         return role_map.get(hero, 'fighter') 

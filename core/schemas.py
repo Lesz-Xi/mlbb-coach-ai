@@ -59,6 +59,26 @@ class TigrealMatch(BaseMatch):
     hero: Literal['tigreal']
 
 
+class AngelaMatch(BaseMatch):
+    """Schema for Angela."""
+    hero: Literal['angela']
+
+
+class FredrinnMatch(BaseMatch):
+    """Schema for Fredrinn."""
+    hero: Literal['fredrinn']
+
+
+class HayabusaMatch(BaseMatch):
+    """Schema for Hayabusa."""
+    hero: Literal['hayabusa']
+
+
+class UnknownMatch(BaseMatch):
+    """Schema for unknown heroes."""
+    hero: Literal['unknown']
+
+
 # A discriminated union to validate against the correct hero schema.
 # Pydantic uses the `hero` literal to determine which model to use.
 AnyMatch = Annotated[
@@ -69,7 +89,11 @@ AnyMatch = Annotated[
         KaguraMatch,
         LancelotMatch,
         ChouMatch,
-        TigrealMatch
+        TigrealMatch,
+        AngelaMatch,
+        FredrinnMatch,
+        HayabusaMatch,
+        UnknownMatch
     ],
     Field(discriminator='hero')
 ]

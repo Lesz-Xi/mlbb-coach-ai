@@ -13,7 +13,7 @@ def main():
 
     # Load player history for the Mental Coach
     try:
-        with open("data/player_history.json", "r") as f:
+        with open("mlbb-coach-ai/data/player_history.json", "r") as f:
             player_data = json.load(f)
         history = player_data.get("match_history", [])
         goal = player_data.get("player_defined_goal", "general_improvement")
@@ -24,29 +24,67 @@ def main():
     # Instantiate the mental coach with the player's data
     mental_coach = MentalCoach(player_history=history, player_goal=goal)
 
-    # Use the collector to load and validate data from the JSON file
+    # --- New Screenshot-based Workflow ---
     try:
-        matches = collector.from_json_upload("data/sample_match.json")
+        ign = "Lesz XVII"
+        hero_override = "hayabusa"  # Manually specify the hero here
+        kda_image_path = "Screenshot-Test/IMG_1523.PNG"
+        
+        print(f"🔬 Analyzing screenshot for player: {ign} (Hero: {hero_override})")
+        
+        result = collector.from_screenshot(
+            ign, kda_image_path, hero_override=hero_override
+        )
+        
+        if result and result.get("data"):
+            match_data = result["data"]
+            stats_feedback = generate_feedback(match_data, include_severity=True)
+            hero = match_data.get("hero", "Unknown")
+
+            print(f"\n🧠 Match Coaching Report (Hero: {hero.title()})")
+            for severity, line in stats_feedback:
+                print(f"- {severity.upper()}: {line}")
+            
+            print("-" * 20)
+
+            mental_boost = mental_coach.get_mental_boost(match_data)
+            print(f"💡 Mental Boost: {mental_boost}")
+            print()
+
+            if result.get("warnings"):
+                print("\n⚠️  Parsing Warnings:")
+                for warning in result["warnings"]:
+                    print(f"- {warning}")
+        else:
+            print("\n❌ Analysis failed. No data was extracted.")
+            if result.get("warnings"):
+                print("\n⚠️  Parsing Warnings:")
+                for warning in result["warnings"]:
+                    print(f"- {warning}")
+
     except (FileNotFoundError, ValueError) as e:
         print(f"Error: {e}")
         return
 
-    # Process each match and print the feedback
-    for i, match_data in enumerate(matches):
-        # 1. Get statistical feedback
-        stats_feedback = generate_feedback(match_data, include_severity=True)
-        hero = match_data.get("hero", "Unknown")
-
-        print(f"🧠 Match {i + 1} Coaching Report (Hero: {hero.title()})")
-        for severity, line in stats_feedback:
-            print(f"- {severity.upper()}: {line}")
-        
-        print("-" * 20)  # Separator
-
-        # 2. Get mental boost feedback
-        mental_boost = mental_coach.get_mental_boost(match_data)
-        print(f"💡 Mental Boost: {mental_boost}")
-        print()  # Add a blank line for readability
+    # --- Old JSON-based workflow (commented out for now) ---
+    # try:
+    #     matches = collector.from_json_upload("data/sample_match.json")
+    # except (FileNotFoundError, ValueError) as e:
+    #     print(f"Error: {e}")
+    #     return
+    # # Process each match and print the feedback
+    # for i, match_data in enumerate(matches):
+    #     # 1. Get statistical feedback
+    #     stats_feedback = generate_feedback(match_data, include_severity=True)
+    #     hero = match_data.get("hero", "Unknown")
+    #     print(f"🧠 Match {i + 1} Coaching Report (Hero: {hero.title()})")
+    #     for severity, line in stats_feedback:
+    #         print(f"- {severity.upper()}: {line}")
+    #     print("-" * 20)  # Separator
+    #     # 2. Get mental boost feedback
+    #     mental_boost = mental_coach.get_mental_boost(match_data)
+    #     print(f"💡 Mental Boost: {mental_boost}")
+    #     print()  # Add a blank line for readability
 
     # After processing all matches, generate a progress journal summary.
     print("\n" + "="*40)
