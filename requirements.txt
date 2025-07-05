@@ -1,7 +1,7 @@
 pydantic==2.7.1
 PyYAML==6.0.1
 paddlepaddle==2.6.1
-paddleocr==2.8.0
+paddleocr==2.8.0 
 fastapi==0.115.14
 uvicorn
 python-multipart 
