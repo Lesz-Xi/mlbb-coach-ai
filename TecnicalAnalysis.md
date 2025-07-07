@@ -1,6 +1,7 @@
 ## 🎯 Current State Analysis
 
 **Strengths of Your Architecture:**
+
 - **Dynamic module loading** - Scales beautifully for adding new heroes
 - **YAML-driven configuration** - Non-technical users can tune thresholds
 - **Inheritance pattern** - BaseEvaluator eliminates code duplication
@@ -14,37 +15,42 @@
 
 ### **Phase 1: Complete MVP (Week 2-3)**
 
-#### **1.A: Data Input Layer** 
+#### **1.A: Data Input Layer**
+
 ```python
 # Add to your existing architecture
 class DataCollector:
-    def from_screenshot(self, image_path): 
+    def from_screenshot(self, image_path):
         # OCR → JSON pipeline
-        
+
     def from_manual_input(self, form_data):
         # Web form → JSON pipeline
-        
+
     def from_json_upload(self, file_path):
         # Direct JSON import
 ```
 
 **Integration Points:**
+
 - Extends your existing `validate_data()` function
 - Feeds into your current `generate_feedback()` system
 - Maintains your JSON schema format
 
 #### **1.B: Missing Hero Coverage**
+
 Your current heroes: Miya, Franco, Estes, Kagura, Lancelot, Chou
 
 **Add these for role completeness:**
+
 - **Tank**: Tigreal (simpler than Franco)
-- **Support**: Angela (different playstyle than Estes) 
+- **Support**: Angela (different playstyle than Estes)
 - **Marksman**: Layla (beginner-friendly)
 - **Assassin**: Hayabusa (different mechanics than Lancelot)
 
 ### **Phase 2: Web Interface (Week 3-4)**
 
 #### **2.A: Frontend Architecture**
+
 ```
 web/
 ├── templates/
@@ -58,6 +64,7 @@ web/
 ```
 
 **Integration with Current System:**
+
 ```python
 @app.route('/analyze', methods=['POST'])
 def analyze_match():
@@ -67,35 +74,48 @@ def analyze_match():
 ```
 
 #### **2.B: Severity-Level UI Integration**
+
 Your existing severity system maps perfectly to web UI:
+
 ```css
-.critical { border-left: 4px solid #ef4444; }
-.warning { border-left: 4px solid #f59e0b; }
-.info { border-left: 4px solid #3b82f6; }
-.success { border-left: 4px solid #10b981; }
+.critical {
+  border-left: 4px solid #ef4444;
+}
+.warning {
+  border-left: 4px solid #f59e0b;
+}
+.info {
+  border-left: 4px solid #3b82f6;
+}
+.success {
+  border-left: 4px solid #10b981;
+}
 ```
 
 ### **Phase 3: Data Collection Enhancement (Week 4-5)**
 
 #### **3.A: OCR Pipeline** (Most Practical for MLBB)
+
 ```python
 # Integrate with your existing system
 class MLBBScreenReader:
     def extract_stats(self, screenshot_path):
         # 1. Crop relevant UI regions
-        # 2. OCR text extraction  
+        # 2. OCR text extraction
         # 3. Parse into your JSON format
         # 4. Validate with utils.validate_data()
         return structured_json
 ```
 
 **Target MLBB Screen Regions:**
+
 - Post-match summary (KDA, GPM, damage)
 - Match duration (top of screen)
 - Hero name and role
 - Damage charts (if visible)
 
 #### **3.B: Replay File Analysis** (Advanced)
+
 ```python
 class ReplayAnalyzer:
     def extract_positioning_data(self, replay_file):
@@ -107,6 +127,7 @@ class ReplayAnalyzer:
 ### **Phase 4: ML Integration (Week 5-6)**
 
 #### **4.A: Performance Prediction**
+
 ```python
 # Extends your BaseEvaluator
 class MLEnhancedEvaluator(BaseEvaluator):
@@ -116,6 +137,7 @@ class MLEnhancedEvaluator(BaseEvaluator):
 ```
 
 #### **4.B: Dynamic Threshold Learning**
+
 ```python
 # Updates your thresholds.yml automatically
 class ThresholdOptimizer:
@@ -127,15 +149,18 @@ class ThresholdOptimizer:
 ## 🚀 Immediate Next Steps (This Week)
 
 ### **Priority 1: Data Collection MVP**
+
 1. **Screenshot Upload Interface** - Simplest path to get real data
 2. **OCR Prototype** - Test with actual MLBB screenshots
 3. **Manual Input Form** - Backup for OCR validation
 
 ### **Priority 2: Hero Coverage**
+
 1. **Complete missing roles** - Add Tigreal, Angela, Layla, Hayabusa
 2. **Test with sample_match.json** - Ensure consistency
 
-### **Priority 3: Web Interface Foundation**  
+### **Priority 3: Web Interface Foundation**
+
 1. **Flask/FastAPI wrapper** around your existing coach.py
 2. **Basic upload + results pages**
 3. **Severity-level styling**

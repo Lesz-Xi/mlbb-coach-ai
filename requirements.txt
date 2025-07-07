@@ -2,7 +2,9 @@ pydantic==2.7.1
 PyYAML==6.0.1
 easyocr==1.7.0
 fastapi==0.115.14
-uvicorn
-python-multipart 
+uvicorn==0.30.6
+python-multipart==0.0.9
 requests==2.32.3
-Pillow==9.5.0 
+Pillow==9.5.0
+torch==2.0.1+cpu --index-url https://download.pytorch.org/whl/cpu
+loguru==0.7.2 
