@@ -26,14 +26,17 @@ def main():
 
     # --- New Screenshot-based Workflow ---
     try:
-        ign = "Lesz XVII"
+        ign = "Lesz XVII"  # This can now be dynamically set or detected
         hero_override = "hayabusa"  # Manually specify the hero here
         kda_image_path = "Screenshot-Test/IMG_1523.PNG"
         
         print(f"🔬 Analyzing screenshot for player: {ign} (Hero: {hero_override})")
         
+        # Add known IGNs for better validation
+        known_igns = ["Lesz XVII", "Player1", "Enemy1", "Enemy2", "Enemy3", "Enemy4"]
+        
         result = collector.from_screenshot(
-            ign, kda_image_path, hero_override=hero_override
+            ign, kda_image_path, hero_override=hero_override, known_igns=known_igns
         )
         
         if result and result.get("data"):
