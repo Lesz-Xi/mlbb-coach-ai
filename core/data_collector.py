@@ -10,6 +10,7 @@ import numpy as np
 from pydantic import ValidationError
 
 from .schemas import Matches
+from .ign_validator import IGNValidator, IGNMatch
 
 # --- Configuration ---
 # Configure logging to provide insights into the OCR parsing process.
@@ -99,7 +100,8 @@ class DataCollector:
             raise ValueError(f"Manual input data failed validation: {e}")
 
     def from_screenshot(
-        self, ign: str, image_path: str, hero_override: str = None
+        self, ign: str, image_path: str, hero_override: str = None,
+        known_igns: List[str] = None
     ) -> Dict[str, Any]:
         """
         Extracts match data from a single screenshot using EasyOCR.
@@ -110,12 +112,16 @@ class DataCollector:
             ign: The In-Game Name of the player to find.
             image_path: Path to the screenshot.
             hero_override: Manually specified hero name to bypass detection.
+            known_igns: List of known IGNs for validation (optional).
         
         Returns:
             A dictionary with the validated match data, confidence scores,
             and any parsing warnings.
         """
         logging.info("Processing screenshot for IGN: %s", ign)
+        
+        # Initialize IGN validator
+        validator = IGNValidator()
         
         logging.info("Preprocessing image for better OCR accuracy...")
         preprocessed_image = self._preprocess_image(image_path)
@@ -128,10 +134,24 @@ class DataCollector:
         if not results:
             warnings.append("Screenshot OCR returned no results.")
         else:
+            # Validate IGN using the new validator
+            validated_ign = ign
+            for bbox, text, conf in results:
+                validation_result = validator.validate_mlbb_ign(text)
+                if validation_result['is_valid'] and ign.lower() in validation_result['cleaned_ign'].lower():
+                    validated_ign = validation_result['cleaned_ign']
+                    logging.info(f"IGN validation successful: {validated_ign} (confidence: {validation_result['confidence']:.3f})")
+                    if validation_result['confidence'] < 0.8:
+                        warnings.append(f"IGN match confidence low: {validation_result['confidence']:.3f}")
+                    break
+            else:
+                logging.warning(f"IGN validation failed for '{ign}'")
+                warnings.append(f"IGN '{ign}' not found in OCR results.")
+            
             # This unified parser will get all stats from the single image
-            parsed_data = self._parse_player_row(ign, results, hero_override)
+            parsed_data = self._parse_player_row(validated_ign, results, hero_override)
             if not parsed_data:
-                warnings.append(f"Could not find player '{ign}' in screenshot.")
+                warnings.append(f"Could not find player '{validated_ign}' in screenshot.")
 
         # --- Final Data Assembly & Defaults ---
         if hero_override:
@@ -337,11 +357,13 @@ class DataCollector:
         all_text_blob = " ".join(text_lines)
 
         # --- 1. Hero and Player Detection ---
-        # Prioritize finding the main player "Lesz XVII"
-        player_name_found = "Lesz XVII".lower() in all_text_blob
+        # Find the main player using IGN validation
+        validator = IGNValidator()
+        potential_igns = validator.extract_potential_igns([([], line, 0.8) for line in text_lines])
+        player_name_found = any(ign.lower() in all_text_blob for ign in potential_igns)
         
         if player_name_found:
-            logging.info("Primary player 'Lesz XVII' found in screenshot.")
+            logging.info("Primary player found in screenshot.")
             # If we find the main player, we can be more confident in hero detection
             # on the same line or nearby. This part can be enhanced later.
         
