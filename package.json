@@ -2,24 +2,20 @@
   "name": "mlbb-coach-ai",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "description": "AI-powered coaching tool for Mobile Legends: Bang Bang",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix"
+    "lint": "eslint . --ext .js,.jsx",
+    "lint:fix": "eslint . --ext .js,.jsx --fix"
   },
   "keywords": ["mlbb", "mobile-legends", "coaching", "ai", "gaming"],
   "author": "Rhine (Les)",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^20.10.0",
-    "@types/react": "^18.2.43",
-    "@types/react-dom": "^18.2.17",
-    "@typescript-eslint/eslint-plugin": "^6.0.0",
-    "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.16",
     "eslint": "^8.0.0",
@@ -27,10 +23,8 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "postcss": "^8.4.32",
     "tailwindcss": "^3.3.6",
-    "typescript": "^5.4.5",
     "vite": "^5.0.0",
-    "vitest": "^1.0.0",
-    "zod": "^3.23.8"
+    "vitest": "^1.0.0"
   },
   "dependencies": {
     "react": "^18.2.0",
