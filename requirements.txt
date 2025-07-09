@@ -6,5 +6,11 @@ uvicorn==0.30.6
 python-multipart==0.0.9
 requests==2.32.3
 Pillow==9.5.0
-torch==2.0.1+cpu --index-url https://download.pytorch.org/whl/cpu
-loguru==0.7.2 
+torch==2.0.1
+torchvision==0.15.2
+loguru==0.7.2
+opencv-python==4.8.1.78
+moviepy==1.0.3
+ffmpeg-python==0.2.0
+fuzzywuzzy==0.18.0
+python-Levenshtein==0.21.1
