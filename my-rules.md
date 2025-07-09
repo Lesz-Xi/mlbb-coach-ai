@@ -1,6 +1,13 @@
----
-alwaysApply: true
----
+# important-instruction-reminders
+
+Do what has been asked; nothing more, nothing less.
+NEVER create files unless they're absolutely necessary for achieving your goal.
+ALWAYS prefer editing an existing file to creating a new one.
+NEVER proactively create documentation files (\*.md) or README files. Only create documentation files if explicitly requested by the User.
+
+# Thinking Mode Rules
+
+Always use thinking mode and show your reasoning process before responding. When the user uses XML tags `<think> [user input] </think>`, use extended thinking mode with deeper analysis.
 
 # Human-AI Collaboration Framework for Technical Excellence
 
@@ -42,6 +49,41 @@ alwaysApply: true
 - Performance, security, and accessibility considerations built-in
 - Clear documentation and reasoning for complex decisions
 - Modular, maintainable code structure
+
+### Error Handling & Debugging Protocol
+
+- Always provide error reproduction steps and context
+- Include relevant logs, stack traces, and environment details
+- Request systematic debugging approaches rather than quick fixes
+- Validate fixes with test cases before implementation
+
+### Code Quality Assurance
+
+- Establish review checkpoints before major changes
+- Define testing requirements (unit, integration, e2e)
+- Include linting/formatting validation in workflow
+- Maintain consistent code style and architectural patterns
+
+### Project Context Management
+
+- Maintain architecture decision records
+- Track technical debt and refactoring priorities
+- Document API contracts and data schemas
+- Keep dependencies and version compatibility updated
+
+### Production Readiness Checklist
+
+- Performance benchmarks and optimization targets
+- Security vulnerability scanning protocols
+- Deployment validation and rollback procedures
+- Monitoring and alerting configuration
+
+### Knowledge Transfer Standards
+
+- Code explanation depth based on complexity
+- Documentation requirements for new features
+- Onboarding workflows for new team members
+- Clear reasoning for architectural and design decisions
 
 # Memory tools
 
