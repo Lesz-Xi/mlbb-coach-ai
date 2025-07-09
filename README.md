@@ -1,4 +1,4 @@
-# MLBB Coach AI
+# SkillShift AI
 
 **Intelligent Coaching System for Mobile Legends: Bang Bang Players**
 
@@ -6,7 +6,7 @@
 
 ## 🎯 Project Goal
 
-MLBB Coach AI is an advanced AI-powered coaching tool that analyzes Mobile Legends: Bang Bang match statistics and provides actionable, role-specific feedback. Built with sophisticated evaluation logic and dynamic thresholds, it simulates what a professional coach would tell you—based on real performance data and game knowledge.
+SkillShift AI is an advanced AI-powered coaching tool that analyzes Mobile Legends: Bang Bang match statistics and provides actionable, role-specific feedback. Built with sophisticated evaluation logic and dynamic thresholds, it simulates what a professional coach would tell you—based on real performance data and game knowledge.
 
 ## ⚡ Key Features
 
@@ -39,7 +39,7 @@ The system now includes a `MentalCoach` that analyzes your performance trend ove
 ## 📁 Current Architecture
 
 ```
-mlbb-coach-ai/
+skillshift-ai/
 ├── main.py                    # Main script to run the coach
 ├── coach.py                   # Handles dynamic rule loading and evaluation
 ├── requirements.txt           # Project dependencies
@@ -158,7 +158,7 @@ Traditional MLBB tools provide raw statistics without context. This system provi
 ```bash
 # Clone and run
 git clone [your-repo]
-cd mlbb-coach-ai
+cd skillshift-ai
 pip install -r requirements.txt
 python main.py
 
