@@ -213,7 +213,7 @@ class DataCollector:
         
         # --- Debugging: Save the processed image ---
         # This helps us visually inspect what the OCR engine is "seeing".
-        output_path = "mlbb-coach-ai/temp/preprocessed_image.png"
+        output_path = "temp/preprocessed_image.png"
         cv2.imwrite(output_path, gray)
         logging.info(f"Saved pre-processed debug image to: {output_path}")
         
