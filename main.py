@@ -13,7 +13,7 @@ def main():
 
     # Load player history for the Mental Coach
     try:
-        with open("mlbb-coach-ai/data/player_history.json", "r") as f:
+        with open("data/player_history.json", "r") as f:
             player_data = json.load(f)
         history = player_data.get("match_history", [])
         goal = player_data.get("player_defined_goal", "general_improvement")
