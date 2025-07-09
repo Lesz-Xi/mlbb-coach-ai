@@ -1,0 +1,76 @@
+{
+  "patch_version": "1.7.8",
+  "timestamp": "2024-01-01T00:00:00",
+  "heroes": [
+    {
+      "ranking": 1,
+      "hero": "Angela",
+      "pick_rate": 0.8,
+      "win_rate": 55.0,
+      "ban_rate": 65.0,
+      "counter_heroes": [
+        "Chou",
+        "Franco",
+        "Jawhead"
+      ],
+      "tier": "S",
+      "meta_score": 35.0
+    },
+    {
+      "ranking": 2,
+      "hero": "Franco",
+      "pick_rate": 0.2,
+      "win_rate": 52.0,
+      "ban_rate": 0.5,
+      "counter_heroes": [
+        "Karrie",
+        "Claude",
+        "Wanwan"
+      ],
+      "tier": "A",
+      "meta_score": 32.0
+    },
+    {
+      "ranking": 3,
+      "hero": "Melissa",
+      "pick_rate": 0.5,
+      "win_rate": 53.0,
+      "ban_rate": 8.0,
+      "counter_heroes": [
+        "Chou",
+        "Gusion",
+        "Ling"
+      ],
+      "tier": "A",
+      "meta_score": 33.0
+    },
+    {
+      "ranking": 4,
+      "hero": "Tigreal",
+      "pick_rate": 0.3,
+      "win_rate": 51.0,
+      "ban_rate": 5.0,
+      "counter_heroes": [
+        "Karrie",
+        "Claude",
+        "Wanwan"
+      ],
+      "tier": "B",
+      "meta_score": 31.0
+    },
+    {
+      "ranking": 5,
+      "hero": "Layla",
+      "pick_rate": 0.4,
+      "win_rate": 50.0,
+      "ban_rate": 2.0,
+      "counter_heroes": [
+        "Chou",
+        "Gusion",
+        "Ling"
+      ],
+      "tier": "B",
+      "meta_score": 30.0
+    }
+  ]
+}

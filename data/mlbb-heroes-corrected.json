@@ -1,0 +1,776 @@
+[
+  {
+    "hero_name": "Zetian",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Zetian",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage_1_9_90/100_22dc8b16ea98a735027c3141b74ef841.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Kalea",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Kalea",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage_1_9_64/100_9c5f2904026ba88b7aba8c9b2722f4ad.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Lukas",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Lukas",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage_1_9_20/100_454c13b2de7b7d1a20fbf553c620510d.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Suyou",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Suyou",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage_1_9_20/100_422ffc7849e8bb01629d2423054ed410.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Zhuxin",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Zhuxin",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage_92/100_13cfeec4bec7a27a09677e519f1ef9d2.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Chip",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Chip",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_85e15c66733cab7d8d73f7f725f31f1e.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Cici",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Cici",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_4f970eb4b44b8c9fff2c511d8e856ff4.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Nolan",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Nolan",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_0495066df0d828c149e7fe89aa63078b.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Ixia",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Ixia",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_c5f758bd1141327d36f2c77928268ab7.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Arlott",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Arlott",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_01450fec4397f8780ce0d11ab652c73d.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Novaria",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Novaria",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_12c811236741ae8e3fbdaa2d884b30a2.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Joy",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Joy",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_6b5570b0e557e36501b4228fcdfcf164.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Fredrinn",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Fredrinn",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_3f574825bd9192094f047a4abc6d5d05.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Julian",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Julian",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_44891c699fb1c00fc4a7fa59ea95b8b3.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Xavier",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Xavier",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_2f4e01714176adb56ca70eef1460e461.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Melissa",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Melissa",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_566636fa333651ef67931deade4eef84.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Yin",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Yin",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage_92/100_95836476311e2026077d87eb2373a281.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Floryn",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Floryn",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_5168f0a54304b2f20f976a1ffa96e1dc.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Edith",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Edith",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_352f65059bc1180ae0fc066003d628e0.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Valentina",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Valentina",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_7923ebf470d0e963e9978cb21eb25780.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Aamon",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Aamon",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_c9e4d330229c88b1e78ef88ce9db4223.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Aulus",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Aulus",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_55751a5c47dc36cb6c1da705c5f5c687.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Natan",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Natan",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_6736ef8c230d82576c3710e9fc248e11.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Phoveus",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Phoveus",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage_1_9_06/100_6bfe8ca7e60623a5261eac20e2b39d34.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Beatrix",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Beatrix",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_c1acd7cbd828f0c5d291e48a0f7c018d.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Gloo",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Gloo",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage_1_9_642/100_8b401d50920f2359060a9c7a3c833df1.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Paquito",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Paquito",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_1986ebcc24fc3eb28f59f079c15be612.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Mathilda",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Mathilda",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_515a1949e9c3dc1ee1a281f45d42b085.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Yve",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Yve",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage_92/100_d8cc30b9d273a81bd838afc691852b6f.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Brody",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Brody",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_dc8216bde520fd7be7a2e9e6fad90191.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Barats",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Barats",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_2ff4a47ddc77ec9e4e5a522fd696d2c4.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Khaleed",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Khaleed",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_216ea76d9188164c58950885b3962ba1.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Benedetta",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Benedetta",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_eceefa7ba07f093d71a30852f0051b7a.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Luo Yi",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Luo_Yi",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_74fe63bd31cc092aed923543a115b7bd.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Yu Zhong",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Yu_Zhong",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage_92/100_7d5ad4d511f5257137028f19e9ee973f.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Popol and Kupa",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Popol_and_Kupa",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_5eb4653a13ff08c8f4138dc38ae4e110.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Atlas",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Atlas",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_1fa7b5bb5ddc89246d65e199c6e3b22f.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Carmilla",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Carmilla",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_358d6ad9cff97fc3bfef8a2bd4acbadd.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Cecilion",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Cecilion",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_af02ce891528cd3576858589d8d33d8d.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Silvanna",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Silvanna",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_fe98dd2e19bb6c29591763d1d11a3eb7.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Wanwan",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Wanwan",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage_1_9_47/100_c042bfb106853182a8c38ae5386ceb77.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Masha",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Masha",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_6fcd3a37b34ea16ca6b485b88220e400.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Baxia",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Baxia",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_ae43a252fda0fe996322ea8d27a6fe69.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Lylia",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Lylia",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_03146a311ed83c166b70bdb8fbcdc04f.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Dyrroth",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Dyrroth",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_c999d5c218a0860ffbd7647a02baef1d.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Ling",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Ling",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage_92/100_4405561c38db556d9cdc6a57b8642e66.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "X.Borg",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/X.Borg",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_9317fc6f999a43428c2fb9f7feda3cd7.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Terizla",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Terizla",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_fcfbde52476bad8c8e67951240de854c.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Esmeralda",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Esmeralda",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_f684768281faab70dea48d06fb72979e.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Guinevere",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Guinevere",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_a34258a6365097da09d9513b620bc14a.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Granger",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Granger",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage_1_9_22/100_9ed57f48f91012fd110935258cd1ab61.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Khufra",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Khufra",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_b1bd27f70c015094eaba5e48eacc4762.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Badang",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Badang",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_484caceb9611d547774d6d936519a7d6.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Faramis",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Faramis",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_4bed236fc260d9924b030e576793a26b.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Kadita",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Kadita",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_4e743d3fe80b1bb63bb8298ae1d1463f.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Minsitthar",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Minsitthar",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_dbfdfa2d0a3cc95cbc197d0a14d5ecd1.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Harith",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Harith",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_0f81a3d82eb05c2c062fc6ea8b3d6578.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Thamuz",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Thamuz",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_43000699fe7c795c520f6f8ee3d8a191.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Kimmy",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Kimmy",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage_1_9_642/100_3fa938873a71f33898f26b19db654b7d.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Belerick",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Belerick",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_69fdf773b92fbbf182f83d79abcf8d01.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Hanzo",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Hanzo",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage_1_9_47/100_746725e15c7577be6bb92b2665adf447.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Lunox",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Lunox",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_69d35cd0c549a9bdbcf9fbfddf3122a5.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Leomord",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Leomord",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_6c205605c520867a534e4e74588a7208.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Vale",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Vale",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_80d3dd1f4cb10ffebb84289be46a3ecb.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Claude",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Claude",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_808e898e89986b917e146a9b5dcbbb57.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Aldous",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Aldous",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_c2f6866ffc797395ee35f97a74bbea20.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Selena",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Selena",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_547ce6e3351ef7a46c02b51d0c4e452c.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Kaja",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Kaja",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_87a88d7acc62a25869a5316147f3ce6a.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Chang'e",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Chang'e",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_4a2db83b0fb92b826f039955d1b8b5df.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Hanabi",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Hanabi",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_85d213390613bbc09220cf1d9f64c5c0.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Uranus",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Uranus",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_04a36899ac866eecb1d3a9c436cfb1d9.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Martis",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Martis",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_9691f86f84a553ea3982014738905f3f.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Valir",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Valir",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_cd4c780c0ed639e2889c1131e56638ec.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Gusion",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Gusion",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_82dbd20a7d0f274520895007898199e0.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Angela",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Angela",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_a815a3adad8df99481700c84abaf3c41.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Jawhead",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Jawhead",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_9f6109678fb8da14a3999f6b5cb00449.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Lesley",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Lesley",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_f4f42410c90f84e4d46b129d5e8887e8.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Pharsa",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Pharsa",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_cccf53dbeacc789288ebc1fb63fcf7dd.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Helcurt",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Helcurt",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_ffd27cd02c46f7075caedcd51de80d9a.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Zhask",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Zhask",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_7e69b480400b37dd75614f0c8d033c37.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Hylos",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Hylos",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_22d8716de16d99253671c2f9e59d9ef3.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Diggie",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Diggie",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_7a7a688cf1562a124f7183b2c2957608.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Lancelot",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Lancelot",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_db7d20dd6e7a9f958ad210680dc2ba7b.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Odette",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Odette",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage_1_9_47/100_6fd1d8e4d436d1de3102a7880cd61cbd.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Argus",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Argus",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_ee4f9ddb2f82ef0dfc99bb72e0a8f557.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Grock",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Grock",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_8d904fbad23813b91539e367e8ce5262.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Irithel",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Irithel",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_5af934fae1b64f1c689a346741a49858.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Harley",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Harley",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_503566ddaa4727778929dee4b3a01807.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Gatotkaca",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Gatotkaca",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_e3ccd096c9c4649519d736073acca91a.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Karrie",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Karrie",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_ccc0a2768caba67b601309c771e7ecd5.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Roger",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Roger",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_d518759b615468fc3bc4f6a3ad2c598f.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Vexana",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Vexana",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_39c9058219c59535e9ed07645c8d9dd3.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Lapu-Lapu",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Lapu-Lapu",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_b72b473b98494269cedbba84d4888409.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Aurora",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Aurora",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_1f3f900f917956e81d7764b9e5ffeb3d.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Hilda",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Hilda",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_0adb85b02fe21534ab505b61977f699f.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Estes",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Estes",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_a3619b68f415405f0a1ad77be31eb64d.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Cyclops",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Cyclops",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_71c31e9801e7d1b40604d54099b30054.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Johnson",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Johnson",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_9939e5cc09011a287a989b7d4b3aec4d.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Moskov",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Moskov",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_9cf1a5936ac506d5e1b911be097acfb7.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Yi Sun-shin",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Yi_Sun-shin",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_3fe7fdb5f2aedef505f3728c28572e2e.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Ruby",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Ruby",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_5b9d38f9f2e7ca03f9f489de19656bc9.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Alpha",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Alpha",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_49cc1a8137341b547e2126910cf91ee6.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Sun",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Sun",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_f082e5ba6eb2dd54ae922c0f57c816ac.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Chou",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Chou",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage_1_9_42/100_850c4b51e3dbab3fd12a718917eaaf44.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Kagura",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Kagura",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_634196d9234babcc3072155d4fefaf0c.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Natalia",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Natalia",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_67fa418c9efe0a0c29112067b9ddfcd5.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Gord",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Gord",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage_1_9_47/100_6ba16b4ca438152a629e7706cbd7453d.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Freya",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Freya",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_efdd9d11fe41854a4ee1e62139200a0b.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Hayabusa",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Hayabusa",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_63cb1f44bf906b71767a000e38d8ab14.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Lolita",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Lolita",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_55de18c865efe8e360b3b9ae463d76a2.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Minotaur",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Minotaur",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_cf2794cfdbea9a75784133863cf6ac83.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Layla",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Layla",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_6efe9abc2047f59d45fa1c88fb1261b7.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Fanny",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Fanny",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_8ea3a95fa3c726ed0338c0fdd21ad991.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Zilong",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Zilong",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_e22227fa343e8c5bffd83bb78d1bd292.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Eudora",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Eudora",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_3e9c8286caaff10bd0f0844545198163.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Rafaela",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Rafaela",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_f22e22659e8b1acfb665aec8eaffabd7.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Clint",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Clint",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_ffb96ce8d57c9987401f9c5bfebee3b2.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Bruno",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Bruno",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_68d7ca30f69cb691125e3f03cd782a53.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Bane",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Bane",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_846a816f7905f17c81cb35e7f3ff1c3e.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Franco",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Franco",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_d9a0d6432cc0610a2232b2d2ed5e09ce.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Akai",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Akai",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_48404e80a426805d1b6072b3b33e2c3a.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Karina",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Karina",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_7745192fc72de28d09e839cd7c250bae.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Alucard",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Alucard",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_2a0606e575ae278db77134b50ccef7ac.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Tigreal",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Tigreal",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_4e0005dbfb1376beaccc54ef7aa39375.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Nana",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Nana",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_d3ef9fa051f8643b1345accd72c48abf.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Alice",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Alice",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_e7f782918c687ed9c06e76f297814d58.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Saber",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Saber",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_75f50285862c6c34aa1770b11d00b4f8.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Balmond",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Balmond",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_774d5cdd7ab9bed0afc7e11dc9d1c97d.png",
+    "extraction_method": "image_analysis"
+  },
+  {
+    "hero_name": "Miya",
+    "correct_hero_url": "https://mobile-legends.fandom.com/wiki/Miya",
+    "image_url": "https://akmweb.youngjoygame.com/web/svnres/img/mlbb/homepage/100_32c0d9d3a727a9052754296af6251435.png",
+    "extraction_method": "image_analysis"
+  }
+]

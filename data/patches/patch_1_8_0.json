@@ -1,0 +1,428 @@
+{
+  "patch_version": "1.8.0",
+  "timestamp": "2025-07-10T02:51:59.613173",
+  "heroes": [
+    {
+      "ranking": 1,
+      "hero": "Lolita",
+      "pick_rate": 0.17,
+      "win_rate": 59.49,
+      "ban_rate": 1.44,
+      "counter_heroes": [
+        "Baxia",
+        "Angela",
+        "Edith",
+        "Melissa",
+        "Beatrix"
+      ],
+      "tier": "B",
+      "meta_score": 35.889
+    },
+    {
+      "ranking": 2,
+      "hero": "Angela",
+      "pick_rate": 1.06,
+      "win_rate": 57.55,
+      "ban_rate": 73.04,
+      "counter_heroes": [
+        "Chou",
+        "Franco",
+        "Jawhead"
+      ],
+      "tier": "S",
+      "meta_score": 39.84799999999999
+    },
+    {
+      "ranking": 3,
+      "hero": "Edith",
+      "pick_rate": 1.38,
+      "win_rate": 56.48,
+      "ban_rate": 3.68,
+      "counter_heroes": [
+        "Karrie",
+        "Claude",
+        "Wanwan"
+      ],
+      "tier": "A",
+      "meta_score": 34.67
+    },
+    {
+      "ranking": 4,
+      "hero": "Melissa",
+      "pick_rate": 0.37,
+      "win_rate": 55.25,
+      "ban_rate": 11.46,
+      "counter_heroes": [
+        "Chou",
+        "Gusion",
+        "Ling"
+      ],
+      "tier": "S",
+      "meta_score": 34.407
+    },
+    {
+      "ranking": 5,
+      "hero": "Beatrix",
+      "pick_rate": 0.96,
+      "win_rate": 54.77,
+      "ban_rate": 27.45,
+      "counter_heroes": [
+        "Chou",
+        "Gusion",
+        "Saber"
+      ],
+      "tier": "B",
+      "meta_score": 35.894999999999996
+    },
+    {
+      "ranking": 6,
+      "hero": "Khufra",
+      "pick_rate": 0.19,
+      "win_rate": 54.6,
+      "ban_rate": 2.41,
+      "counter_heroes": [
+        "Karrie",
+        "Claude",
+        "Kimmy"
+      ],
+      "tier": "B",
+      "meta_score": 33.058
+    },
+    {
+      "ranking": 7,
+      "hero": "Yi Sun-shin",
+      "pick_rate": 1.14,
+      "win_rate": 54.44,
+      "ban_rate": 32.35,
+      "counter_heroes": [
+        "Chou",
+        "Gusion",
+        "Fanny"
+      ],
+      "tier": "A",
+      "meta_score": 36.24099999999999
+    },
+    {
+      "ranking": 8,
+      "hero": "Franco",
+      "pick_rate": 0.1,
+      "win_rate": 54.41,
+      "ban_rate": 0.1,
+      "counter_heroes": [
+        "Karrie",
+        "Claude",
+        "Wanwan"
+      ],
+      "tier": "B",
+      "meta_score": 32.68599999999999
+    },
+    {
+      "ranking": 9,
+      "hero": "Bane",
+      "pick_rate": 0.37,
+      "win_rate": 54.4,
+      "ban_rate": 0.61,
+      "counter_heroes": [
+        "Chou",
+        "Franco",
+        "Johnson"
+      ],
+      "tier": "B",
+      "meta_score": 32.812
+    },
+    {
+      "ranking": 10,
+      "hero": "Carmilla",
+      "pick_rate": 0.69,
+      "win_rate": 54.28,
+      "ban_rate": 45.78,
+      "counter_heroes": [
+        "Diggie",
+        "Rafaela",
+        "Angela"
+      ],
+      "tier": "B",
+      "meta_score": 37.353
+    },
+    {
+      "ranking": 11,
+      "hero": "Faramis",
+      "pick_rate": 1.21,
+      "win_rate": 54.06,
+      "ban_rate": 3.16,
+      "counter_heroes": [
+        "Chou",
+        "Franco",
+        "Gusion"
+      ],
+      "tier": "A",
+      "meta_score": 33.115
+    },
+    {
+      "ranking": 12,
+      "hero": "Diggie",
+      "pick_rate": 0.2,
+      "win_rate": 53.9,
+      "ban_rate": 0.69,
+      "counter_heroes": [
+        "Chou",
+        "Franco",
+        "Johnson"
+      ],
+      "tier": "B",
+      "meta_score": 32.469
+    },
+    {
+      "ranking": 13,
+      "hero": "Popol and Kupa",
+      "pick_rate": 0.72,
+      "win_rate": 53.81,
+      "ban_rate": 1.08,
+      "counter_heroes": [
+        "Chou",
+        "Gusion",
+        "Ling"
+      ],
+      "tier": "B",
+      "meta_score": 32.61
+    },
+    {
+      "ranking": 14,
+      "hero": "Cyclops",
+      "pick_rate": 0.52,
+      "win_rate": 53.61,
+      "ban_rate": 0.33,
+      "counter_heroes": [
+        "Chou",
+        "Gusion",
+        "Ling"
+      ],
+      "tier": "B",
+      "meta_score": 32.355
+    },
+    {
+      "ranking": 15,
+      "hero": "Grock",
+      "pick_rate": 1.0,
+      "win_rate": 53.6,
+      "ban_rate": 18.22,
+      "counter_heroes": [
+        "Karrie",
+        "Claude",
+        "Granger"
+      ],
+      "tier": "A",
+      "meta_score": 34.282
+    },
+    {
+      "ranking": 16,
+      "hero": "Atlas",
+      "pick_rate": 0.8,
+      "win_rate": 53.51,
+      "ban_rate": 2.42,
+      "counter_heroes": [
+        "Karrie",
+        "Claude",
+        "Wanwan"
+      ],
+      "tier": "B",
+      "meta_score": 32.587999999999994
+    },
+    {
+      "ranking": 17,
+      "hero": "Belerick",
+      "pick_rate": 0.2,
+      "win_rate": 53.42,
+      "ban_rate": 0.86,
+      "counter_heroes": [
+        "Karrie",
+        "Claude",
+        "Kimmy"
+      ],
+      "tier": "B",
+      "meta_score": 32.198
+    },
+    {
+      "ranking": 18,
+      "hero": "Minotaur",
+      "pick_rate": 0.51,
+      "win_rate": 53.38,
+      "ban_rate": 0.34,
+      "counter_heroes": [
+        "Karrie",
+        "Claude",
+        "Wanwan"
+      ],
+      "tier": "B",
+      "meta_score": 32.214999999999996
+    },
+    {
+      "ranking": 19,
+      "hero": "Hylos",
+      "pick_rate": 0.57,
+      "win_rate": 53.34,
+      "ban_rate": 8.11,
+      "counter_heroes": [
+        "Karrie",
+        "Claude",
+        "Granger"
+      ],
+      "tier": "B",
+      "meta_score": 32.986
+    },
+    {
+      "ranking": 20,
+      "hero": "Tigreal",
+      "pick_rate": 1.53,
+      "win_rate": 53.0,
+      "ban_rate": 9.03,
+      "counter_heroes": [
+        "Karrie",
+        "Claude",
+        "Wanwan"
+      ],
+      "tier": "A",
+      "meta_score": 33.162
+    },
+    {
+      "ranking": 21,
+      "hero": "Johnson",
+      "pick_rate": 0.55,
+      "win_rate": 52.89,
+      "ban_rate": 0.75,
+      "counter_heroes": [
+        "Diggie",
+        "Chou",
+        "Franco"
+      ],
+      "tier": "B",
+      "meta_score": 31.973999999999997
+    },
+    {
+      "ranking": 22,
+      "hero": "Rafaela",
+      "pick_rate": 0.37,
+      "win_rate": 52.76,
+      "ban_rate": 0.3,
+      "counter_heroes": [
+        "Chou",
+        "Franco",
+        "Gusion"
+      ],
+      "tier": "B",
+      "meta_score": 31.797
+    },
+    {
+      "ranking": 23,
+      "hero": "Ruby",
+      "pick_rate": 0.72,
+      "win_rate": 52.71,
+      "ban_rate": 4.26,
+      "counter_heroes": [
+        "Karrie",
+        "Claude",
+        "Granger"
+      ],
+      "tier": "B",
+      "meta_score": 32.268
+    },
+    {
+      "ranking": 24,
+      "hero": "Hilda",
+      "pick_rate": 0.46,
+      "win_rate": 52.6,
+      "ban_rate": 0.38,
+      "counter_heroes": [
+        "Karrie",
+        "Claude",
+        "Granger"
+      ],
+      "tier": "B",
+      "meta_score": 31.736
+    },
+    {
+      "ranking": 25,
+      "hero": "Akai",
+      "pick_rate": 1.06,
+      "win_rate": 52.58,
+      "ban_rate": 4.78,
+      "counter_heroes": [
+        "Karrie",
+        "Claude",
+        "Granger"
+      ],
+      "tier": "A",
+      "meta_score": 32.344
+    },
+    {
+      "ranking": 26,
+      "hero": "Estes",
+      "pick_rate": 0.74,
+      "win_rate": 52.42,
+      "ban_rate": 0.2,
+      "counter_heroes": [
+        "Chou",
+        "Franco",
+        "Gusion"
+      ],
+      "tier": "B",
+      "meta_score": 31.694
+    },
+    {
+      "ranking": 27,
+      "hero": "Gatotkaca",
+      "pick_rate": 0.22,
+      "win_rate": 52.35,
+      "ban_rate": 0.35,
+      "counter_heroes": [
+        "Karrie",
+        "Claude",
+        "Granger"
+      ],
+      "tier": "B",
+      "meta_score": 31.511
+    },
+    {
+      "ranking": 28,
+      "hero": "Mathilda",
+      "pick_rate": 0.9,
+      "win_rate": 52.33,
+      "ban_rate": 3.99,
+      "counter_heroes": [
+        "Chou",
+        "Franco",
+        "Gusion"
+      ],
+      "tier": "B",
+      "meta_score": 32.06699999999999
+    },
+    {
+      "ranking": 29,
+      "hero": "Layla",
+      "pick_rate": 0.34,
+      "win_rate": 52.22,
+      "ban_rate": 0.97,
+      "counter_heroes": [
+        "Chou",
+        "Gusion",
+        "Ling"
+      ],
+      "tier": "B",
+      "meta_score": 31.531
+    },
+    {
+      "ranking": 30,
+      "hero": "Sun",
+      "pick_rate": 0.49,
+      "win_rate": 52.12,
+      "ban_rate": 0.21,
+      "counter_heroes": [
+        "Chou",
+        "Gusion",
+        "Ling"
+      ],
+      "tier": "B",
+      "meta_score": 31.439999999999998
+    }
+  ]
+}

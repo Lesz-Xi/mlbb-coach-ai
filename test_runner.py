@@ -58,7 +58,7 @@ def test_screenshot(file_path: str):
 
 
 if __name__ == "__main__":
-    # This script is in 'mlbb-coach-ai', and screenshots are in a sibling directory.
+    # This script is in 'skillshift-ai', and screenshots are in a sibling directory.
     # To make paths robust, construct absolute paths from this script's location.
     script_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.dirname(script_dir)
