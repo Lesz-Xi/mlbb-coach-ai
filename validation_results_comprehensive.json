@@ -1,0 +1,859 @@
+[
+  {
+    "screenshot": "screenshot-test-excellent-1.PNG",
+    "expected_label": "Excellent",
+    "image_path": "Screenshot-Test-Excellent/screenshot-test-excellent-1.PNG",
+    "enhanced_analysis": {
+      "ign_used": "Lesz XVII",
+      "data": {
+        "kills": 2,
+        "deaths": 2,
+        "assists": 17,
+        "gold": 7344,
+        "hero_damage": 5907,
+        "_parsing_method": "anchor_based",
+        "_anchors_found": [
+          "DURATION"
+        ],
+        "_columns_found": [],
+        "match_duration": 10,
+        "player_rank": "Unknown",
+        "screenshot_confidence": 0.51,
+        "hero": [
+          "unknown",
+          0.0
+        ],
+        "turret_damage": 0,
+        "damage_taken": 0,
+        "teamfight_participation": 0,
+        "positioning_rating": "average",
+        "ult_usage": "average",
+        "gold_per_min": 734
+      },
+      "session_info": {},
+      "warnings": [
+        "Could not detect match duration",
+        "Could not detect match result",
+        "Could not detect player rank"
+      ]
+    },
+    "ultimate_analysis": {
+      "ign_used": "Lesz XVII",
+      "overall_confidence": 68.23333333333332,
+      "confidence_category": "unreliable",
+      "parsed_data": {
+        "kills": 0,
+        "deaths": 1,
+        "assists": 0,
+        "gold": 5000,
+        "hero": "miya",
+        "hero_damage": 10000,
+        "damage_taken": 8000,
+        "match_result": "unknown",
+        "match_duration": 10.0,
+        "gold_per_min": 500,
+        "turret_damage": 1000,
+        "healing_done": 0,
+        "rank": "unknown",
+        "season": "unknown",
+        "overall_confidence": 68.23333333333332,
+        "confidence_category": "unreliable",
+        "completeness_score": 2.000000000000001,
+        "component_confidences": {
+          "image_quality": 0.3,
+          "hero_detection": 0.6333333333333333,
+          "data_completeness": 0.5047619047619047,
+          "data_consistency": 1.0,
+          "ocr_reliability": 0.4,
+          "semantic_validity": 1.0,
+          "layout_recognition": 0.3
+        },
+        "quality_factors": {}
+      },
+      "component_scores": {
+        "image_quality": 0.3,
+        "hero_detection": 0.6333333333333333,
+        "data_completeness": 0.5047619047619047,
+        "data_consistency": 1.0,
+        "ocr_reliability": 0.4,
+        "semantic_validity": 1.0,
+        "layout_recognition": 0.3
+      },
+      "success_factors": [],
+      "improvement_roadmap": [
+        "\ud83c\udfaf Current: 68.2% \u2192 Target: 95%+",
+        "\ud83d\udd27 Priority 1: Improve screenshot quality (lighting, stability, resolution)",
+        "\ud83d\udd27 Priority 2: Enhance hero detection (clear portraits, readable names)",
+        "\ud83d\udd27 Priority 3: Boost data completeness (capture all game panels)",
+        "\ud83d\udd27 Applied optimizations: quality_preprocessing, hero_detection_boost, data_completion_enhancement"
+      ]
+    },
+    "validation_summary": {
+      "label_match": false,
+      "mvp_detected": false,
+      "medal_detected": null,
+      "hero_detected": true,
+      "kda_extracted": true,
+      "performance_rating": null,
+      "confidence_score": 68.23333333333332,
+      "issues": [
+        "Expected MVP badge for 'Excellent' but not detected"
+      ],
+      "success_factors": [
+        "KDA extracted successfully",
+        "Hero detected: ('unknown', 0.0)"
+      ]
+    },
+    "processing_time": 69.91355895996094
+  },
+  {
+    "screenshot": "screenshot-test-excellent-2.PNG",
+    "expected_label": "Excellent",
+    "image_path": "Screenshot-Test-Excellent/screenshot-test-excellent-2.PNG",
+    "enhanced_analysis": {
+      "ign_used": "Lesz XVII",
+      "data": {
+        "hero_damage": 189415,
+        "damage_taken": 96567,
+        "turret_damage": 55652,
+        "teamfight_participation": 90,
+        "kills": 41,
+        "deaths": 43,
+        "assists": 8,
+        "hero": [
+          "unknown",
+          0.0
+        ],
+        "gold": 0,
+        "positioning_rating": "average",
+        "ult_usage": "average",
+        "match_duration": 10,
+        "gold_per_min": 0,
+        "_session_info": {
+          "screenshot_count": 1,
+          "screenshot_types": [
+            "stats_page"
+          ],
+          "avg_confidence": 1.0,
+          "all_warnings": []
+        }
+      },
+      "session_info": {},
+      "warnings": []
+    },
+    "ultimate_analysis": {
+      "ign_used": "Lesz XVII",
+      "overall_confidence": 68.23333333333332,
+      "confidence_category": "unreliable",
+      "parsed_data": {
+        "kills": 0,
+        "deaths": 1,
+        "assists": 0,
+        "gold": 5000,
+        "hero": "miya",
+        "hero_damage": 10000,
+        "damage_taken": 8000,
+        "match_result": "unknown",
+        "match_duration": 10.0,
+        "gold_per_min": 500,
+        "turret_damage": 1000,
+        "healing_done": 0,
+        "rank": "unknown",
+        "season": "unknown",
+        "overall_confidence": 68.23333333333332,
+        "confidence_category": "unreliable",
+        "completeness_score": 2.000000000000001,
+        "component_confidences": {
+          "image_quality": 0.3,
+          "hero_detection": 0.6333333333333333,
+          "data_completeness": 0.5047619047619047,
+          "data_consistency": 1.0,
+          "ocr_reliability": 0.4,
+          "semantic_validity": 1.0,
+          "layout_recognition": 0.3
+        },
+        "quality_factors": {}
+      },
+      "component_scores": {
+        "image_quality": 0.3,
+        "hero_detection": 0.6333333333333333,
+        "data_completeness": 0.5047619047619047,
+        "data_consistency": 1.0,
+        "ocr_reliability": 0.4,
+        "semantic_validity": 1.0,
+        "layout_recognition": 0.3
+      },
+      "success_factors": [],
+      "improvement_roadmap": [
+        "\ud83c\udfaf Current: 68.2% \u2192 Target: 95%+",
+        "\ud83d\udd27 Priority 1: Improve screenshot quality (lighting, stability, resolution)",
+        "\ud83d\udd27 Priority 2: Enhance hero detection (clear portraits, readable names)",
+        "\ud83d\udd27 Priority 3: Boost data completeness (capture all game panels)",
+        "\ud83d\udd27 Applied optimizations: quality_preprocessing, hero_detection_boost, data_completion_enhancement"
+      ]
+    },
+    "validation_summary": {
+      "label_match": false,
+      "mvp_detected": false,
+      "medal_detected": null,
+      "hero_detected": true,
+      "kda_extracted": true,
+      "performance_rating": null,
+      "confidence_score": 68.23333333333332,
+      "issues": [
+        "Expected MVP badge for 'Excellent' but not detected"
+      ],
+      "success_factors": [
+        "KDA extracted successfully",
+        "Hero detected: ('unknown', 0.0)"
+      ]
+    },
+    "processing_time": 61.5171012878418
+  },
+  {
+    "screenshot": "screenshot-test-good-1.PNG",
+    "expected_label": "Good",
+    "image_path": "Screenshot-Test-Good/screenshot-test-good-1.PNG",
+    "enhanced_analysis": {
+      "ign_used": "Lesz XVII",
+      "data": {
+        "kills": 8,
+        "deaths": 5,
+        "assists": 14,
+        "gold": 13829,
+        "hero_damage": 13809,
+        "match_result": "defeat",
+        "_parsing_method": "anchor_based",
+        "_anchors_found": [
+          "DEFEAT",
+          "DURATION"
+        ],
+        "_columns_found": [],
+        "match_duration": 10,
+        "player_rank": "Unknown",
+        "screenshot_confidence": 0.65,
+        "hero": [
+          "unknown",
+          0.0
+        ],
+        "turret_damage": 0,
+        "damage_taken": 0,
+        "teamfight_participation": 0,
+        "positioning_rating": "average",
+        "ult_usage": "average",
+        "gold_per_min": 1383,
+        "_session_info": {
+          "screenshot_count": 1,
+          "screenshot_types": [
+            "scoreboard"
+          ],
+          "avg_confidence": 0.9325,
+          "all_warnings": [
+            "Could not detect match duration",
+            "Could not detect player rank"
+          ]
+        }
+      },
+      "session_info": {},
+      "warnings": [
+        "Could not detect match duration",
+        "Could not detect player rank"
+      ]
+    },
+    "ultimate_analysis": {
+      "ign_used": "Lesz XVII",
+      "overall_confidence": 68.23333333333332,
+      "confidence_category": "unreliable",
+      "parsed_data": {
+        "kills": 0,
+        "deaths": 1,
+        "assists": 0,
+        "gold": 5000,
+        "hero": "miya",
+        "hero_damage": 10000,
+        "damage_taken": 8000,
+        "match_result": "unknown",
+        "match_duration": 10.0,
+        "gold_per_min": 500,
+        "turret_damage": 1000,
+        "healing_done": 0,
+        "rank": "unknown",
+        "season": "unknown",
+        "overall_confidence": 68.23333333333332,
+        "confidence_category": "unreliable",
+        "completeness_score": 2.000000000000001,
+        "component_confidences": {
+          "image_quality": 0.3,
+          "hero_detection": 0.6333333333333333,
+          "data_completeness": 0.5047619047619047,
+          "data_consistency": 1.0,
+          "ocr_reliability": 0.4,
+          "semantic_validity": 1.0,
+          "layout_recognition": 0.3
+        },
+        "quality_factors": {}
+      },
+      "component_scores": {
+        "image_quality": 0.3,
+        "hero_detection": 0.6333333333333333,
+        "data_completeness": 0.5047619047619047,
+        "data_consistency": 1.0,
+        "ocr_reliability": 0.4,
+        "semantic_validity": 1.0,
+        "layout_recognition": 0.3
+      },
+      "success_factors": [],
+      "improvement_roadmap": [
+        "\ud83c\udfaf Current: 68.2% \u2192 Target: 95%+",
+        "\ud83d\udd27 Priority 1: Improve screenshot quality (lighting, stability, resolution)",
+        "\ud83d\udd27 Priority 2: Enhance hero detection (clear portraits, readable names)",
+        "\ud83d\udd27 Priority 3: Boost data completeness (capture all game panels)",
+        "\ud83d\udd27 Applied optimizations: quality_preprocessing, hero_detection_boost, data_completion_enhancement"
+      ]
+    },
+    "validation_summary": {
+      "label_match": true,
+      "mvp_detected": false,
+      "medal_detected": null,
+      "hero_detected": true,
+      "kda_extracted": true,
+      "performance_rating": null,
+      "confidence_score": 68.23333333333332,
+      "issues": [],
+      "success_factors": [
+        "KDA extracted successfully",
+        "Hero detected: ('unknown', 0.0)"
+      ]
+    },
+    "processing_time": 53.99332094192505
+  },
+  {
+    "screenshot": "screenshot-test-good-2.PNG",
+    "expected_label": "Good",
+    "image_path": "Screenshot-Test-Good/screenshot-test-good-2.PNG",
+    "enhanced_analysis": {
+      "ign_used": "Lesz XVII",
+      "data": {
+        "hero_damage": 234155,
+        "damage_taken": 226531,
+        "turret_damage": 224130,
+        "teamfight_participation": 100,
+        "kills": 62,
+        "deaths": 87,
+        "assists": 7,
+        "hero": [
+          "unknown",
+          0.0
+        ],
+        "gold": 0,
+        "positioning_rating": "average",
+        "ult_usage": "average",
+        "match_duration": 10,
+        "gold_per_min": 0,
+        "_session_info": {
+          "screenshot_count": 1,
+          "screenshot_types": [
+            "stats_page"
+          ],
+          "avg_confidence": 1.0,
+          "all_warnings": []
+        }
+      },
+      "session_info": {},
+      "warnings": []
+    },
+    "ultimate_analysis": {
+      "ign_used": "Lesz XVII",
+      "overall_confidence": 66.62266666666666,
+      "confidence_category": "unreliable",
+      "parsed_data": {
+        "kills": 0,
+        "deaths": 1,
+        "assists": 0,
+        "gold": 5000,
+        "hero": "fredrinn",
+        "hero_damage": 10000,
+        "damage_taken": 8000,
+        "match_result": "unknown",
+        "match_duration": 10.0,
+        "gold_per_min": 500,
+        "turret_damage": 1000,
+        "healing_done": 0,
+        "rank": "unknown",
+        "season": "unknown",
+        "overall_confidence": 66.62266666666666,
+        "confidence_category": "unreliable",
+        "completeness_score": 2.000000000000001,
+        "component_confidences": {
+          "image_quality": 0.3,
+          "hero_detection": 0.43200000000000005,
+          "data_completeness": 0.5047619047619047,
+          "data_consistency": 1.0,
+          "ocr_reliability": 0.4,
+          "semantic_validity": 1.0,
+          "layout_recognition": 0.3
+        },
+        "quality_factors": {}
+      },
+      "component_scores": {
+        "image_quality": 0.3,
+        "hero_detection": 0.43200000000000005,
+        "data_completeness": 0.5047619047619047,
+        "data_consistency": 1.0,
+        "ocr_reliability": 0.4,
+        "semantic_validity": 1.0,
+        "layout_recognition": 0.3
+      },
+      "success_factors": [],
+      "improvement_roadmap": [
+        "\ud83c\udfaf Current: 66.6% \u2192 Target: 95%+",
+        "\ud83d\udd27 Priority 1: Improve screenshot quality (lighting, stability, resolution)",
+        "\ud83d\udd27 Priority 2: Enhance hero detection (clear portraits, readable names)",
+        "\ud83d\udd27 Priority 3: Boost data completeness (capture all game panels)",
+        "\ud83d\udd27 Applied optimizations: quality_preprocessing, hero_detection_boost, data_completion_enhancement"
+      ]
+    },
+    "validation_summary": {
+      "label_match": true,
+      "mvp_detected": false,
+      "medal_detected": null,
+      "hero_detected": true,
+      "kda_extracted": true,
+      "performance_rating": null,
+      "confidence_score": 66.62266666666666,
+      "issues": [],
+      "success_factors": [
+        "KDA extracted successfully",
+        "Hero detected: ('unknown', 0.0)"
+      ]
+    },
+    "processing_time": 91.08358502388
+  },
+  {
+    "screenshot": "screenshot-test-average-2.PNG",
+    "expected_label": "Average",
+    "image_path": "Screenshot-Test-Average/screenshot-test-average-2.PNG",
+    "enhanced_analysis": {
+      "ign_used": "Lesz XVII",
+      "data": {
+        "hero_damage": 270857,
+        "damage_taken": 202901,
+        "turret_damage": 124218,
+        "teamfight_participation": 80,
+        "kills": 68,
+        "deaths": 27,
+        "assists": 5,
+        "hero": [
+          "unknown",
+          0.0
+        ],
+        "gold": 0,
+        "positioning_rating": "average",
+        "ult_usage": "average",
+        "match_duration": 10,
+        "gold_per_min": 0,
+        "_session_info": {
+          "screenshot_count": 1,
+          "screenshot_types": [
+            "stats_page"
+          ],
+          "avg_confidence": 1.0,
+          "all_warnings": []
+        }
+      },
+      "session_info": {},
+      "warnings": []
+    },
+    "ultimate_analysis": {
+      "ign_used": "Lesz XVII",
+      "overall_confidence": 66.62266666666666,
+      "confidence_category": "unreliable",
+      "parsed_data": {
+        "kills": 0,
+        "deaths": 1,
+        "assists": 0,
+        "gold": 5000,
+        "hero": "miya",
+        "hero_damage": 10000,
+        "damage_taken": 8000,
+        "match_result": "unknown",
+        "match_duration": 10.0,
+        "gold_per_min": 500,
+        "turret_damage": 1000,
+        "healing_done": 0,
+        "rank": "unknown",
+        "season": "unknown",
+        "overall_confidence": 66.62266666666666,
+        "confidence_category": "unreliable",
+        "completeness_score": 2.000000000000001,
+        "component_confidences": {
+          "image_quality": 0.3,
+          "hero_detection": 0.43200000000000005,
+          "data_completeness": 0.5047619047619047,
+          "data_consistency": 1.0,
+          "ocr_reliability": 0.4,
+          "semantic_validity": 1.0,
+          "layout_recognition": 0.3
+        },
+        "quality_factors": {}
+      },
+      "component_scores": {
+        "image_quality": 0.3,
+        "hero_detection": 0.43200000000000005,
+        "data_completeness": 0.5047619047619047,
+        "data_consistency": 1.0,
+        "ocr_reliability": 0.4,
+        "semantic_validity": 1.0,
+        "layout_recognition": 0.3
+      },
+      "success_factors": [],
+      "improvement_roadmap": [
+        "\ud83c\udfaf Current: 66.6% \u2192 Target: 95%+",
+        "\ud83d\udd27 Priority 1: Improve screenshot quality (lighting, stability, resolution)",
+        "\ud83d\udd27 Priority 2: Enhance hero detection (clear portraits, readable names)",
+        "\ud83d\udd27 Priority 3: Boost data completeness (capture all game panels)",
+        "\ud83d\udd27 Applied optimizations: quality_preprocessing, hero_detection_boost, data_completion_enhancement"
+      ]
+    },
+    "validation_summary": {
+      "label_match": true,
+      "mvp_detected": false,
+      "medal_detected": null,
+      "hero_detected": true,
+      "kda_extracted": true,
+      "performance_rating": null,
+      "confidence_score": 66.62266666666666,
+      "issues": [],
+      "success_factors": [
+        "KDA extracted successfully",
+        "Hero detected: ('unknown', 0.0)"
+      ]
+    },
+    "processing_time": 101.23412013053894
+  },
+  {
+    "screenshot": "screenshot-test-average-1.PNG",
+    "expected_label": "Average",
+    "image_path": "Screenshot-Test-Average/screenshot-test-average-1.PNG",
+    "enhanced_analysis": {
+      "ign_used": "Lesz XVII",
+      "data": {
+        "kills": 1,
+        "deaths": 6,
+        "assists": 10,
+        "gold": 9389,
+        "hero_damage": 10777,
+        "match_result": "victory",
+        "_parsing_method": "anchor_based",
+        "_anchors_found": [
+          "DEFEAT",
+          "DURATION"
+        ],
+        "_columns_found": [],
+        "match_duration": 10,
+        "player_rank": "Unknown",
+        "screenshot_confidence": 0.65,
+        "hero": [
+          "unknown",
+          0.0
+        ],
+        "turret_damage": 0,
+        "damage_taken": 0,
+        "teamfight_participation": 0,
+        "positioning_rating": "average",
+        "ult_usage": "average",
+        "gold_per_min": 939,
+        "_session_info": {
+          "screenshot_count": 1,
+          "screenshot_types": [
+            "scoreboard"
+          ],
+          "avg_confidence": 0.9325,
+          "all_warnings": [
+            "Could not detect match duration",
+            "Could not detect player rank"
+          ]
+        }
+      },
+      "session_info": {},
+      "warnings": [
+        "Could not detect match duration",
+        "Could not detect player rank"
+      ]
+    },
+    "ultimate_analysis": {
+      "ign_used": "Lesz XVII",
+      "overall_confidence": 68.23333333333332,
+      "confidence_category": "unreliable",
+      "parsed_data": {
+        "kills": 0,
+        "deaths": 1,
+        "assists": 0,
+        "gold": 5000,
+        "hero": "miya",
+        "hero_damage": 10000,
+        "damage_taken": 8000,
+        "match_result": "unknown",
+        "match_duration": 10.0,
+        "gold_per_min": 500,
+        "turret_damage": 1000,
+        "healing_done": 0,
+        "rank": "unknown",
+        "season": "unknown",
+        "overall_confidence": 68.23333333333332,
+        "confidence_category": "unreliable",
+        "completeness_score": 2.000000000000001,
+        "component_confidences": {
+          "image_quality": 0.3,
+          "hero_detection": 0.6333333333333333,
+          "data_completeness": 0.5047619047619047,
+          "data_consistency": 1.0,
+          "ocr_reliability": 0.4,
+          "semantic_validity": 1.0,
+          "layout_recognition": 0.3
+        },
+        "quality_factors": {}
+      },
+      "component_scores": {
+        "image_quality": 0.3,
+        "hero_detection": 0.6333333333333333,
+        "data_completeness": 0.5047619047619047,
+        "data_consistency": 1.0,
+        "ocr_reliability": 0.4,
+        "semantic_validity": 1.0,
+        "layout_recognition": 0.3
+      },
+      "success_factors": [],
+      "improvement_roadmap": [
+        "\ud83c\udfaf Current: 68.2% \u2192 Target: 95%+",
+        "\ud83d\udd27 Priority 1: Improve screenshot quality (lighting, stability, resolution)",
+        "\ud83d\udd27 Priority 2: Enhance hero detection (clear portraits, readable names)",
+        "\ud83d\udd27 Priority 3: Boost data completeness (capture all game panels)",
+        "\ud83d\udd27 Applied optimizations: quality_preprocessing, hero_detection_boost, data_completion_enhancement"
+      ]
+    },
+    "validation_summary": {
+      "label_match": true,
+      "mvp_detected": false,
+      "medal_detected": null,
+      "hero_detected": true,
+      "kda_extracted": true,
+      "performance_rating": null,
+      "confidence_score": 68.23333333333332,
+      "issues": [],
+      "success_factors": [
+        "KDA extracted successfully",
+        "Hero detected: ('unknown', 0.0)"
+      ]
+    },
+    "processing_time": 57.57289505004883
+  },
+  {
+    "screenshot": "screenshot-test-poor-2.PNG",
+    "expected_label": "Poor",
+    "image_path": "Screenshot-Test-Poor/screenshot-test-poor-2.PNG",
+    "enhanced_analysis": {
+      "ign_used": "Lesz XVII",
+      "data": {
+        "hero_damage": 99377,
+        "damage_taken": 64643,
+        "turret_damage": 56368,
+        "teamfight_participation": 100,
+        "kills": 22,
+        "deaths": 26,
+        "assists": 9,
+        "hero": [
+          "unknown",
+          0.0
+        ],
+        "gold": 0,
+        "positioning_rating": "average",
+        "ult_usage": "average",
+        "match_duration": 10,
+        "gold_per_min": 0,
+        "_session_info": {
+          "screenshot_count": 1,
+          "screenshot_types": [
+            "stats_page"
+          ],
+          "avg_confidence": 1.0,
+          "all_warnings": []
+        }
+      },
+      "session_info": {},
+      "warnings": []
+    },
+    "ultimate_analysis": {
+      "ign_used": "Lesz XVII",
+      "overall_confidence": 68.6939393939394,
+      "confidence_category": "unreliable",
+      "parsed_data": {
+        "kills": 0,
+        "deaths": 1,
+        "assists": 0,
+        "gold": 5000,
+        "hero": "roger",
+        "hero_damage": 10000,
+        "damage_taken": 8000,
+        "match_result": "unknown",
+        "match_duration": 10.0,
+        "gold_per_min": 500,
+        "turret_damage": 1000,
+        "healing_done": 0,
+        "rank": "unknown",
+        "season": "unknown",
+        "overall_confidence": 68.6939393939394,
+        "confidence_category": "unreliable",
+        "completeness_score": 2.000000000000001,
+        "component_confidences": {
+          "image_quality": 0.3,
+          "hero_detection": 0.6909090909090909,
+          "data_completeness": 0.5047619047619047,
+          "data_consistency": 1.0,
+          "ocr_reliability": 0.4,
+          "semantic_validity": 1.0,
+          "layout_recognition": 0.3
+        },
+        "quality_factors": {}
+      },
+      "component_scores": {
+        "image_quality": 0.3,
+        "hero_detection": 0.6909090909090909,
+        "data_completeness": 0.5047619047619047,
+        "data_consistency": 1.0,
+        "ocr_reliability": 0.4,
+        "semantic_validity": 1.0,
+        "layout_recognition": 0.3
+      },
+      "success_factors": [],
+      "improvement_roadmap": [
+        "\ud83c\udfaf Current: 68.7% \u2192 Target: 95%+",
+        "\ud83d\udd27 Priority 1: Improve screenshot quality (lighting, stability, resolution)",
+        "\ud83d\udd27 Priority 2: Enhance hero detection (clear portraits, readable names)",
+        "\ud83d\udd27 Priority 3: Boost data completeness (capture all game panels)",
+        "\ud83d\udd27 Applied optimizations: quality_preprocessing, hero_detection_boost, data_completion_enhancement"
+      ]
+    },
+    "validation_summary": {
+      "label_match": true,
+      "mvp_detected": false,
+      "medal_detected": null,
+      "hero_detected": true,
+      "kda_extracted": true,
+      "performance_rating": null,
+      "confidence_score": 68.6939393939394,
+      "issues": [],
+      "success_factors": [
+        "KDA extracted successfully",
+        "Hero detected: ('unknown', 0.0)"
+      ]
+    },
+    "processing_time": 57.64444899559021
+  },
+  {
+    "screenshot": "screenshot-test-poor-1.PNG",
+    "expected_label": "Poor",
+    "image_path": "Screenshot-Test-Poor/screenshot-test-poor-1.PNG",
+    "enhanced_analysis": {
+      "ign_used": "Lesz XVII",
+      "data": {
+        "kills": 0,
+        "deaths": 5,
+        "assists": 1,
+        "gold": 4671,
+        "hero_damage": 7586,
+        "match_result": "defeat",
+        "_parsing_method": "anchor_based",
+        "_anchors_found": [
+          "DEFEAT",
+          "DURATION"
+        ],
+        "_columns_found": [],
+        "match_duration": 10,
+        "player_rank": "Unknown",
+        "screenshot_confidence": 0.65,
+        "hero": [
+          "unknown",
+          0.0
+        ],
+        "turret_damage": 0,
+        "damage_taken": 0,
+        "teamfight_participation": 0,
+        "positioning_rating": "average",
+        "ult_usage": "average",
+        "gold_per_min": 467
+      },
+      "session_info": {},
+      "warnings": [
+        "Could not detect match duration",
+        "Could not detect player rank"
+      ]
+    },
+    "ultimate_analysis": {
+      "ign_used": "Lesz XVII",
+      "overall_confidence": 68.6939393939394,
+      "confidence_category": "unreliable",
+      "parsed_data": {
+        "kills": 0,
+        "deaths": 1,
+        "assists": 0,
+        "gold": 5000,
+        "hero": "roger",
+        "hero_damage": 10000,
+        "damage_taken": 8000,
+        "match_result": "unknown",
+        "match_duration": 10.0,
+        "gold_per_min": 500,
+        "turret_damage": 1000,
+        "healing_done": 0,
+        "rank": "unknown",
+        "season": "unknown",
+        "overall_confidence": 68.6939393939394,
+        "confidence_category": "unreliable",
+        "completeness_score": 2.000000000000001,
+        "component_confidences": {
+          "image_quality": 0.3,
+          "hero_detection": 0.6909090909090909,
+          "data_completeness": 0.5047619047619047,
+          "data_consistency": 1.0,
+          "ocr_reliability": 0.4,
+          "semantic_validity": 1.0,
+          "layout_recognition": 0.3
+        },
+        "quality_factors": {}
+      },
+      "component_scores": {
+        "image_quality": 0.3,
+        "hero_detection": 0.6909090909090909,
+        "data_completeness": 0.5047619047619047,
+        "data_consistency": 1.0,
+        "ocr_reliability": 0.4,
+        "semantic_validity": 1.0,
+        "layout_recognition": 0.3
+      },
+      "success_factors": [],
+      "improvement_roadmap": [
+        "\ud83c\udfaf Current: 68.7% \u2192 Target: 95%+",
+        "\ud83d\udd27 Priority 1: Improve screenshot quality (lighting, stability, resolution)",
+        "\ud83d\udd27 Priority 2: Enhance hero detection (clear portraits, readable names)",
+        "\ud83d\udd27 Priority 3: Boost data completeness (capture all game panels)",
+        "\ud83d\udd27 Applied optimizations: quality_preprocessing, hero_detection_boost, data_completion_enhancement"
+      ]
+    },
+    "validation_summary": {
+      "label_match": true,
+      "mvp_detected": false,
+      "medal_detected": null,
+      "hero_detected": true,
+      "kda_extracted": true,
+      "performance_rating": null,
+      "confidence_score": 68.6939393939394,
+      "issues": [],
+      "success_factors": [
+        "KDA extracted successfully",
+        "Hero detected: ('unknown', 0.0)"
+      ]
+    },
+    "processing_time": 54.46635580062866
+  }
+]
