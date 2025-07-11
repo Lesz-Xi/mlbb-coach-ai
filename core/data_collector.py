@@ -1,6 +1,8 @@
 import json
 import re
 import logging
+import threading
+import time
 from typing import Dict, Any, List, Tuple
 from difflib import get_close_matches
 
@@ -10,7 +12,7 @@ import numpy as np
 from pydantic import ValidationError
 
 from .schemas import Matches
-from .ign_validator import IGNValidator, IGNMatch
+from .ign_validator import IGNValidator
 
 # --- Configuration ---
 # Configure logging to provide insights into the OCR parsing process.
@@ -19,17 +21,109 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 
-# Initialize the EasyOCR reader. 
-# Using lazy loading pattern to avoid startup overhead.
-ocr_reader = None
+
+# PERFORMANCE OPTIMIZATION: Thread-safe OCR Reader Singleton
+class OCRReaderSingleton:
+    """
+    Thread-safe singleton for EasyOCR reader with performance optimization.
+    
+    Features:
+    - Lazy initialization (only create when first needed)
+    - Thread-safe access using double-checked locking
+    - Performance monitoring and caching
+    - Memory-efficient reader reuse
+    """
+    
+    _instance = None
+    _lock = threading.Lock()
+    _reader = None
+    _initialization_time = None
+    _access_count = 0
+    
+    def __new__(cls):
+        # Double-checked locking pattern for thread safety
+        if cls._instance is None:
+            with cls._lock:
+                if cls._instance is None:
+                    cls._instance = super(OCRReaderSingleton, cls).__new__(cls)
+        return cls._instance
+    
+    def get_reader(self):
+        """Get the OCR reader instance with lazy initialization."""
+        if self._reader is None:
+            with self._lock:
+                if self._reader is None:
+                    start_time = time.time()
+                    logging.info("🔄 Initializing EasyOCR reader (one-time setup)...")
+                    
+                    # Initialize with optimized settings for performance
+                    self._reader = easyocr.Reader(
+                        ['en'],
+                        gpu=False,      # CPU mode for stability
+                        verbose=False,  # Reduce logging overhead
+                        model_storage_directory=None,  # Use default caching
+                        download_enabled=True,
+                        detector=True,
+                        recognizer=True,
+                        width_ths=0.7,    # Optimized for MLBB screenshots
+                        height_ths=0.7,   # Optimized for MLBB screenshots
+                    )
+                    
+                    self._initialization_time = time.time() - start_time
+                    logging.info(f"✅ OCR reader initialized in {self._initialization_time:.3f}s")
+        
+                          # Track usage for performance analytics
+         self._access_count += 1
+         if self._access_count % 10 == 0:
+             init_time = self._initialization_time
+             logging.debug(f"📊 OCR reader accessed {self._access_count} times "
+                          f"(init time: {init_time:.3f}s)")
+        
+        return self._reader
+    
+    def get_stats(self) -> Dict[str, Any]:
+        """Get performance statistics for the OCR reader."""
+        return {
+            "initialized": self._reader is not None,
+            "initialization_time": self._initialization_time,
+            "access_count": self._access_count,
+            "memory_efficient": True,
+            "thread_safe": True
+        }
+    
+    def reset_reader(self):
+        """Reset the reader (for testing or error recovery)."""
+        with self._lock:
+            if self._reader is not None:
+                logging.info("🔄 Resetting OCR reader...")
+                # EasyOCR doesn't have explicit cleanup, but we can reset
+                self._reader = None
+                self._initialization_time = None
+                logging.info("✅ OCR reader reset complete")
+
+
+# Global singleton instance
+_ocr_singleton = OCRReaderSingleton()
 
 
 def get_ocr_reader():
-    """Lazy initialization of OCR reader to improve startup time."""
-    global ocr_reader
-    if ocr_reader is None:
-        ocr_reader = easyocr.Reader(['en'], gpu=False, verbose=False)
-    return ocr_reader
+    """
+    OPTIMIZED: Get OCR reader with singleton pattern and performance monitoring.
+    
+    Returns:
+        EasyOCR reader instance (cached and reused)
+    """
+    return _ocr_singleton.get_reader()
+
+
+def get_ocr_stats() -> Dict[str, Any]:
+    """Get OCR reader performance statistics."""
+    return _ocr_singleton.get_stats()
+
+
+def reset_ocr_reader():
+    """Reset OCR reader (for testing or error recovery)."""
+    _ocr_singleton.reset_reader()
 
 
 # A list of heroes for fuzzy matching. This improves detection accuracy.
@@ -273,41 +367,89 @@ class DataCollector:
         for text in row_texts:
             all_numbers.extend([int(n) for n in re.findall(r'\b\d+\b', text)])
 
-        # Heuristic: KDA is 3 numbers, gold is a larger number.
-        # This is more robust than simple sorting.
-        # Gold is the max number > 1000.
-        gold_candidates = [n for n in all_numbers if n > 1000]
+        # SPATIAL ALIGNMENT FIX: Extract data based on left-to-right position
+        # Build list of (number, position) pairs from row texts
+        spatial_data = []
+        for i, text in enumerate(row_texts):
+            numbers = [int(n) for n in re.findall(r'\b\d+\b', text)]
+            for num in numbers:
+                spatial_data.append((num, i))  # (value, position_index)
+        
+        # Sort by spatial position (left to right)
+        spatial_data.sort(key=lambda x: x[1])
+        
+        # Extract KDA first (small numbers, typically first)
+        kda_candidates = [(n, pos) for n, pos in spatial_data if n < 50]
+        if len(kda_candidates) >= 3:
+            # Take first 3 small numbers by position as K/D/A
+            k, d, a = [n for n, pos in kda_candidates[:3]]
+            data["kills"] = k
+            data["deaths"] = max(1, d)  # Deaths can't be 0
+            data["assists"] = a
+            logging.info(f"Parsed KDA (spatial): {k}/{d}/{a}")
+            
+        # Extract gold (medium-large numbers, after KDA position)
+        gold_candidates = [(n, pos) for n, pos in spatial_data 
+                           if 500 <= n <= 50000]
+        
         if gold_candidates:
-            data["gold"] = max(gold_candidates)
-            logging.info(f"Parsed Gold: {data['gold']}")
+            # Find KDA position to locate gold relative to it
+            kda_positions = ([pos for n, pos in kda_candidates[:3]] 
+                             if len(kda_candidates) >= 3 else [])
+            
+            if kda_positions:
+                # Look for gold after KDA position
+                max_kda_pos = max(kda_positions)
+                gold_after_kda = [(n, pos) for n, pos in gold_candidates 
+                                  if pos > max_kda_pos]
+                
+                if gold_after_kda:
+                    data["gold"] = gold_after_kda[0][0]
+                    logging.info(f"Parsed Gold (spatial, after KDA): "
+                                 f"{data['gold']}")
+                else:
+                    # Fallback: use spatial ordering
+                    data["gold"] = gold_candidates[0][0]
+                    logging.info(f"Parsed Gold (spatial fallback): "
+                                 f"{data['gold']}")
+            else:
+                # No KDA reference, use spatial ordering
+                data["gold"] = gold_candidates[0][0] 
+                logging.info(f"Parsed Gold (spatial, no KDA ref): "
+                             f"{data['gold']}")
+        else:
+            logging.warning("No gold candidates found in range 500-50000")
+            # FALLBACK: Try broader gold range or largest number approach
+            broader_gold = [(n, pos) for n, pos in spatial_data if 1000 <= n <= 100000]
+            if broader_gold:
+                data["gold"] = broader_gold[0][0]  # First by position
+                logging.info(f"FALLBACK: Using broader gold range: {data['gold']}")
+            else:
+                # Last resort: largest number in all_numbers
+                large_numbers = [n for n in all_numbers if n >= 1000]
+                if large_numbers:
+                    data["gold"] = max(large_numbers)
+                    logging.info(f"FALLBACK: Using largest number as gold: {data['gold']}")
 
-        # KDA numbers are all other numbers, typically < 50
-        kda_numbers = [n for n in all_numbers if n < 50]
-        if len(kda_numbers) >= 3:
-            # We assume the three numbers appearing together are KDA
-            # This is still a heuristic, but improved.
-            # Example row text: ['Lesz XVII', '9', '0   6', '8920']
-            # We need to find the "9 0 6" pattern.
-            full_row_text = " ".join(row_texts)
-            kda_match = re.search(r"(\d{1,2})\s+(\d{1,2})\s+(\d{1,2})", full_row_text)
-            if kda_match:
-                 k, d, a = (int(g) for g in kda_match.groups())
-                 if k in kda_numbers and d in kda_numbers and a in kda_numbers:
-                    data["kills"] = k
-                    data["deaths"] = d
-                    data["assists"] = a
-                    logging.info(f"Parsed KDA: {k}/{d}/{a}")
-
-        # For damage stats, we'll pull from the same numbers. This is a fallback.
-        remaining_numbers = sorted(
-            [n for n in gold_candidates if n != data.get("gold")], 
-            reverse=True
-        )
-        if len(remaining_numbers) >= 2:
-            data["hero_damage"] = remaining_numbers[0]
-            data["damage_taken"] = remaining_numbers[1]
-            if len(remaining_numbers) >= 3:
-                data["turret_damage"] = remaining_numbers[2]
+        # For damage stats, extract large numbers (spatial approach)
+        damage_candidates = [(n, pos) for n, pos in spatial_data if 1000 <= n <= 500000]
+        if damage_candidates:
+            # Sort by spatial position
+            damage_candidates.sort(key=lambda x: x[1])
+            # Filter out gold value to avoid duplication
+            gold_value = data.get("gold", 0)
+            damage_only = [(n, pos) for n, pos in damage_candidates if n != gold_value]
+            
+            if damage_only:
+                # Use first 2-3 damage values by spatial position
+                damage_values = [n for n, pos in damage_only]
+                if len(damage_values) >= 1:
+                    data["hero_damage"] = damage_values[0]
+                if len(damage_values) >= 2:
+                    data["damage_taken"] = damage_values[1]
+                if len(damage_values) >= 3:
+                    data["turret_damage"] = damage_values[2]
+                logging.info(f"Parsed damage values (spatial): {damage_values[:3]}")
         
         # Teamfight is a percentage
         tfp_match = re.search(r"(\d{1,3})%", " ".join(row_texts))
