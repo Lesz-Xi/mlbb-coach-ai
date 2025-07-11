@@ -95,14 +95,21 @@ class SessionManager:
     
     def _try_compile_result(self, session: AnalysisSession):
         """Try to compile final result if we have enough data."""
-        # Simple logic: if we have at least one screenshot with decent confidence
-        if len(session.screenshots) > 0:
+        # Enhanced logic: wait for multiple screenshots OR very high confidence
+        screenshot_count = len(session.screenshots)
+        if screenshot_count > 0:
             best_analysis = max(session.screenshots, key=lambda x: x.confidence)
             
-            if best_analysis.confidence > 0.7:  # Confidence threshold
+            # Complete if: (2+ screenshots AND confidence > 70%) OR (1 screenshot AND confidence > 90%)
+            should_complete = (
+                (screenshot_count >= 2 and best_analysis.confidence > 0.7) or
+                (screenshot_count >= 1 and best_analysis.confidence > 0.9)
+            )
+            
+            if should_complete:
                 session.final_result = self._merge_screenshot_data(session.screenshots)
                 session.is_complete = True
-                logger.info(f"Session {session.session_id} marked as complete")
+                logger.info(f"Session {session.session_id} marked as complete with {screenshot_count} screenshots (confidence: {best_analysis.confidence:.1%})")
     
     def _merge_screenshot_data(self, analyses: List[ScreenshotAnalysis]) -> Dict[str, Any]:
         """Merge data from multiple screenshot analyses."""
