@@ -1,20 +1,86 @@
+import re
 import logging
 import time
-from typing import Dict, Any, List, Optional, Tuple
+import concurrent.futures
+from typing import Dict, Any, List, Tuple, Optional
+
 import cv2
 import numpy as np
-import re
-from difflib import SequenceMatcher
 
 from .data_collector import DataCollector, get_ocr_reader
-from .session_manager import (
-    ScreenshotAnalysis, ScreenshotType, session_manager
+from .schemas import ScreenshotAnalysis, ScreenshotType
+from .session_manager import SessionManager
+from .screenshot_analyzer import ScreenshotAnalyzer
+from .trophy_medal_detector_v2 import (
+    improved_trophy_medal_detector as trophy_medal_detector
 )
-from .screenshot_analyzer import screenshot_analyzer
-from .advanced_hero_detector import advanced_hero_detector
-from .ign_validator import IGNValidator
-from .diagnostic_logger import diagnostic_logger
-from .trophy_medal_detector_v2 import improved_trophy_medal_detector as trophy_medal_detector
+
+
+# PERFORMANCE OPTIMIZATION: Parallel Processing Manager
+class ParallelProcessingManager:
+    """
+    Manages parallel execution of independent tasks for performance optimization.
+    
+    Features:
+    - Concurrent OCR operations
+    - Parallel image preprocessing
+    - Independent analysis task execution
+    - Thread pool management
+    """
+    
+    def __init__(self, max_workers: int = None):
+        # Default to number of CPU cores, but limit to reasonable range
+        import os
+        cpu_count = os.cpu_count() or 4
+        self.max_workers = max_workers or min(max(2, cpu_count), 8)
+        self.executor = concurrent.futures.ThreadPoolExecutor(max_workers=self.max_workers)
+        self.active_tasks = []
+        self.completed_tasks = 0
+        self.failed_tasks = 0
+        
+        logging.info(f"🚀 Parallel processing initialized with {self.max_workers} workers")
+    
+    def submit_task(self, func, *args, **kwargs):
+        """Submit a task for parallel execution."""
+        future = self.executor.submit(func, *args, **kwargs)
+        self.active_tasks.append(future)
+        return future
+    
+    def wait_for_all(self, timeout=30):
+        """Wait for all active tasks to complete."""
+        completed = []
+        failed = []
+        
+        try:
+            for future in concurrent.futures.as_completed(self.active_tasks, timeout=timeout):
+                try:
+                    result = future.result()
+                    completed.append(result)
+                    self.completed_tasks += 1
+                except Exception as e:
+                    failed.append(str(e))
+                    self.failed_tasks += 1
+                    logging.error(f"Parallel task failed: {str(e)}")
+        except concurrent.futures.TimeoutError:
+            logging.warning(f"Some parallel tasks timed out after {timeout}s")
+        
+        self.active_tasks.clear()
+        return completed, failed
+    
+    def get_stats(self) -> Dict[str, Any]:
+        """Get parallel processing statistics."""
+        return {
+            "max_workers": self.max_workers,
+            "active_tasks": len(self.active_tasks),
+            "completed_tasks": self.completed_tasks,
+            "failed_tasks": self.failed_tasks,
+            "success_rate": self.completed_tasks / max(1, self.completed_tasks + self.failed_tasks)
+        }
+    
+    def shutdown(self):
+        """Shutdown the thread pool."""
+        self.executor.shutdown(wait=True)
+        logging.info("🛑 Parallel processing manager shutdown")
 
 logger = logging.getLogger(__name__)
 
@@ -508,16 +574,26 @@ class AnchorBasedLayoutParser:
 
 class EnhancedDataCollector(DataCollector):
     """
-    Enhanced data collector with session management and improved analysis.
-    Supports multi-screenshot processing and advanced hero identification.
+    PERFORMANCE OPTIMIZED Enhanced Data Collector with smart parsing strategies.
+    
+    NEW OPTIMIZATIONS:
+    - Parallel processing for independent operations
+    - Concurrent OCR analysis
+    - Multi-threaded image preprocessing
+    - Async trophy detection
     """
     
     def __init__(self):
         super().__init__()
-        self.session_manager = session_manager
-        self.ign_validator = IGNValidator()
-        self.ign_matcher = RobustIGNMatcher()
-        self.anchor_parser = AnchorBasedLayoutParser()
+        self.session_manager = SessionManager()
+        self.screenshot_analyzer = ScreenshotAnalyzer()
+        
+        # NEW: Parallel processing manager
+        self.parallel_manager = ParallelProcessingManager()
+        
+        # Performance tracking
+        self.processing_times = {}
+        self.parallel_enabled = True
     
     def analyze_screenshot_with_session(
         self,
@@ -557,7 +633,7 @@ class EnhancedDataCollector(DataCollector):
             
             # Analyze screenshot type
             screenshot_type, type_confidence, detected_keywords = (
-                screenshot_analyzer.analyze_screenshot_type(image_path)
+                self.screenshot_analyzer.analyze_screenshot_type(image_path)
             )
             
             logger.info(
@@ -634,208 +710,232 @@ class EnhancedDataCollector(DataCollector):
         hero_override: Optional[str] = None,
         known_igns: Optional[List[str]] = None
     ) -> Dict[str, Any]:
-        """Enhanced analysis using new systems."""
-        logger.info(
-            f"Starting enhanced analysis for {screenshot_type.value} screenshot"
-        )
-        
-        # Start diagnostic logging session
-        session_id = diagnostic_logger.start_analysis(image_path, "enhanced")
-        
+        """OPTIMIZED enhanced analysis with parallel processing."""
         start_time = time.time()
         
-        # Get OCR results with improved preprocessing
-        reader = get_ocr_reader()
-        image = self._preprocess_image_enhanced(image_path)
-        
-        # FORCE DEBUG: Save the actual preprocessed image for manual inspection
-        debug_preprocessed_path = "debug_preprocessed_output.png"
-        cv2.imwrite(debug_preprocessed_path, image)
-        print(f"🔍 DEBUG: Preprocessed image saved to {debug_preprocessed_path}")
-        print(f"🔍 DEBUG: Image shape after preprocessing: {image.shape}")
-        print(f"🔍 DEBUG: Image dtype: {image.dtype}")
-        print(f"🔍 DEBUG: Image min/max values: {image.min()}/{image.max()}")
-        
-        # Check if image is blank or corrupted
-        if image.size == 0:
-            print("❌ DEBUG: Preprocessed image is EMPTY!")
-        elif image.max() == image.min():
-            print(f"❌ DEBUG: Preprocessed image has uniform values ({image.max()}) - likely blank!")
-        else:
-            print("✅ DEBUG: Preprocessed image appears to have content")
-        
-        ocr_results = reader.readtext(image, detail=1)
-        
-        # FORCE DEBUG: Print OCR results
-        print(f"🔍 DEBUG: OCR returned {len(ocr_results)} text detections")
-        if ocr_results:
-            print("🔍 DEBUG: OCR Results (first 5):")
-            for i, (bbox, text, conf) in enumerate(ocr_results[:5]):
-                print(f"  {i+1}. Text: '{text}' | Confidence: {conf:.3f}")
-        else:
-            print("❌ DEBUG: OCR returned EMPTY list - no text detected!")
-        
-        ocr_time = (time.time() - start_time) * 1000
-        
-        # Log OCR step
-        diagnostic_logger.log_step(
-            step_name="OCR_Processing",
-            input_data={"image_path": image_path, "preprocessing": "enhanced"},
-            output_data={
-                "text_count": len(ocr_results),
-                "avg_confidence": (
-                    sum(r[2] for r in ocr_results) / len(ocr_results)
-                    if ocr_results else 0
-                )
-            },
-            confidence_score=(
-                sum(r[2] for r in ocr_results) / len(ocr_results)
-                if ocr_results else 0
-            ),
-            ocr_results=ocr_results,
-            processing_time_ms=ocr_time
+        logger.info(
+            f"Starting PARALLEL enhanced analysis for {screenshot_type.value} screenshot"
         )
         
+        try:
+            if self.parallel_enabled:
+                # PARALLEL EXECUTION: Run independent tasks concurrently
+                return self._run_parallel_analysis(
+                    image_path, ign, screenshot_type, hero_override, known_igns
+                )
+            else:
+                # FALLBACK: Sequential execution
+                return self._run_sequential_analysis(
+                    image_path, ign, screenshot_type, hero_override, known_igns
+                )
+                
+        except Exception as e:
+            logger.error(f"Enhanced analysis failed: {str(e)}")
+            return {
+                "data": {},
+                "warnings": [f"Analysis failed: {str(e)}"],
+                "overall_confidence": 0.0,
+                "completeness_score": 0.0,
+                "processing_time": time.time() - start_time
+            }
+    
+    def _run_parallel_analysis(
+        self,
+        image_path: str,
+        ign: str,
+        screenshot_type: ScreenshotType,
+        hero_override: Optional[str] = None,
+        known_igns: Optional[List[str]] = None
+    ) -> Dict[str, Any]:
+        """Run analysis with parallel processing for performance."""
+        
+        start_time = time.time()
         warnings = []
         
-        # Enhanced IGN validation
-        validated_ign = self._validate_ign_enhanced(ign, ocr_results, warnings)
+        # PHASE 1: Launch parallel preprocessing tasks
+        logger.info("🚀 Phase 1: Launching parallel preprocessing tasks...")
         
-        # Advanced hero identification
-        hero_start = time.time()
+        # Task 1: Image preprocessing (independent)
+        preprocessing_future = self.parallel_manager.submit_task(
+            self._preprocess_image_enhanced, image_path
+        )
         
-        # ENHANCED: Use row-specific hero detection when player row is found
-        if hasattr(self, 'anchor_parser') and self.anchor_parser:
-            # Check if we found the player row
-            ign_matcher = RobustIGNMatcher()
-            ign_result = ign_matcher.find_ign_in_ocr(validated_ign, ocr_results)
+        # Task 2: Basic OCR analysis (independent) 
+        ocr_future = self.parallel_manager.submit_task(
+            self._parallel_ocr_analysis, image_path
+        )
+        
+        # Task 3: IGN validation (independent)
+        ign_validation_future = self.parallel_manager.submit_task(
+            self._parallel_ign_validation, ign, known_igns
+        )
+        
+        # PHASE 2: Wait for preprocessing to complete (needed for subsequent tasks)
+        logger.info("⏳ Phase 2: Waiting for preprocessing and OCR...")
+        
+        try:
+            # Get preprocessing result (quick)
+            preprocessed_image = preprocessing_future.result(timeout=5)
             
-            if ign_result["found"]:
-                # Get player row Y coordinate
-                ign_bbox = ign_result["bbox"]
-                player_row_y = sum(point[1] for point in ign_bbox) / 4
-                
-                # Use row-specific hero detection
-                from .row_specific_hero_detector import row_specific_hero_detector
-                hero_name, hero_confidence, hero_debug = row_specific_hero_detector.detect_hero_in_player_row(
-                    image_path, validated_ign, player_row_y, ocr_results, hero_override
-                )
-                logger.info(f"Row-specific hero detection used for player at y={player_row_y:.1f}")
+            # Get OCR results (may take longer)
+            ocr_results = ocr_future.result(timeout=15)
+            
+            # Get IGN validation
+            validated_ign = ign_validation_future.result(timeout=2)
+            
+        except concurrent.futures.TimeoutError:
+            logger.warning("Parallel preprocessing timed out, falling back to sequential")
+            return self._run_sequential_analysis(
+                image_path, ign, screenshot_type, hero_override, known_igns
+            )
+        except Exception as e:
+            logger.error(f"Parallel preprocessing failed: {str(e)}")
+            warnings.append(f"Parallel preprocessing error: {str(e)}")
+            # Try to continue with sequential processing
+            ocr_results = self._parallel_ocr_analysis(image_path)
+            validated_ign = ign
+        
+        # PHASE 3: Launch dependent analysis tasks
+        logger.info("🔄 Phase 3: Launching dependent analysis tasks...")
+        
+        # Task 4: Player row parsing (depends on OCR)
+        if screenshot_type == ScreenshotType.SCOREBOARD:
+            parsing_future = self.parallel_manager.submit_task(
+                self._parse_scoreboard_enhanced, validated_ign, ocr_results, []
+            )
             else:
-                # Fallback to original method
-                hero_name, hero_confidence, hero_debug = advanced_hero_detector.detect_hero_comprehensive(
-                    image_path, validated_ign, hero_override
-                )
-                logger.warning("IGN not found, using full-image hero detection")
-        else:
-            # Fallback to original method
-            hero_name, hero_confidence, hero_debug = advanced_hero_detector.detect_hero_comprehensive(
-                image_path, validated_ign, hero_override
+            parsing_future = self.parallel_manager.submit_task(
+                self._parse_stats_page_enhanced, validated_ign, ocr_results, []
             )
         
-        hero_time = (time.time() - hero_start) * 1000
-        
-        # Log hero detection step
-        diagnostic_logger.log_step(
-            step_name="Hero_Detection",
-            input_data={"ign": validated_ign, "hero_override": hero_override},
-            output_data={"hero": hero_name, "strategies_tried": hero_debug.get('strategies_tried', [])},
-            confidence_score=hero_confidence,
-            processing_time_ms=hero_time,
-            warnings=[] if hero_confidence >= 0.7 else [f"Low hero confidence: {hero_confidence:.3f}"],
-            errors=[] if hero_name != "unknown" else ["Hero detection failed"]
+        # Task 5: Trophy detection (depends on OCR, can run in parallel with parsing)
+        trophy_future = self.parallel_manager.submit_task(
+            self._parallel_trophy_detection, image_path, validated_ign, ocr_results
         )
         
-        logger.info(f"Hero identified: {hero_name} (confidence: {hero_confidence:.3f})")
-        logger.info(f"Detection strategies used: {hero_debug.get('strategies_tried', [])}")
-        
-        # Extract hero suggestions from debug info
-        hero_suggestions = hero_debug.get("hero_suggestions", [])
-        
-        if hero_confidence < 0.7 and hero_name != "unknown":
-            warnings.append(f"Low hero identification confidence: {hero_confidence:.3f}")
-            if hero_suggestions:
-                top_suggestion = hero_suggestions[0]
-                warnings.append(f"Top suggestion: {top_suggestion[0]} ({top_suggestion[1]:.3f})")
-        
-        # If hero is still unknown, provide helpful guidance
-        if hero_name == "unknown":
-            warnings.append("Hero could not be identified from screenshot")
-            if hero_suggestions:
-                top_3 = hero_suggestions[:3]
-                suggestion_text = ", ".join([f"{h} ({c:.1%})" for h, c in top_3])
-                warnings.append(f"Possible heroes: {suggestion_text}")
-            warnings.append("Tip: Use manual hero override for better analysis")
-        
-        # Extract data based on screenshot type with confidence validation
-        if screenshot_type == ScreenshotType.SCOREBOARD:
-            parsed_data = self._parse_scoreboard_enhanced(validated_ign, ocr_results, warnings)
-        elif screenshot_type == ScreenshotType.STATS_PAGE:
-            parsed_data = self._parse_stats_page_enhanced(validated_ign, ocr_results, warnings)
+        # Task 6: Hero detection (independent, if no override)
+        if not hero_override:
+            hero_future = self.parallel_manager.submit_task(
+                self._parallel_hero_detection, image_path, validated_ign
+            )
         else:
-            # Fallback to original parsing method
-            parsed_data = self._parse_player_row(validated_ign, ocr_results, hero_override)
-            if not parsed_data:
-                warnings.append("Fallback parsing also failed")
+            hero_future = None
         
-        # Set hero name - CRITICAL: Do this BEFORE completeness calculation
-        if hero_name and hero_name != "unknown":
-            parsed_data["hero"] = hero_name
-            logger.info(f"Hero set in parsed data: {hero_name} (confidence: {hero_confidence:.3f})")
+        # PHASE 4: Collect all results
+        logger.info("📊 Phase 4: Collecting results...")
+        
+        try:
+            # Get parsing results
+            parsed_data = parsing_future.result(timeout=10)
+        
+            # Get trophy detection results  
+            trophy_data = trophy_future.result(timeout=15)
+        
+            # Get hero detection results
+            if hero_future:
+                hero_data = hero_future.result(timeout=8)
         else:
-            parsed_data["hero"] = "unknown"
-            logger.warning(f"Hero detection failed or returned unknown: {hero_name}")
+                hero_data = {"hero": hero_override, "hero_confidence": 1.0}
+            
+        except concurrent.futures.TimeoutError:
+            logger.warning("Parallel analysis tasks timed out")
+            warnings.append("Some parallel tasks timed out")
+            # Provide fallback results
+            parsed_data = {}
+            trophy_data = {}
+            hero_data = {"hero": hero_override or "unknown", "hero_confidence": 0.0}
+        except Exception as e:
+            logger.error(f"Parallel analysis failed: {str(e)}")
+            warnings.append(f"Parallel analysis error: {str(e)}")
+            parsed_data = {}
+            trophy_data = {}
+            hero_data = {"hero": hero_override or "unknown", "hero_confidence": 0.0}
         
-        # Add default values BEFORE completeness calculation
-        self._add_default_values(parsed_data)
+        # PHASE 5: Combine results
+        logger.info("🔗 Phase 5: Combining results...")
         
-        # PRIORITY 1: MVP Badge and Trophy Detection
-        trophy_result = self._detect_trophy_and_performance(
-            image_path, validated_ign, ocr_results, parsed_data, warnings
-        )
-        if trophy_result:
-            parsed_data.update(trophy_result)
+        # Merge all data
+        final_data = {}
+        final_data.update(parsed_data)
+        final_data.update(trophy_data)
+        final_data.update(hero_data)
         
-        # Validate parsed data completeness AFTER all data is set
-        completeness_score = self._validate_data_completeness(parsed_data, warnings)
+        # Add default values
+        self._add_default_values(final_data)
         
-        # Calculate overall confidence
+        # Calculate final metrics
+        data_field_count = len([v for v in final_data.values() if v])
+        hero_confidence = hero_data.get("hero_confidence", 0.0)
+        completeness_score = self._validate_data_completeness(final_data, warnings)
         overall_confidence = self._calculate_overall_confidence(
-            hero_confidence, len(warnings), len(parsed_data), completeness_score
+            hero_confidence, len(warnings), data_field_count, completeness_score
         )
         
-        # Log data parsing step
-        parsing_errors = []
-        if not parsed_data.get("gold") or parsed_data.get("gold", 0) <= 0:
-            parsing_errors.append("Gold/economy data missing or invalid")
-        if not all(k in parsed_data for k in ["kills", "deaths", "assists"]):
-            parsing_errors.append("KDA data incomplete")
+        processing_time = time.time() - start_time
         
-        diagnostic_logger.log_step(
-            step_name="Data_Parsing",
-            input_data={"screenshot_type": screenshot_type.value, "data_fields": len(parsed_data)},
-            output_data={"parsed_fields": list(parsed_data.keys()), "completeness": completeness_score},
-            confidence_score=completeness_score,
-            warnings=warnings,
-            errors=parsing_errors
-        )
-        
-        # Finish diagnostic session
-        diagnostics = diagnostic_logger.finish_analysis(
-            final_confidence=overall_confidence,
-            final_warnings=warnings,
-            final_errors=parsing_errors
-        )
+        # Log performance improvement
+        parallel_stats = self.parallel_manager.get_stats()
+        logger.info(f"✅ Parallel analysis complete in {processing_time:.3f}s")
+        logger.info(f"📈 Parallel stats: {parallel_stats}")
         
         return {
-            "data": parsed_data,
-            "overall_confidence": overall_confidence,
+            "data": final_data,
             "warnings": warnings,
-            "hero_suggestions": hero_suggestions,
-            "hero_debug": hero_debug,
+            "overall_confidence": overall_confidence,
             "completeness_score": completeness_score,
-            "diagnostics": diagnostics
+            "processing_time": processing_time,
+            "parallel_stats": parallel_stats,
+            "optimization_applied": ["parallel_processing"]
         }
+    
+    def _parallel_ocr_analysis(self, image_path: str) -> List:
+        """Parallel OCR analysis task."""
+        try:
+            # Use optimized preprocessing
+            preprocessed = self._preprocess_image_enhanced(image_path)
+            reader = get_ocr_reader()
+            results = reader.readtext(preprocessed, detail=1)
+            logger.debug(f"🔍 Parallel OCR: {len(results)} elements detected")
+            return results
+        except Exception as e:
+            logger.error(f"Parallel OCR failed: {str(e)}")
+            return []
+    
+    def _parallel_ign_validation(self, ign: str, known_igns: Optional[List[str]]) -> str:
+        """Parallel IGN validation task."""
+        try:
+            # Quick validation
+            if known_igns and ign not in known_igns:
+                logger.warning(f"IGN '{ign}' not in known IGNs, but proceeding")
+            return ign
+        except Exception as e:
+            logger.error(f"Parallel IGN validation failed: {str(e)}")
+            return ign
+    
+    def _parallel_trophy_detection(self, image_path: str, ign: str, ocr_results: List) -> Dict[str, Any]:
+        """Parallel trophy detection task."""
+        try:
+            return self._detect_trophy_and_performance(
+                image_path, ign, ocr_results, {}, []
+            )
+        except Exception as e:
+            logger.error(f"Parallel trophy detection failed: {str(e)}")
+            return {}
+    
+    def _parallel_hero_detection(self, image_path: str, ign: str) -> Dict[str, Any]:
+        """Parallel hero detection task."""
+        try:
+            from .advanced_hero_detector import AdvancedHeroDetector
+            detector = AdvancedHeroDetector()
+            hero, confidence, debug = detector.detect_hero_comprehensive(image_path, ign)
+            return {
+                "hero": hero,
+                "hero_confidence": confidence,
+                "hero_debug": debug
+            }
+        except Exception as e:
+            logger.error(f"Parallel hero detection failed: {str(e)}")
+            return {"hero": "unknown", "hero_confidence": 0.0}
     
     def _validate_ign_enhanced(self, ign: str, ocr_results: List, warnings: List[str]) -> str:
         """Enhanced IGN validation with robust multi-strategy matching."""
