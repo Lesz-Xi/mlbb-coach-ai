@@ -72,11 +72,11 @@ class OCRReaderSingleton:
                     self._initialization_time = time.time() - start_time
                     logging.info(f"✅ OCR reader initialized in {self._initialization_time:.3f}s")
         
-                          # Track usage for performance analytics
-         self._access_count += 1
-         if self._access_count % 10 == 0:
-             init_time = self._initialization_time
-             logging.debug(f"📊 OCR reader accessed {self._access_count} times "
+        # Track usage for performance analytics
+        self._access_count += 1
+        if self._access_count % 10 == 0:
+            init_time = self._initialization_time
+            logging.debug(f"📊 OCR reader accessed {self._access_count} times "
                           f"(init time: {init_time:.3f}s)")
         
         return self._reader
