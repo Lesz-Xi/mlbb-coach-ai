@@ -61,35 +61,63 @@ class ImprovedTrophyMedalDetector:
             {'lower': np.array([10, 50, 80]), 'upper': np.array([35, 255, 200])},
         ]
         
-        # IMPROVED: Better medal color differentiation
+        # ENHANCED: Precise medal color differentiation with non-overlapping ranges
         self.medal_colors = {
             'gold': [
-                {'lower': np.array([20, 80, 120]), 'upper': np.array([30, 255, 255])},
-                {'lower': np.array([15, 60, 100]), 'upper': np.array([25, 255, 255])},
+                # Bright gold medals - distinct from bronze
+                {'lower': np.array([20, 100, 140]), 
+                 'upper': np.array([30, 255, 255])},
+                # Golden yellow range
+                {'lower': np.array([15, 80, 120]), 
+                 'upper': np.array([25, 255, 255])},
+                # Rich gold range
+                {'lower': np.array([18, 120, 160]), 
+                 'upper': np.array([28, 255, 255])},
             ],
-            'silver': [
-                {'lower': np.array([0, 0, 180]), 'upper': np.array([180, 30, 255])},
-                {'lower': np.array([0, 0, 150]), 'upper': np.array([180, 60, 220])},
-            ],
-            'bronze': [
-                {'lower': np.array([5, 40, 60]), 'upper': np.array([20, 255, 180])},
-                {'lower': np.array([8, 30, 50]), 'upper': np.array([25, 200, 150])},
-            ]
+                          'silver': [
+                  # Light silver/gray range - distinct from white and other colors
+                  {'lower': np.array([0, 0, 160]), 
+                   'upper': np.array([180, 40, 240])},
+                  # Metallic silver range
+                  {'lower': np.array([0, 0, 140]), 
+                   'upper': np.array([180, 50, 200])},
+                  # Dark silver range
+                  {'lower': np.array([0, 0, 120]), 
+                   'upper': np.array([180, 60, 180])},
+              ],
+              'bronze': [
+                  # Bronze/copper range - distinct from gold and brown
+                  {'lower': np.array([5, 60, 80]), 
+                   'upper': np.array([15, 255, 160])},
+                  # Dark bronze range
+                  {'lower': np.array([8, 80, 60]), 
+                   'upper': np.array([18, 255, 140])},
+                  # Copper-bronze range
+                  {'lower': np.array([3, 100, 70]), 
+                   'upper': np.array([12, 255, 150])},
+              ]
         }
         
-        # IMPROVED: Expanded search regions
+        # ENHANCED: More targeted search regions
         self.trophy_search_offsets = [
-            (-150, -40, 80, 50),   # Far left of name
-            (-80, -30, 60, 40),    # Left of name  
-            (120, -30, 100, 40),   # Right of name
-            (200, -30, 80, 40),    # Far right of name
-            (-40, -70, 120, 50),   # Above name
-            (-100, -80, 250, 100)  # Extended search area
+            (-120, -35, 70, 45),   # Left of name (reduced overlap)
+            (-70, -25, 50, 35),    # Near left of name  
+            (100, -25, 80, 35),    # Right of name
+            (180, -25, 70, 35),    # Far right of name
+            (-30, -60, 100, 45),   # Above name (reduced height)
+            (-80, -70, 200, 80)    # Extended search area (optimized)
         ]
         
-        # Trophy size constraints
-        self.min_trophy_area = 50
-        self.max_trophy_area = 8000
+        # ENHANCED: More restrictive trophy size constraints for better accuracy
+        self.min_trophy_area = 80      # Increased from 50
+        self.max_trophy_area = 6000    # Decreased from 8000
+        
+        # Medal-specific size constraints
+        self.medal_size_ranges = {
+            'gold': {'min': 120, 'max': 4000},
+            'silver': {'min': 100, 'max': 3500}, 
+            'bronze': {'min': 80, 'max': 3000}
+        }
         
         # MVP crown specific patterns
         self.mvp_text_patterns = ['mvp', 'most valuable', 'crown', '👑']
@@ -381,15 +409,20 @@ class ImprovedTrophyMedalDetector:
                     for contour in contours:
                         area = cv2.contourArea(contour)
                         
-                        # Filter by area
-                        if area < self.min_trophy_area or area > self.max_trophy_area:
+                        # ENHANCED: Medal-specific size filtering
+                        size_ranges = self.medal_size_ranges[medal_color]
+                        if area < size_ranges['min'] or area > size_ranges['max']:
                             continue
                         
-                        # Analyze medal characteristics (circularity)
+                        # ENHANCED: Advanced shape analysis
                         circularity = self._calculate_circularity(contour)
+                        aspect_ratio = self._calculate_aspect_ratio(contour)
+                        solidity = self._calculate_solidity(contour)
                         
-                        # Medal confidence calculation
-                        medal_confidence = self._calculate_medal_confidence(medal_color, circularity, area, i)
+                        # ENHANCED: Weighted confidence calculation
+                        medal_confidence = self._calculate_enhanced_medal_confidence(
+                            medal_color, circularity, aspect_ratio, solidity, area, i, j
+                        )
                         
                         if medal_confidence > best_confidence:
                             best_confidence = medal_confidence
@@ -400,6 +433,8 @@ class ImprovedTrophyMedalDetector:
                                 "color_range_index": j,
                                 "region_index": i,
                                 "circularity": circularity,
+                                "aspect_ratio": aspect_ratio,
+                                "solidity": solidity,
                                 "area": area,
                                 "mask_pixels": cv2.countNonZero(mask)
                             }
@@ -412,7 +447,8 @@ class ImprovedTrophyMedalDetector:
                             else:
                                 best_medal_type = TrophyType.BRONZE_MEDAL
         
-        if best_confidence > 0.4:
+        # ENHANCED: Higher confidence threshold for better accuracy
+        if best_confidence > 0.7:
             # Map trophy type to performance label
             performance_map = {
                 TrophyType.GOLD_MEDAL: PerformanceLabel.GOOD,
@@ -581,6 +617,84 @@ class ImprovedTrophyMedalDetector:
             shape_analysis={},
             debug_info=debug_info
         )
+
+    def _calculate_aspect_ratio(self, contour: np.ndarray) -> float:
+        """Calculate aspect ratio of contour bounding rectangle."""
+        x, y, w, h = cv2.boundingRect(contour)
+        if h == 0:
+            return 0.0
+        return w / h
+
+    def _calculate_solidity(self, contour: np.ndarray) -> float:
+        """Calculate solidity (ratio of contour area to convex hull area)."""
+        area = cv2.contourArea(contour)
+        if area == 0:
+            return 0.0
+        hull = cv2.convexHull(contour)
+        hull_area = cv2.contourArea(hull)
+        if hull_area == 0:
+            return 0.0
+        return area / hull_area
+
+    def _calculate_enhanced_medal_confidence(
+        self, 
+        medal_color: str, 
+        circularity: float, 
+        aspect_ratio: float,
+        solidity: float,
+        area: float, 
+        region_index: int,
+        color_range_index: int
+    ) -> float:
+        """Enhanced medal confidence calculation with weighted scoring."""
+        
+        # Base confidence from shape analysis
+        shape_score = 0.0
+        
+        # Circularity scoring (medals should be circular)
+        if circularity > 0.7:
+            shape_score += 0.4
+        elif circularity > 0.5:
+            shape_score += 0.2
+        
+        # Aspect ratio scoring (medals should be roughly square)
+        if 0.8 <= aspect_ratio <= 1.2:
+            shape_score += 0.3
+        elif 0.7 <= aspect_ratio <= 1.4:
+            shape_score += 0.15
+        
+        # Solidity scoring (medals should be solid shapes)
+        if solidity > 0.8:
+            shape_score += 0.3
+        elif solidity > 0.6:
+            shape_score += 0.15
+        
+        # Size scoring based on medal type
+        size_score = 0.0
+        size_ranges = self.medal_size_ranges[medal_color]
+        optimal_size = (size_ranges['min'] + size_ranges['max']) / 2
+        size_diff = abs(area - optimal_size) / optimal_size
+        
+        if size_diff < 0.3:
+            size_score = 0.25
+        elif size_diff < 0.5:
+            size_score = 0.15
+        elif size_diff < 0.7:
+            size_score = 0.1
+        
+        # Position scoring (medals typically appear in specific regions)
+        position_score = self._get_position_boost(region_index, area)
+        
+        # Color range preference (primary ranges get higher scores)
+        color_range_score = 0.1 if color_range_index == 0 else 0.05
+        
+        # Medal type confidence (gold > silver > bronze in typical scenarios)
+        type_bonus = {'gold': 0.05, 'silver': 0.03, 'bronze': 0.01}[medal_color]
+        
+        total_confidence = (shape_score + size_score + 
+                          position_score + color_range_score + type_bonus)
+        
+        return min(total_confidence, 1.0)
 
 
 # Global instance
