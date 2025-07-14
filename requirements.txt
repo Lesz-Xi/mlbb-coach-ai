@@ -14,3 +14,8 @@ moviepy==1.0.3
 ffmpeg-python==0.2.0
 fuzzywuzzy==0.18.0
 python-Levenshtein==0.21.1
+
+# YOLOv8 Dependencies
+ultralytics==8.0.196
+supervision==0.18.0
+roboflow==1.1.9
