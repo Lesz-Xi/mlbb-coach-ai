@@ -1,14 +1,15 @@
+import json
+import logging
 import os
+import shutil
 import sys
+from tempfile import NamedTemporaryFile
+from typing import List, Optional
 
 # Add parent directory to path for imports
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-import json
-import shutil
-from tempfile import NamedTemporaryFile
-from typing import List, Optional
-
+import numpy as np
 from fastapi import FastAPI, HTTPException, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -27,7 +28,6 @@ from core.advanced_performance_analyzer import advanced_performance_analyzer
 from core.enhanced_counter_pick_system import enhanced_counter_pick_system
 from core.error_handler import error_handler
 
-import numpy as np
 
 def convert_numpy_types(obj):
     """Recursively convert numpy types to Python native types."""
