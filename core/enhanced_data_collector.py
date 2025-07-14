@@ -3,17 +3,32 @@ import logging
 import time
 import concurrent.futures
 from typing import Dict, Any, List, Tuple, Optional
+from difflib import SequenceMatcher
 
 import cv2
 import numpy as np
 
-from .data_collector import DataCollector, get_ocr_reader
-from .schemas import ScreenshotAnalysis, ScreenshotType
-from .session_manager import SessionManager
-from .screenshot_analyzer import ScreenshotAnalyzer
-from .trophy_medal_detector_v2 import (
-    improved_trophy_medal_detector as trophy_medal_detector
-)
+# Define simple types to replace the missing classes
+SCREENSHOT_TYPE_SCOREBOARD = "scoreboard"
+SCREENSHOT_TYPE_STATS = "stats"
+SCREENSHOT_TYPE_UNKNOWN = "unknown"
+
+# Handle both module and script execution
+try:
+    from .data_collector import DataCollector, get_ocr_reader
+    from .session_manager import SessionManager
+    from .screenshot_analyzer import ScreenshotAnalyzer
+    from .trophy_medal_detector_v2 import (
+        improved_trophy_medal_detector as trophy_medal_detector
+    )
+except ImportError:
+    # Fallback for when running as script
+    from data_collector import DataCollector, get_ocr_reader
+    from session_manager import SessionManager
+    from screenshot_analyzer import ScreenshotAnalyzer
+    from trophy_medal_detector_v2 import (
+        improved_trophy_medal_detector as trophy_medal_detector
+    )
 
 
 # PERFORMANCE OPTIMIZATION: Parallel Processing Manager
@@ -574,26 +589,255 @@ class AnchorBasedLayoutParser:
 
 class EnhancedDataCollector(DataCollector):
     """
-    PERFORMANCE OPTIMIZED Enhanced Data Collector with smart parsing strategies.
-    
-    NEW OPTIMIZATIONS:
-    - Parallel processing for independent operations
-    - Concurrent OCR analysis
-    - Multi-threaded image preprocessing
-    - Async trophy detection
+    Enhanced data collector with parallel processing, improved parsing,
+    and video timestamp correlation support.
     """
     
-    def __init__(self):
-        super().__init__()
+    def __init__(self, enable_parallel_processing: bool = True):
+        """
+        Initialize the enhanced data collector.
+        
+        Args:
+            enable_parallel_processing: Whether to use parallel processing
+        """
+        self.enable_parallel_processing = enable_parallel_processing
+        self.parallel_manager = (
+            ParallelProcessingManager()
+            if enable_parallel_processing else None
+        )
+        
+        # Initialize session manager
         self.session_manager = SessionManager()
+        
+        # Initialize trophy/medal detector
+        self.trophy_detector = trophy_medal_detector
+        
+        # Initialize screenshot analyzer
         self.screenshot_analyzer = ScreenshotAnalyzer()
         
-        # NEW: Parallel processing manager
-        self.parallel_manager = ParallelProcessingManager()
+        # Initialize IGN matcher with improved algorithms
+        self.ign_matcher = IGNMatcher()
+        
+        # Initialize IGN validator
+        self.ign_validator = IGNValidator()
         
         # Performance tracking
-        self.processing_times = {}
-        self.parallel_enabled = True
+        self.performance_stats = {
+            "total_processed": 0,
+            "successful_extractions": 0,
+            "failed_extractions": 0,
+            "average_processing_time": 0.0,
+            "parallel_speedup": 1.0
+        }
+        
+        # OCR reader (lazy loading)
+        self._ocr_reader = None
+    
+    def analyze_screenshot_with_timestamp(
+        self,
+        image_path: str,
+        ign: str,
+        video_timestamp: float = None,
+        frame_number: int = None,
+        frame_metadata: Dict[str, Any] = None,
+        session_id: str = None,
+        hero_override: str = None,
+        known_igns: List[str] = None
+    ) -> Dict[str, Any]:
+        """
+        Analyze screenshot with video timestamp correlation.
+        
+        Args:
+            image_path: Path to the screenshot image
+            ign: Player's in-game name
+            video_timestamp: Time in seconds from video start
+            frame_number: Frame number in the video
+            frame_metadata: Additional frame metadata
+            session_id: Optional session ID for multi-screenshot analysis
+            hero_override: Manually specified hero name
+            known_igns: List of known IGNs for validation
+            
+        Returns:
+            Dictionary containing analysis results with timestamp information
+        """
+        import time
+        start_time = time.time()
+        
+        # Perform standard screenshot analysis
+        result = self.analyze_screenshot_with_session(
+            image_path=image_path,
+            ign=ign,
+            session_id=session_id,
+            hero_override=hero_override,
+            known_igns=known_igns
+        )
+        
+        # Add timestamp information to the result
+        temporal_info = {
+            "video_timestamp": video_timestamp,
+            "frame_number": frame_number,
+            "frame_metadata": frame_metadata or {},
+            "analysis_timestamp": time.time(),
+            "processing_time": time.time() - start_time
+        }
+        
+        # Add temporal information to the result
+        result["temporal_info"] = temporal_info
+        
+        # If we have data, add timestamp to the data section
+        if result.get("data"):
+            result["data"]["video_timestamp"] = video_timestamp
+            result["data"]["frame_number"] = frame_number
+            
+            # Add game phase information based on timestamp
+            if video_timestamp is not None:
+                result["data"]["game_phase"] = self._determine_game_phase(
+                    video_timestamp
+                )
+        
+        return result
+    
+    def _determine_game_phase(self, timestamp: float) -> str:
+        """
+        Determine game phase based on video timestamp.
+        
+        Args:
+            timestamp: Time in seconds from video start
+            
+        Returns:
+            Game phase string (early, mid, late)
+        """
+        if timestamp < 300:  # 0-5 minutes
+            return "early_game"
+        elif timestamp < 900:  # 5-15 minutes
+            return "mid_game"
+        else:  # 15+ minutes
+            return "late_game"
+    
+    def analyze_timestamped_frames_batch(
+        self,
+        timestamped_frames: List,  # List of TimestampedFrame objects
+        ign: str,
+        session_id: str = None,
+        hero_override: str = None,
+        known_igns: List[str] = None
+    ) -> List[Dict[str, Any]]:
+        """
+        Analyze multiple timestamped frames in batch.
+        
+        Args:
+            timestamped_frames: List of TimestampedFrame objects
+            ign: Player's in-game name
+            session_id: Optional session ID for multi-screenshot analysis
+            hero_override: Manually specified hero name
+            known_igns: List of known IGNs for validation
+            
+        Returns:
+            List of analysis results with timestamp correlation
+        """
+        results = []
+        
+        for timestamped_frame in timestamped_frames:
+            try:
+                result = self.analyze_screenshot_with_timestamp(
+                    image_path=timestamped_frame.frame_path,
+                    ign=ign,
+                    video_timestamp=timestamped_frame.timestamp,
+                    frame_number=timestamped_frame.frame_number,
+                    frame_metadata=timestamped_frame.metadata,
+                    session_id=session_id,
+                    hero_override=hero_override,
+                    known_igns=known_igns
+                )
+                results.append(result)
+                
+            except Exception as e:
+                logger.error(
+                    f"Error analyzing timestamped frame at "
+                    f"{timestamped_frame.timestamp:.2f}s: {str(e)}"
+                )
+                results.append({
+                    "success": False,
+                    "error": str(e),
+                    "temporal_info": {
+                        "video_timestamp": timestamped_frame.timestamp,
+                        "frame_number": timestamped_frame.frame_number,
+                        "frame_metadata": timestamped_frame.metadata
+                    }
+                })
+        
+        return results
+    
+    def create_temporal_event_log(
+        self,
+        analysis_results: List[Dict[str, Any]],
+        event_types: List[str] = None
+    ) -> List[Dict[str, Any]]:
+        """
+        Create a temporal event log from analysis results.
+        
+        Args:
+            analysis_results: List of analysis results with temporal info
+            event_types: Types of events to include in the log
+            
+        Returns:
+            List of timestamped events
+        """
+        if event_types is None:
+            event_types = ["score_screen", "statistics", "match_result"]
+        
+        events = []
+        
+        for result in analysis_results:
+            if (not result.get("success", False) or
+                    not result.get("temporal_info")):
+                continue
+            
+            temporal_info = result["temporal_info"]
+            data = result.get("data", {})
+            
+            # Create event based on detected content
+            event_type = self._classify_event_type(result)
+            
+            if event_type in event_types:
+                event = {
+                    "event_type": event_type,
+                    "video_timestamp": temporal_info.get("video_timestamp"),
+                    "frame_number": temporal_info.get("frame_number"),
+                    "game_phase": data.get("game_phase"),
+                    "confidence": result.get("confidence", 0.0),
+                    "data": data,
+                    "metadata": temporal_info.get("frame_metadata", {})
+                }
+                events.append(event)
+        
+        # Sort events by timestamp
+        events.sort(key=lambda x: x["video_timestamp"] or 0)
+        
+        return events
+    
+    def _classify_event_type(self, analysis_result: Dict[str, Any]) -> str:
+        """
+        Classify the type of event based on analysis result.
+        
+        Args:
+            analysis_result: Analysis result dictionary
+            
+        Returns:
+            Event type string
+        """
+        data = analysis_result.get("data", {})
+        
+        # Check for different types of screens/events
+        if data.get("mvp_badge") or data.get("legend_badge"):
+            return "match_result"
+        elif (data.get("kills") is not None and
+              data.get("deaths") is not None):
+            return "score_screen"
+        elif data.get("hero_damage") or data.get("gold"):
+            return "statistics"
+        else:
+            return "unknown"
     
     def analyze_screenshot_with_session(
         self,
@@ -648,14 +892,14 @@ class EnhancedDataCollector(DataCollector):
             )
             
             # Create screenshot analysis object
-            screenshot_analysis = ScreenshotAnalysis(
-                screenshot_type=screenshot_type,
-                raw_data=analysis_result.get("data", {}),
-                confidence=analysis_result.get(
+            screenshot_analysis = {
+                "screenshot_type": screenshot_type,
+                "raw_data": analysis_result.get("data", {}),
+                "confidence": analysis_result.get(
                     "overall_confidence", type_confidence
                 ),
-                warnings=analysis_result.get("warnings", [])
-            )
+                "warnings": analysis_result.get("warnings", [])
+            }
             
             # Add to session
             self.session_manager.add_screenshot_analysis(
@@ -706,7 +950,7 @@ class EnhancedDataCollector(DataCollector):
         self,
         image_path: str,
         ign: str,
-        screenshot_type: ScreenshotType,
+        screenshot_type: str,
         hero_override: Optional[str] = None,
         known_igns: Optional[List[str]] = None
     ) -> Dict[str, Any]:
@@ -718,7 +962,7 @@ class EnhancedDataCollector(DataCollector):
         )
         
         try:
-            if self.parallel_enabled:
+            if self.enable_parallel_processing:
                 # PARALLEL EXECUTION: Run independent tasks concurrently
                 return self._run_parallel_analysis(
                     image_path, ign, screenshot_type, hero_override, known_igns
@@ -743,7 +987,7 @@ class EnhancedDataCollector(DataCollector):
         self,
         image_path: str,
         ign: str,
-        screenshot_type: ScreenshotType,
+        screenshot_type: str,
         hero_override: Optional[str] = None,
         known_igns: Optional[List[str]] = None
     ) -> Dict[str, Any]:
@@ -799,11 +1043,11 @@ class EnhancedDataCollector(DataCollector):
         logger.info("🔄 Phase 3: Launching dependent analysis tasks...")
         
         # Task 4: Player row parsing (depends on OCR)
-        if screenshot_type == ScreenshotType.SCOREBOARD:
+        if screenshot_type == SCREENSHOT_TYPE_SCOREBOARD:
             parsing_future = self.parallel_manager.submit_task(
                 self._parse_scoreboard_enhanced, validated_ign, ocr_results, []
             )
-            else:
+        else:
             parsing_future = self.parallel_manager.submit_task(
                 self._parse_stats_page_enhanced, validated_ign, ocr_results, []
             )
@@ -834,8 +1078,8 @@ class EnhancedDataCollector(DataCollector):
             # Get hero detection results
             if hero_future:
                 hero_data = hero_future.result(timeout=8)
-        else:
-                hero_data = {"hero": hero_override, "hero_confidence": 1.0}
+            else:
+                hero_data = {"hero": hero_override or "unknown", "hero_confidence": 0.0}
             
         except concurrent.futures.TimeoutError:
             logger.warning("Parallel analysis tasks timed out")
