@@ -17,6 +17,20 @@ logger = logging.getLogger(__name__)
 
 
 @dataclass
+class TimestampedFrame:
+    """Frame with timestamp information for temporal tracking."""
+    frame_path: str
+    timestamp: float  # Time in seconds from video start
+    frame_number: int
+    confidence: float = 0.0
+    metadata: Dict[str, Any] = None
+    
+    def __post_init__(self):
+        if self.metadata is None:
+            self.metadata = {}
+
+
+@dataclass
 class VideoAnalysisResult:
     """Result of video analysis with extracted match data."""
     success: bool
@@ -26,6 +40,11 @@ class VideoAnalysisResult:
     confidence_score: float
     warnings: List[str]
     processing_time: float
+    timestamped_frames: List[TimestampedFrame] = None  # Timestamp tracking
+    
+    def __post_init__(self):
+        if self.timestamped_frames is None:
+            self.timestamped_frames = []
 
 
 class VideoReader:
@@ -34,6 +53,7 @@ class VideoReader:
     
     Uses frame sampling and OCR to analyze video content and extract
     player statistics at key moments during gameplay.
+    Enhanced with timestamp tracking for temporal analysis.
     """
     
     def __init__(self, temp_dir: str = "temp/video_frames"):
@@ -112,21 +132,21 @@ class VideoReader:
         except Exception as e:
             return False, f"Error reading video properties: {str(e)}"
     
-    def extract_frames(self, video_path: str, sample_rate: int = None) -> List[str]:
+    def extract_frames(self, video_path: str, sample_rate: int = None) -> List[TimestampedFrame]:
         """
-        Extract frames from video at specified intervals.
+        Extract frames from video at specified intervals with timestamp tracking.
         
         Args:
             video_path: Path to video file
             sample_rate: Frames per second to extract (default: self.target_fps)
             
         Returns:
-            List of paths to extracted frame images
+            List of TimestampedFrame objects with paths and timestamps
         """
         if sample_rate is None:
             sample_rate = self.target_fps
         
-        frame_paths = []
+        timestamped_frames = []
         
         try:
             # Use OpenCV for frame extraction
@@ -155,43 +175,61 @@ class VideoReader:
                 
                 # Extract frame at specified intervals
                 if frame_count % frame_interval == 0:
-                    # Create frame filename
-                    frame_filename = f"frame_{extracted_count:06d}.jpg"
+                    # Calculate timestamp in seconds
+                    timestamp = frame_count / fps
+                    
+                    # Create frame filename with timestamp
+                    frame_filename = f"frame_{extracted_count:06d}_t{timestamp:.2f}s.jpg"
                     frame_path = self.temp_dir / frame_filename
                     
                     # Save frame
                     cv2.imwrite(str(frame_path), frame)
-                    frame_paths.append(str(frame_path))
+                    
+                    # Create timestamped frame object
+                    timestamped_frame = TimestampedFrame(
+                        frame_path=str(frame_path),
+                        timestamp=timestamp,
+                        frame_number=frame_count,
+                        metadata={
+                            "fps": fps,
+                            "total_frames": total_frames,
+                            "duration": duration,
+                            "sample_rate": sample_rate,
+                            "frame_interval": frame_interval
+                        }
+                    )
+                    
+                    timestamped_frames.append(timestamped_frame)
                     extracted_count += 1
                 
                 frame_count += 1
             
             cap.release()
             
-            logger.info(f"Extracted {extracted_count} frames from {total_frames} total frames")
+            logger.info(f"Extracted {extracted_count} timestamped frames from {total_frames} total frames")
             
         except Exception as e:
             logger.error(f"Error extracting frames: {str(e)}")
             raise
         
-        return frame_paths
+        return timestamped_frames
     
-    def identify_score_screen_frames(self, frame_paths: List[str]) -> List[str]:
+    def identify_score_screen_frames(self, timestamped_frames: List[TimestampedFrame]) -> List[TimestampedFrame]:
         """
         Identify frames that likely contain score/statistics screens.
         
         Args:
-            frame_paths: List of frame image paths
+            timestamped_frames: List of TimestampedFrame objects
             
         Returns:
-            List of frame paths that contain score screens
+            List of TimestampedFrame objects that contain score screens
         """
         score_frames = []
         
-        for frame_path in frame_paths:
+        for timestamped_frame in timestamped_frames:
             try:
                 # Load image
-                frame = cv2.imread(frame_path)
+                frame = cv2.imread(timestamped_frame.frame_path)
                 if frame is None:
                     continue
                 
@@ -212,11 +250,16 @@ class VideoReader:
                 
                 # If we find multiple keywords, likely a score screen
                 if keyword_count >= 3:
-                    score_frames.append(frame_path)
-                    logger.info(f"Score screen detected: {frame_path} (keywords: {keyword_count})")
+                    # Update confidence based on keyword matches
+                    timestamped_frame.confidence = keyword_count / len(self.score_screen_keywords)
+                    timestamped_frame.metadata["score_screen_keywords"] = keyword_count
+                    timestamped_frame.metadata["detected_text"] = text_content
+                    
+                    score_frames.append(timestamped_frame)
+                    logger.info(f"Score screen detected at {timestamped_frame.timestamp:.2f}s: {timestamped_frame.frame_path} (keywords: {keyword_count})")
                 
             except Exception as e:
-                logger.warning(f"Error analyzing frame {frame_path}: {str(e)}")
+                logger.warning(f"Error analyzing frame at {timestamped_frame.timestamp:.2f}s: {str(e)}")
                 continue
         
         return score_frames
@@ -225,7 +268,7 @@ class VideoReader:
                      known_igns: List[str] = None,
                      hero_override: str = None) -> VideoAnalysisResult:
         """
-        Analyze video file and extract match statistics.
+        Analyze video file and extract match statistics with timestamp tracking.
         
         Args:
             video_path: Path to video file
@@ -234,7 +277,7 @@ class VideoReader:
             hero_override: Manually specified hero name
             
         Returns:
-            VideoAnalysisResult with extracted match data
+            VideoAnalysisResult with extracted match data and timestamp information
         """
         import time
         start_time = time.time()
@@ -252,17 +295,18 @@ class VideoReader:
                     processed_frames=0,
                     confidence_score=0.0,
                     warnings=[error_msg],
-                    processing_time=time.time() - start_time
+                    processing_time=time.time() - start_time,
+                    timestamped_frames=[]
                 )
             
             # Clean up previous frames
             self._cleanup_temp_frames()
             
-            # Extract frames from video
-            logger.info(f"Extracting frames from video: {video_path}")
-            frame_paths = self.extract_frames(video_path)
+            # Extract frames from video with timestamps
+            logger.info(f"Extracting timestamped frames from video: {video_path}")
+            timestamped_frames = self.extract_frames(video_path)
             
-            if not frame_paths:
+            if not timestamped_frames:
                 return VideoAnalysisResult(
                     success=False,
                     match_data={},
@@ -270,31 +314,32 @@ class VideoReader:
                     processed_frames=0,
                     confidence_score=0.0,
                     warnings=["No frames could be extracted from video"],
-                    processing_time=time.time() - start_time
+                    processing_time=time.time() - start_time,
+                    timestamped_frames=[]
                 )
             
             # Identify score screen frames
             logger.info("Identifying score screen frames...")
-            score_frames = self.identify_score_screen_frames(frame_paths)
+            score_frames = self.identify_score_screen_frames(timestamped_frames)
             
             if not score_frames:
                 # If no score screens found, analyze last few frames
                 logger.info("No score screens detected, analyzing last frames...")
-                score_frames = frame_paths[-5:] if len(frame_paths) >= 5 else frame_paths
+                score_frames = timestamped_frames[-5:] if len(timestamped_frames) >= 5 else timestamped_frames
                 warnings.append("No clear score screens detected, analyzing end-game frames")
             
             # Analyze score screen frames
             best_result = None
             best_confidence = 0.0
             
-            for frame_path in score_frames:
+            for timestamped_frame in score_frames:
                 try:
-                    logger.info(f"Analyzing frame: {frame_path}")
+                    logger.info(f"Analyzing frame at {timestamped_frame.timestamp:.2f}s: {timestamped_frame.frame_path}")
                     
                     # Use existing OCR pipeline
                     result = self.data_collector.from_screenshot(
                         ign=ign,
-                        image_path=frame_path,
+                        image_path=timestamped_frame.frame_path,
                         hero_override=hero_override,
                         known_igns=known_igns
                     )
@@ -304,18 +349,23 @@ class VideoReader:
                         data = result["data"]
                         confidence = self._calculate_confidence(data)
                         
+                        # Add timestamp information to the result
+                        data["video_timestamp"] = timestamped_frame.timestamp
+                        data["frame_number"] = timestamped_frame.frame_number
+                        data["frame_metadata"] = timestamped_frame.metadata
+                        
                         if confidence > best_confidence:
                             best_confidence = confidence
                             best_result = result
-                            logger.info(f"Better result found with confidence: {confidence:.3f}")
+                            logger.info(f"Better result found at {timestamped_frame.timestamp:.2f}s with confidence: {confidence:.3f}")
                     
                     # Collect warnings
                     if result and result.get("warnings"):
                         warnings.extend(result["warnings"])
                 
                 except Exception as e:
-                    logger.error(f"Error analyzing frame {frame_path}: {str(e)}")
-                    warnings.append(f"Frame analysis error: {str(e)}")
+                    logger.error(f"Error analyzing frame at {timestamped_frame.timestamp:.2f}s: {str(e)}")
+                    warnings.append(f"Frame analysis error at {timestamped_frame.timestamp:.2f}s: {str(e)}")
                     continue
             
             # Return best result
@@ -323,21 +373,23 @@ class VideoReader:
                 return VideoAnalysisResult(
                     success=True,
                     match_data=best_result["data"],
-                    frame_count=len(frame_paths),
+                    frame_count=len(timestamped_frames),
                     processed_frames=len(score_frames),
                     confidence_score=best_confidence,
                     warnings=warnings,
-                    processing_time=time.time() - start_time
+                    processing_time=time.time() - start_time,
+                    timestamped_frames=timestamped_frames
                 )
             else:
                 return VideoAnalysisResult(
                     success=False,
                     match_data={},
-                    frame_count=len(frame_paths),
+                    frame_count=len(timestamped_frames),
                     processed_frames=len(score_frames),
                     confidence_score=0.0,
                     warnings=warnings + ["No valid match data could be extracted"],
-                    processing_time=time.time() - start_time
+                    processing_time=time.time() - start_time,
+                    timestamped_frames=timestamped_frames
                 )
         
         except Exception as e:
@@ -349,12 +401,49 @@ class VideoReader:
                 processed_frames=0,
                 confidence_score=0.0,
                 warnings=[f"Analysis failed: {str(e)}"],
-                processing_time=time.time() - start_time
+                processing_time=time.time() - start_time,
+                timestamped_frames=[]
             )
         
         finally:
             # Clean up temporary frames
             self._cleanup_temp_frames()
+    
+    def get_frame_at_timestamp(self, timestamped_frames: List[TimestampedFrame], target_timestamp: float) -> Optional[TimestampedFrame]:
+        """
+        Get the frame closest to a specific timestamp.
+        
+        Args:
+            timestamped_frames: List of TimestampedFrame objects
+            target_timestamp: Target timestamp in seconds
+            
+        Returns:
+            TimestampedFrame closest to the target timestamp, or None if no frames
+        """
+        if not timestamped_frames:
+            return None
+        
+        # Find the frame with timestamp closest to target
+        closest_frame = min(timestamped_frames, 
+                          key=lambda f: abs(f.timestamp - target_timestamp))
+        
+        return closest_frame
+    
+    def get_frames_in_time_range(self, timestamped_frames: List[TimestampedFrame], 
+                                start_time: float, end_time: float) -> List[TimestampedFrame]:
+        """
+        Get all frames within a specific time range.
+        
+        Args:
+            timestamped_frames: List of TimestampedFrame objects
+            start_time: Start time in seconds
+            end_time: End time in seconds
+            
+        Returns:
+            List of TimestampedFrame objects within the time range
+        """
+        return [frame for frame in timestamped_frames 
+                if start_time <= frame.timestamp <= end_time]
     
     def _calculate_confidence(self, data: Dict[str, Any]) -> float:
         """Calculate confidence score based on extracted data completeness."""
@@ -457,6 +546,18 @@ if __name__ == "__main__":
             print(f"\nExtracted Data:")
             for key, value in result.match_data.items():
                 print(f"  {key}: {value}")
+            
+            # Display timestamp information
+            if "video_timestamp" in result.match_data:
+                print(f"\nTemporal Information:")
+                print(f"  Video timestamp: {result.match_data['video_timestamp']:.2f}s")
+                print(f"  Frame number: {result.match_data['frame_number']}")
+        
+        # Display timestamped frames information
+        if result.timestamped_frames:
+            print(f"\nTimestamped Frames:")
+            for i, frame in enumerate(result.timestamped_frames[:5]):  # Show first 5
+                print(f"  Frame {i+1}: {frame.timestamp:.2f}s - {Path(frame.frame_path).name}")
         
         if result.warnings:
             print(f"\nWarnings:")
