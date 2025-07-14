@@ -612,7 +612,7 @@ const ResultsDisplay = ({
                       </div>
                     </div>
                     <div className="mt-2 text-xs text-gray-500 italic">
-                      💡 Verify these values match your screenshot's player row
+                      💡 Verify these values match your screenshot&apos;s player row
                       to confirm spatial alignment
                     </div>
                   </div>
@@ -687,7 +687,7 @@ const ResultsDisplay = ({
 
       {/* Warnings */}
       {warnings && warnings.length > 0 && (
-        <div className="mt-6 p-4 bg-red-900 border-l-4 border-red-500 rounded-lg border border-red-600">
+        <div className="mt-6 p-4 bg-red-900 border-l-4 border-red-500 rounded-lg">
           <h4 className="text-red-300 font-semibold mb-2 flex items-center">
             <span className="text-lg mr-2">⚠️</span>
             Analysis Warnings - Reduced Accuracy
