@@ -1,0 +1,14 @@
+# MLBB YOLO Dataset Annotation Requirements
+# Dependencies for Label Studio annotation setup
+
+label-studio==1.9.2
+label-studio-tools>=0.0.3
+Pillow>=9.0.0
+PyYAML>=6.0
+numpy>=1.21.0
+opencv-python>=4.5.0
+ultralytics>=8.0.0
+
+# Optional: For advanced annotation features
+pandas>=1.3.0
+matplotlib>=3.5.0 

@@ -1,0 +1,114 @@
+# classes.yaml - MLBB Detection Classes for YOLO Training
+# Comprehensive class hierarchy for object detection in MLBB post-match screenshots
+
+classes:
+  # ===== HERO DETECTION =====
+  # Ally Team Hero Icons (green team)
+  - hero_icon_ally_1 # First ally hero icon
+  - hero_icon_ally_2 # Second ally hero icon
+  - hero_icon_ally_3 # Third ally hero icon
+  - hero_icon_ally_4 # Fourth ally hero icon
+  - hero_icon_ally_5 # Fifth ally hero icon
+
+  # Enemy Team Hero Icons (red team)
+  - hero_icon_enemy_1 # First enemy hero icon
+  - hero_icon_enemy_2 # Second enemy hero icon
+  - hero_icon_enemy_3 # Third enemy hero icon
+  - hero_icon_enemy_4 # Fourth enemy hero icon
+  - hero_icon_enemy_5 # Fifth enemy hero icon
+
+  # ===== PERFORMANCE INDICATORS =====
+  # MVP and Performance Badges
+  - mvp_badge # MVP crown/badge
+  - mvp_loss_badge # MVP badge for losing team
+  - medal_gold # Gold medal performance
+  - medal_silver # Silver medal performance
+  - medal_bronze # Bronze medal performance
+
+  # ===== MATCH INFORMATION =====
+  # Match Type Indicators
+  - match_type_classic # Classic match indicator
+  - match_type_ranked # Ranked match indicator
+  - match_type_brawl # Brawl match indicator
+  - match_type_custom # Custom match indicator
+
+  # Match Result Indicators
+  - victory_text # "Victory" text display
+  - defeat_text # "Defeat" text display
+
+  # ===== PLAYER STATISTICS =====
+  # Core Performance Metrics
+  - kda_display # Kill/Death/Assist display (e.g., "5/2/8")
+  - gold_amount # Gold earned display
+  - damage_dealt # Damage dealt to heroes
+  - damage_taken # Damage taken from heroes
+  - healing_done # Healing provided to allies
+  - turret_damage # Damage dealt to turrets
+
+  # Additional Stats
+  - gpm_display # Gold per minute
+  - participation_rate # Teamfight participation percentage
+  - match_duration # Total match time
+
+  # ===== UI ELEMENTS =====
+  # Player Identification
+  - player_name # Player IGN text
+  - player_level # Player level indicator
+
+  # Team Organization
+  - team_indicator_ally # Ally team section/background
+  - team_indicator_enemy # Enemy team section/background
+  - scoreboard_container # Main scoreboard area
+
+  # ===== ADDITIONAL DETECTION TARGETS =====
+  # Items and Equipment
+  - item_icon_1 # First item slot
+  - item_icon_2 # Second item slot
+  - item_icon_3 # Third item slot
+  - item_icon_4 # Fourth item slot
+  - item_icon_5 # Fifth item slot
+  - item_icon_6 # Sixth item slot
+
+  # Spell and Battle Effects
+  - battle_spell_1 # First battle spell
+  - battle_spell_2 # Second battle spell
+
+  # Role and Position Indicators
+  - role_indicator # Role icon (Tank, Fighter, etc.)
+  - position_rank # Final ranking position (1st, 2nd, etc.)
+
+  # Special Elements
+  - savage_indicator # Savage achievement
+  - maniac_indicator # Maniac achievement
+  - legendary_indicator # Legendary achievement
+
+  # ===== QUALITY INDICATORS =====
+  # Screenshot Quality Assessment
+  - ui_complete # Complete UI visible
+  - text_readable # Text is clearly readable
+  - icons_clear # Hero icons are clear and identifiable
+
+# ===== METADATA =====
+total_classes: 51
+primary_focus:
+  - hero_detection
+  - performance_metrics
+  - match_information
+  - player_statistics
+
+annotation_priority:
+  high:
+    - hero_icon_ally_1-5
+    - hero_icon_enemy_1-5
+    - mvp_badge
+    - kda_display
+    - player_name
+  medium:
+    - medal_gold/silver/bronze
+    - match_type_*
+    - victory_text/defeat_text
+    - damage_dealt/taken
+  low:
+    - item_icons
+    - achievement_indicators
+    - quality_indicators

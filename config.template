@@ -1,0 +1,23 @@
+# SkillShift AI - Redis Cloud Configuration Template
+# Copy the export commands below to set up your environment
+
+# Redis Cloud Configuration (get from your Redis Cloud dashboard)
+export REDIS_URL="redis://default:your_password@redis-12345.c1.ap-southeast-1.redis.redislabs.com:12345"
+
+# Alternative individual settings (if not using REDIS_URL)
+export REDIS_HOST="localhost"
+export REDIS_PORT="6379" 
+export REDIS_DB="0"
+export REDIS_PASSWORD=""
+
+# FastAPI Configuration
+export SKILLSHIFT_AI_URL="http://localhost:8000"
+export DEFAULT_IGN="Lesz XVII"
+
+# Instructions:
+# 1. Replace the REDIS_URL with your actual Redis Cloud endpoint
+# 2. Run these export commands in your terminal before starting the services
+# 3. Or create a .env file with these variables (without 'export')
+
+# To use this file:
+# source config.template 

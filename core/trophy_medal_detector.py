@@ -54,19 +54,19 @@ class TrophyMedalDetector:
             'upper': np.array([35, 255, 255]) # Upper bound for gold color
         }
         
-        # Medal color ranges in HSV
+        # FIXED: Enhanced medal color ranges in HSV with broader tolerance
         self.medal_colors = {
             'gold': {
-                'lower': np.array([15, 50, 100]),
-                'upper': np.array([35, 255, 255])
+                'lower': np.array([10, 30, 80]),    # Broader hue range for gold
+                'upper': np.array([40, 255, 255])   # Increased tolerance
             },
             'silver': {
-                'lower': np.array([0, 0, 150]),
-                'upper': np.array([180, 50, 255])
+                'lower': np.array([0, 0, 120]),     # Lower brightness threshold
+                'upper': np.array([180, 70, 255])   # Higher saturation tolerance
             },
             'bronze': {
-                'lower': np.array([8, 50, 80]),
-                'upper': np.array([25, 255, 200])
+                'lower': np.array([5, 40, 60]),     # Broader bronze detection
+                'upper': np.array([30, 255, 220])   # Enhanced range
             }
         }
         
@@ -95,6 +95,7 @@ class TrophyMedalDetector:
     ) -> TrophyDetectionResult:
         """
         Detect trophy/medal in the vicinity of a specific player row.
+        FIXED: Enhanced MVP detection with optimized performance and error handling.
         
         Args:
             image_path: Path to the screenshot
@@ -103,7 +104,7 @@ class TrophyMedalDetector:
             debug_mode: Whether to save debug images
             
         Returns:
-            TrophyDetectionResult with detected trophy information
+            TrophyDetectionResult with improved confidence scoring and performance
         """
         debug_info = {
             "regions_searched": [],

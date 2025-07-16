@@ -1,0 +1,455 @@
+# MLBB Coach AI - Enhanced Performance Thresholds Configuration
+# Version: 2.0.0 - SOA Compatible with Caching & Event-Driven Architecture
+
+# Performance scaling factors for different game phases
+scaling_factors:
+  early_game: # 0-8 minutes
+    gpm_multiplier: 0.75
+    damage_multiplier: 0.8
+    participation_multiplier: 0.85
+  mid_game: # 8-15 minutes
+    gpm_multiplier: 1.0
+    damage_multiplier: 1.0
+    participation_multiplier: 1.0
+  late_game: # 15+ minutes
+    gpm_multiplier: 1.15
+    damage_multiplier: 1.2
+    participation_multiplier: 1.1
+
+# Default thresholds (fallback values) - Foundation for all evaluations
+defaults:
+  # KDA thresholds with context-aware scaling
+  kda:
+    poor: 1.5 # Below this = Poor performance
+    low: 2.0 # Warning threshold
+    good: 3.0 # Decent performance
+    excellent: 4.5 # Exceptional performance
+
+  # Economy thresholds (per-minute scaling)
+  economy:
+    gpm_base: 500 # Base gold per minute
+    gpm_poor: 350 # Poor economic performance
+    gpm_excellent: 650 # Excellent economic performance
+    exp_efficiency: 85 # Experience efficiency percentage
+
+  # Combat effectiveness
+  combat:
+    damage_base: 3000 # Base damage per minute
+    damage_efficiency: 75 # Damage per gold spent efficiency
+    survival_rate: 70 # Percentage of fights survived
+
+  # Teamfight & Positioning
+  teamfight:
+    participation_min: 50 # Minimum teamfight participation %
+    positioning_score: 70 # Positioning effectiveness score
+    engage_success: 60 # Successful engage percentage
+
+  # Objective Control
+  objectives:
+    turret_damage_base: 500 # Base turret damage per minute
+    lord_participation: 80 # Lord fight participation %
+    turtle_participation: 70 # Turtle fight participation %
+
+# Role-specific thresholds that override defaults
+roles:
+  # 🛡️ TANK - "The Shield Wall"
+  # Analogy: Think of a tank as a castle gate - they need to absorb damage
+  # while creating opportunities for allies. High deaths are acceptable if
+  # they're meaningful sacrifices that enable team success.
+  tank:
+    kda:
+      poor: 1.0 # Tanks can afford more deaths for team plays
+      low: 1.5 # Lower KDA acceptable due to initiation role
+      good: 2.5 # Solid tank performance
+      excellent: 4.0 # Exceptional tank - high impact, low deaths
+
+    economy:
+      gpm_base: 450 # Lower gold priority, team-focused
+      gpm_poor: 300 # Still functional with less gold
+      gpm_excellent: 550 # Well-farmed tank can dominate
+
+    combat:
+      damage_base: 2000 # Damage output less important
+      damage_taken_base: 4500 # Expected to absorb significant damage
+      cc_duration_min: 8 # Crowd control duration per fight
+
+    teamfight:
+      participation_min: 70 # Tanks must be present in fights
+      engage_success: 55 # Successful initiation rate
+      peel_effectiveness: 65 # Protecting allies score
+
+    # Tank-specific metrics
+    tank_metrics:
+      damage_mitigation: 25 # Damage mitigated for team %
+      vision_control: 60 # Vision score contribution
+      space_creation: 70 # Map control effectiveness
+
+  # ⚔️ FIGHTER - "The Versatile Warrior"
+  # Analogy: Fighters are like Swiss Army knives - they adapt to what
+  # the team needs. They balance damage dealing with durability.
+  fighter:
+    kda:
+      poor: 1.8
+      low: 2.5
+      good: 3.5
+      excellent: 5.0
+
+    economy:
+      gpm_base: 600
+      gpm_poor: 450
+      gpm_excellent: 750
+
+    combat:
+      damage_base: 3500 # Balanced damage expectation
+      damage_taken_base: 3000 # Moderate damage absorption
+      sustain_effectiveness: 70 # Self-sustain capability
+
+    teamfight:
+      participation_min: 60
+      engage_success: 50
+      flank_success: 45 # Successful flank rate
+
+    # Fighter-specific metrics
+    fighter_metrics:
+      damage_trade_ratio: 1.5 # Damage dealt vs taken ratio
+      objective_control: 65 # Objective securing ability
+      split_push_effectiveness: 60 # Side lane pressure
+
+  # 🗡️ ASSASSIN - "The Shadow Striker"
+  # Analogy: Assassins are like surgical scalpels - precision instruments
+  # that eliminate key targets. High risk, high reward gameplay.
+  assassin:
+    kda:
+      poor: 2.0
+      low: 3.0 # Higher expectations due to mobility
+      good: 4.0
+      excellent: 6.0
+
+    economy:
+      gpm_base: 700 # Need gold to snowball
+      gpm_poor: 500
+      gpm_excellent: 900
+
+    combat:
+      damage_base: 4500 # High damage output expected
+      burst_effectiveness: 80 # Burst damage efficiency
+      elimination_rate: 35 # Percentage of eliminations
+
+    teamfight:
+      participation_min: 45 # Can be selective about fights
+      target_priority: 85 # Focusing correct targets
+      escape_success: 75 # Successful escape rate
+
+    # Assassin-specific metrics
+    assassin_metrics:
+      snowball_potential: 70 # Early game impact
+      mobility_usage: 80 # Skill mobility effectiveness
+      pick_potential: 65 # Solo elimination capability
+
+  # 🏹 MARKSMAN - "The Precision Artillery"
+  # Analogy: Marksmen are like master archers - they need protection
+  # to deliver consistent, devastating damage from range.
+  marksman:
+    kda:
+      poor: 2.5
+      low: 3.5 # Should rarely die due to range
+      good: 5.0
+      excellent: 7.0
+
+    economy:
+      gpm_base: 750 # Gold-dependent role
+      gpm_poor: 550
+      gpm_excellent: 950
+
+    combat:
+      damage_base: 5500 # Highest damage expectation
+      damage_consistency: 85 # Sustained damage output
+      positioning_safety: 80 # Safe positioning score
+
+    teamfight:
+      participation_min: 65 # Should be in most fights
+      dps_uptime: 75 # Damage uptime in fights
+      focus_fire: 70 # Target focus effectiveness
+
+    # Marksman-specific metrics
+    marksman_metrics:
+      range_advantage: 75 # Utilizing range effectively
+      kiting_effectiveness: 70 # Kiting and repositioning
+      late_game_scaling: 80 # Late game impact
+
+  # 🔮 MAGE - "The Elemental Master"
+  # Analogy: Mages are like artillery commanders - they control space
+  # and deliver devastating area damage with precise timing.
+  mage:
+    kda:
+      poor: 2.0
+      low: 3.0
+      good: 4.5
+      excellent: 6.5
+
+    economy:
+      gpm_base: 650
+      gpm_poor: 450
+      gpm_excellent: 800
+
+    combat:
+      damage_base: 5000 # High burst damage expected
+      spell_accuracy: 75 # Skill shot accuracy
+      area_damage: 65 # AOE damage effectiveness
+
+    teamfight:
+      participation_min: 60
+      combo_execution: 80 # Skill combo effectiveness
+      zone_control: 70 # Area control capability
+
+    # Mage-specific metrics
+    mage_metrics:
+      burst_timing: 85 # Burst damage timing
+      mana_efficiency: 75 # Resource management
+      cc_chaining: 70 # Crowd control combos
+
+  # 🛡️ SUPPORT - "The Guardian Angel"
+  # Analogy: Supports are like orchestra conductors - they enable
+  # the team to perform at their best through utility and protection.
+  support:
+    kda:
+      poor: 1.5
+      low: 2.5
+      good: 4.0 # Can have high KDA through assists
+      excellent: 6.0
+
+    economy:
+      gpm_base: 450 # Lowest gold priority
+      gpm_poor: 300
+      gpm_excellent: 600
+
+    combat:
+      damage_base: 1500 # Damage less important
+      utility_effectiveness: 85 # Utility skill usage
+      protection_score: 80 # Ally protection ability
+
+    teamfight:
+      participation_min: 75 # Must be present to support
+      assist_rate: 70 # Assist participation rate
+      enablement_score: 80 # Team enablement effectiveness
+
+    # Support-specific metrics
+    support_metrics:
+      vision_control: 85 # Map vision contribution
+      healing_efficiency: 80 # Healing effectiveness
+      utility_timing: 85 # Utility usage timing
+
+# Hero-specific overrides (highest priority)
+# These represent unique hero characteristics that deviate from role norms
+heroes:
+  # Tank Heroes with Special Considerations
+  Franco:
+    # Franco is a playmaker - hook accuracy is crucial
+    combat:
+      hook_accuracy: 60 # Minimum hook accuracy %
+      engage_success: 50 # Lower than average due to hook dependency
+    special_metrics:
+      hook_impact: 70 # Hooks leading to eliminations
+      positioning_aggression: 65 # Aggressive positioning for hooks
+
+  Tigreal:
+    # Tigreal is an initiator - can afford higher deaths for team plays
+    kda:
+      poor: 0.8 # Very low KDA acceptable for initiation
+      low: 1.3 # Lower than generic tank
+    combat:
+      damage_taken_base: 5000 # Higher damage absorption
+      initiation_impact: 75 # Successful initiation rate
+
+  # Assassin Heroes with Unique Playstyles
+  Hayabusa:
+    # Hayabusa relies on ultimate for kills - different damage pattern
+    combat:
+      damage_base: 4200 # Slightly lower sustained damage
+      ultimate_effectiveness: 80 # Ultimate usage efficiency
+    assassin_metrics:
+      stealth_usage: 85 # Shadow clone effectiveness
+      escape_rate: 85 # Higher escape success due to ultimate
+
+  Lancelot:
+    # Lancelot has higher mobility - should have better survival
+    kda:
+      poor: 2.2
+      low: 3.2 # Higher than generic assassin
+      good: 4.5
+      excellent: 6.5
+    combat:
+      damage_base: 4700 # Higher damage expectation
+    assassin_metrics:
+      mobility_usage: 90 # Superior mobility usage
+      combo_execution: 85 # Skill combo effectiveness
+
+  # Fighter Heroes with Distinct Roles
+  Chou:
+    # Chou is a fighter-assassin hybrid
+    combat:
+      damage_base: 3800 # Higher damage than typical fighter
+      cc_effectiveness: 75 # Crowd control impact
+    fighter_metrics:
+      initiation_success: 70 # Can initiate fights
+      displacement_impact: 80 # Knockback/displacement effectiveness
+
+  # Marksman Heroes with Different Scaling
+  Layla:
+    # Layla is early-game weak but late-game strong
+    economy:
+      gpm_base: 700 # Needs gold to be effective
+    marksman_metrics:
+      early_game_survival: 90 # Must survive early game
+      late_game_scaling: 90 # Exceptional late game
+
+  Wanwan:
+    # Wanwan has unique ultimate mechanics
+    combat:
+      ultimate_uptime: 70 # Ultimate usage frequency
+      weakness_exploitation: 80 # Exploiting enemy weakness points
+
+  # Mage Heroes with Unique Mechanics
+  Kagura:
+    # Kagura has complex combo mechanics
+    combat:
+      combo_complexity: 85 # Complex skill combinations
+      umbrella_efficiency: 80 # Umbrella positioning
+    mage_metrics:
+      mobility_usage: 75 # Mobility skill usage
+      poke_effectiveness: 70 # Poke damage efficiency
+
+  # Support Heroes with Distinct Roles
+  Estes:
+    # Estes is a pure healer - different evaluation focus
+    support_metrics:
+      healing_efficiency: 95 # Exceptional healing requirement
+      mana_management: 80 # Resource management crucial
+      positioning_safety: 85 # Must survive to heal
+
+  Angela:
+    # Angela has unique ultimate mechanics
+    combat:
+      ultimate_timing: 85 # Ultimate usage timing
+      attachment_effectiveness: 80 # Attaching to correct ally
+    support_metrics:
+      enablement_score: 90 # High team enablement
+
+# Performance evaluation formulas
+# These define how metrics are calculated and weighted
+evaluation_formulas:
+  # Overall performance score calculation
+  overall_score:
+    kda_weight: 0.25
+    economy_weight: 0.20
+    combat_weight: 0.25
+    teamfight_weight: 0.20
+    role_specific_weight: 0.10
+
+  # Role-specific score calculations
+  role_weights:
+    tank:
+      survivability: 0.30
+      initiation: 0.25
+      protection: 0.25
+      utility: 0.20
+
+    fighter:
+      damage_trade: 0.30
+      versatility: 0.25
+      objective_control: 0.25
+      sustain: 0.20
+
+    assassin:
+      elimination: 0.35
+      mobility: 0.25
+      snowball: 0.25
+      positioning: 0.15
+
+    marksman:
+      damage_output: 0.35
+      positioning: 0.25
+      economy: 0.25
+      scaling: 0.15
+
+    mage:
+      burst_damage: 0.30
+      area_control: 0.25
+      combo_execution: 0.25
+      resource_management: 0.20
+
+    support:
+      enablement: 0.35
+      utility: 0.25
+      vision: 0.20
+      protection: 0.20
+
+# Contextual adjustments based on game state
+contextual_modifiers:
+  # Match duration adjustments
+  duration_scaling:
+    short_game: # < 10 minutes
+      kda_tolerance: 0.8 # More forgiving KDA
+      economy_focus: 1.2 # Higher economy importance
+
+    long_game: # > 20 minutes
+      kda_importance: 1.2 # KDA becomes more crucial
+      late_game_scaling: 1.3 # Late game performance weight
+
+  # Team composition adjustments
+  team_comp_modifiers:
+    early_game_comp:
+      early_impact: 1.3 # Higher early game expectations
+      scaling_tolerance: 0.8 # Lower late game expectations
+
+    late_game_comp:
+      scaling_importance: 1.4 # Higher scaling importance
+      early_tolerance: 0.9 # More forgiving early game
+
+# Advanced performance indicators
+advanced_metrics:
+  # Efficiency metrics
+  efficiency:
+    gold_efficiency: "damage_dealt / gold_earned"
+    time_efficiency: "objectives_taken / minutes_played"
+    space_efficiency: "map_control / deaths"
+
+  # Impact metrics
+  impact:
+    fight_impact: "fight_wins / fights_participated"
+    objective_impact: "objectives_secured / attempts"
+    snowball_impact: "lead_generated / early_advantages"
+
+  # Consistency metrics
+  consistency:
+    performance_variance: "std_deviation(game_scores)"
+    role_consistency: "adherence_to_role_expectations"
+    decision_consistency: "good_decisions / total_decisions"
+
+# Severity levels for feedback with contextual icons
+severity_levels:
+  critical: "🚨" # Game-losing performance
+  warning: "⚠️" # Needs improvement
+  info: "💡" # Neutral feedback/tips
+  success: "✅" # Good performance
+  excellent: "🌟" # Exceptional performance
+
+# Performance bottleneck optimization
+# Hot path optimizations for high-frequency evaluations
+performance_optimizations:
+  # Cache frequently accessed thresholds
+  cache_settings:
+    threshold_cache_ttl: 300 # 5 minutes
+    hero_data_cache_ttl: 600 # 10 minutes
+    evaluation_cache_ttl: 60 # 1 minute
+
+  # Batch processing for multiple evaluations
+  batch_processing:
+    max_batch_size: 50
+    batch_timeout: 5000 # 5 seconds
+
+  # Async processing for non-critical evaluations
+  async_processing:
+    enable_async: true
+    max_concurrent: 10
+    queue_size: 100

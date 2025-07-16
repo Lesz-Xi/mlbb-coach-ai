@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Parsing System - Debug Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2em;
+        }
+
+        .confidence-display {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .confidence-score {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .confidence-circle {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px;
+            position: relative;
+            border-radius: 50%;
+            background: conic-gradient(#4CAF50 0deg, #4CAF50 var(--percentage), #e0e0e0 var(--percentage));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .confidence-inner {
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .confidence-category {
+            font-size: 1.5em;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .category-elite { color: #FFD700; }
+        .category-excellent { color: #4CAF50; }
+        .category-good { color: #2196F3; }
+        .category-acceptable { color: #FF9800; }
+        .category-poor { color: #F44336; }
+        .category-unreliable { color: #9E9E9E; }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .metric-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .metric-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .metric-bar {
+            width: 100%;
+            height: 20px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .metric-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            transition: width 0.3s ease;
+        }
+
+        .metric-value {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .success-factor {
+            background: linear-gradient(135deg, #a8e6cf, #dcedc8);
+            border-left: 4px solid #4CAF50;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .weakness {
+            background: linear-gradient(135deg, #ffcccb, #ffebee);
+            border-left: 4px solid #F44336;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .improvement-item {
+            background: linear-gradient(135deg, #fff3e0, #ffeaa7);
+            border-left: 4px solid #FF9800;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .data-field {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .data-field:last-child {
+            border-bottom: none;
+        }
+
+        .field-name {
+            font-weight: bold;
+            color: #2c3e50;
+            text-transform: capitalize;
+        }
+
+        .field-value {
+            color: #7f8c8d;
+        }
+
+        .source-tag {
+            font-size: 0.8em;
+            padding: 2px 8px;
+            border-radius: 12px;
+            color: white;
+            margin-left: 10px;
+        }
+
+        .source-direct { background: #4CAF50; }
+        .source-cross { background: #2196F3; }
+        .source-calculated { background: #FF9800; }
+        .source-estimated { background: #9C27B0; }
+        .source-fallback { background: #9E9E9E; }
+
+        .processing-time {
+            text-align: center;
+            color: #7f8c8d;
+            font-style: italic;
+            margin-top: 20px;
+        }
+
+        .refresh-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin: 20px auto;
+            display: block;
+        }
+
+        .refresh-button:hover {
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .confidence-circle {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .confidence-inner {
+                width: 100px;
+                height: 100px;
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Ultimate Parsing System</h1>
+            <p class="subtitle">95-100% Confidence AI Coaching Dashboard</p>
+        </div>
+
+        <div class="confidence-display">
+            <div class="confidence-score">
+                <div class="confidence-circle" style="--percentage: {{ (confidence_breakdown.overall_confidence / 100 * 360) | round }}deg;">
+                    <div class="confidence-inner">
+                        {{ confidence_breakdown.overall_confidence | round(1) }}%
+                    </div>
+                </div>
+                <div class="confidence-category category-{{ confidence_breakdown.category.value }}">
+                    {{ confidence_breakdown.category.value }}
+                </div>
+            </div>
+
+            <div class="metrics-grid">
+                {% for component, score in confidence_breakdown.component_scores.items() %}
+                <div class="metric-card">
+                    <h3>{{ component.replace('_', ' ').title() }}</h3>
+                    <div class="metric-bar">
+                        <div class="metric-fill" style="width: {{ score }}%"></div>
+                    </div>
+                    <div class="metric-value">{{ score | round(1) }}%</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📊 Extracted Data</h2>
+            {% for field_name, field_data in data_completion.fields.items() %}
+            <div class="data-field">
+                <span class="field-name">{{ field_name.replace('_', ' ').title() }}</span>
+                <span class="field-value">
+                    {{ field_data.value }}
+                    <span class="source-tag source-{{ field_data.source.value.split('_')[0] }}">
+                        {{ field_data.source.value }}
+                    </span>
+                </span>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% if success_factors %}
+        <div class="section">
+            <h2>🏆 Success Factors</h2>
+            {% for factor in success_factors %}
+            <div class="success-factor">{{ factor }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if confidence_breakdown.weaknesses %}
+        <div class="section">
+            <h2>⚠️ Areas for Improvement</h2>
+            {% for weakness in confidence_breakdown.weaknesses %}
+            <div class="weakness">{{ weakness }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if improvement_roadmap %}
+        <div class="section">
+            <h2>🛠️ Improvement Roadmap</h2>
+            {% for item in improvement_roadmap %}
+            <div class="improvement-item">{{ item }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="section">
+            <h2>🔧 Technical Details</h2>
+            <div class="data-field">
+                <span class="field-name">Image Quality Score</span>
+                <span class="field-value">{{ quality_assessment.overall_score | round(1) }}%</span>
+            </div>
+            <div class="data-field">
+                <span class="field-name">Hero Detection Confidence</span>
+                <span class="field-value">{{ hero_detection.confidence | round(1) }}%</span>
+            </div>
+            <div class="data-field">
+                <span class="field-name">Data Completeness</span>
+                <span class="field-value">{{ data_completion.completeness_score | round(1) }}%</span>
+            </div>
+            <div class="data-field">
+                <span class="field-name">Processing Time</span>
+                <span class="field-value">{{ processing_time | round(2) }}s</span>
+            </div>
+        </div>
+
+        <button class="refresh-button" onclick="location.reload()">
+            🔄 Refresh Analysis
+        </button>
+
+        <div class="processing-time">
+            Analysis completed in {{ processing_time | round(2) }} seconds
+        </div>
+    </div>
+
+    <script>
+        // Add some interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate metric bars
+            const metricFills = document.querySelectorAll('.metric-fill');
+            metricFills.forEach(fill => {
+                const width = fill.style.width;
+                fill.style.width = '0%';
+                setTimeout(() => {
+                    fill.style.width = width;
+                }, 500);
+            });
+
+            // Add click handlers for metric cards
+            const metricCards = document.querySelectorAll('.metric-card');
+            metricCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    this.style.transform = 'scale(1.05)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                    }, 200);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

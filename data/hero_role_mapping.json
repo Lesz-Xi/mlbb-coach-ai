@@ -1,0 +1,666 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2025-01-15",
+  "heroes": {
+    "Zetian": {
+      "role": "mage",
+      "sub_role": "burst",
+      "priority": "damage_dealer"
+    },
+    "Kalea": {
+      "role": "marksman",
+      "sub_role": "carry",
+      "priority": "damage_dealer"
+    },
+    "Lukas": {
+      "role": "tank",
+      "sub_role": "initiator",
+      "priority": "frontline"
+    },
+    "Suyou": {
+      "role": "assassin",
+      "sub_role": "burst",
+      "priority": "damage_dealer"
+    },
+    "Zhuxin": {
+      "role": "support",
+      "sub_role": "healer",
+      "priority": "utility"
+    },
+    "Chip": { "role": "fighter", "sub_role": "bruiser", "priority": "sustain" },
+    "Cici": {
+      "role": "marksman",
+      "sub_role": "carry",
+      "priority": "damage_dealer"
+    },
+    "Nolan": {
+      "role": "assassin",
+      "sub_role": "mobility",
+      "priority": "damage_dealer"
+    },
+    "Ixia": {
+      "role": "marksman",
+      "sub_role": "carry",
+      "priority": "damage_dealer"
+    },
+    "Arlott": {
+      "role": "fighter",
+      "sub_role": "assassin",
+      "priority": "damage_dealer"
+    },
+    "Novaria": {
+      "role": "mage",
+      "sub_role": "burst",
+      "priority": "damage_dealer"
+    },
+    "Joy": {
+      "role": "assassin",
+      "sub_role": "mobility",
+      "priority": "damage_dealer"
+    },
+    "Fredrinn": {
+      "role": "tank",
+      "sub_role": "initiator",
+      "priority": "frontline"
+    },
+    "Julian": {
+      "role": "fighter",
+      "sub_role": "assassin",
+      "priority": "damage_dealer"
+    },
+    "Xavier": {
+      "role": "mage",
+      "sub_role": "poke",
+      "priority": "damage_dealer"
+    },
+    "Melissa": {
+      "role": "marksman",
+      "sub_role": "carry",
+      "priority": "damage_dealer"
+    },
+    "Yin": {
+      "role": "fighter",
+      "sub_role": "assassin",
+      "priority": "damage_dealer"
+    },
+    "Floryn": {
+      "role": "support",
+      "sub_role": "healer",
+      "priority": "utility"
+    },
+    "Edith": { "role": "tank", "sub_role": "hybrid", "priority": "frontline" },
+    "Valentina": {
+      "role": "mage",
+      "sub_role": "burst",
+      "priority": "damage_dealer"
+    },
+    "Aamon": {
+      "role": "assassin",
+      "sub_role": "stealth",
+      "priority": "damage_dealer"
+    },
+    "Aulus": {
+      "role": "fighter",
+      "sub_role": "sustain",
+      "priority": "sustain"
+    },
+    "Natan": {
+      "role": "marksman",
+      "sub_role": "carry",
+      "priority": "damage_dealer"
+    },
+    "Phoveus": {
+      "role": "fighter",
+      "sub_role": "anti-mobility",
+      "priority": "sustain"
+    },
+    "Beatrix": {
+      "role": "marksman",
+      "sub_role": "carry",
+      "priority": "damage_dealer"
+    },
+    "Gloo": {
+      "role": "tank",
+      "sub_role": "initiator",
+      "priority": "frontline"
+    },
+    "Paquito": {
+      "role": "fighter",
+      "sub_role": "assassin",
+      "priority": "damage_dealer"
+    },
+    "Mathilda": {
+      "role": "support",
+      "sub_role": "roamer",
+      "priority": "utility"
+    },
+    "Yve": {
+      "role": "mage",
+      "sub_role": "control",
+      "priority": "damage_dealer"
+    },
+    "Brody": {
+      "role": "marksman",
+      "sub_role": "carry",
+      "priority": "damage_dealer"
+    },
+    "Barats": {
+      "role": "tank",
+      "sub_role": "initiator",
+      "priority": "frontline"
+    },
+    "Khaleed": {
+      "role": "fighter",
+      "sub_role": "sustain",
+      "priority": "sustain"
+    },
+    "Benedetta": {
+      "role": "assassin",
+      "sub_role": "mobility",
+      "priority": "damage_dealer"
+    },
+    "Luo Yi": {
+      "role": "mage",
+      "sub_role": "burst",
+      "priority": "damage_dealer"
+    },
+    "Yu Zhong": {
+      "role": "fighter",
+      "sub_role": "sustain",
+      "priority": "sustain"
+    },
+    "Popol and Kupa": {
+      "role": "marksman",
+      "sub_role": "carry",
+      "priority": "damage_dealer"
+    },
+    "Atlas": {
+      "role": "tank",
+      "sub_role": "initiator",
+      "priority": "frontline"
+    },
+    "Carmilla": {
+      "role": "support",
+      "sub_role": "control",
+      "priority": "utility"
+    },
+    "Cecilion": {
+      "role": "mage",
+      "sub_role": "carry",
+      "priority": "damage_dealer"
+    },
+    "Silvanna": {
+      "role": "fighter",
+      "sub_role": "assassin",
+      "priority": "damage_dealer"
+    },
+    "Wanwan": {
+      "role": "marksman",
+      "sub_role": "carry",
+      "priority": "damage_dealer"
+    },
+    "Masha": {
+      "role": "fighter",
+      "sub_role": "sustain",
+      "priority": "sustain"
+    },
+    "Baxia": {
+      "role": "tank",
+      "sub_role": "initiator",
+      "priority": "frontline"
+    },
+    "Lylia": {
+      "role": "mage",
+      "sub_role": "burst",
+      "priority": "damage_dealer"
+    },
+    "Dyrroth": {
+      "role": "fighter",
+      "sub_role": "assassin",
+      "priority": "damage_dealer"
+    },
+    "Ling": {
+      "role": "assassin",
+      "sub_role": "mobility",
+      "priority": "damage_dealer"
+    },
+    "X.Borg": {
+      "role": "fighter",
+      "sub_role": "sustain",
+      "priority": "sustain"
+    },
+    "Terizla": {
+      "role": "fighter",
+      "sub_role": "bruiser",
+      "priority": "sustain"
+    },
+    "Esmeralda": {
+      "role": "tank",
+      "sub_role": "sustain",
+      "priority": "frontline"
+    },
+    "Guinevere": {
+      "role": "fighter",
+      "sub_role": "assassin",
+      "priority": "damage_dealer"
+    },
+    "Granger": {
+      "role": "marksman",
+      "sub_role": "carry",
+      "priority": "damage_dealer"
+    },
+    "Khufra": {
+      "role": "tank",
+      "sub_role": "initiator",
+      "priority": "frontline"
+    },
+    "Badang": {
+      "role": "fighter",
+      "sub_role": "bruiser",
+      "priority": "sustain"
+    },
+    "Faramis": {
+      "role": "support",
+      "sub_role": "utility",
+      "priority": "utility"
+    },
+    "Kadita": {
+      "role": "mage",
+      "sub_role": "burst",
+      "priority": "damage_dealer"
+    },
+    "Minsitthar": {
+      "role": "fighter",
+      "sub_role": "anti-mobility",
+      "priority": "sustain"
+    },
+    "Harith": {
+      "role": "mage",
+      "sub_role": "burst",
+      "priority": "damage_dealer"
+    },
+    "Thamuz": {
+      "role": "fighter",
+      "sub_role": "sustain",
+      "priority": "sustain"
+    },
+    "Kimmy": {
+      "role": "marksman",
+      "sub_role": "carry",
+      "priority": "damage_dealer"
+    },
+    "Belerick": {
+      "role": "tank",
+      "sub_role": "sustain",
+      "priority": "frontline"
+    },
+    "Hanzo": {
+      "role": "assassin",
+      "sub_role": "stealth",
+      "priority": "damage_dealer"
+    },
+    "Lunox": {
+      "role": "mage",
+      "sub_role": "burst",
+      "priority": "damage_dealer"
+    },
+    "Leomord": {
+      "role": "fighter",
+      "sub_role": "sustain",
+      "priority": "sustain"
+    },
+    "Vale": {
+      "role": "mage",
+      "sub_role": "burst",
+      "priority": "damage_dealer"
+    },
+    "Claude": {
+      "role": "marksman",
+      "sub_role": "carry",
+      "priority": "damage_dealer"
+    },
+    "Aldous": {
+      "role": "fighter",
+      "sub_role": "assassin",
+      "priority": "damage_dealer"
+    },
+    "Selena": {
+      "role": "assassin",
+      "sub_role": "burst",
+      "priority": "damage_dealer"
+    },
+    "Kaja": {
+      "role": "support",
+      "sub_role": "initiator",
+      "priority": "utility"
+    },
+    "Chang'e": {
+      "role": "mage",
+      "sub_role": "poke",
+      "priority": "damage_dealer"
+    },
+    "Hanabi": {
+      "role": "marksman",
+      "sub_role": "carry",
+      "priority": "damage_dealer"
+    },
+    "Uranus": {
+      "role": "tank",
+      "sub_role": "sustain",
+      "priority": "frontline"
+    },
+    "Martis": {
+      "role": "fighter",
+      "sub_role": "bruiser",
+      "priority": "sustain"
+    },
+    "Valir": {
+      "role": "mage",
+      "sub_role": "control",
+      "priority": "damage_dealer"
+    },
+    "Gusion": {
+      "role": "assassin",
+      "sub_role": "burst",
+      "priority": "damage_dealer"
+    },
+    "Angela": {
+      "role": "support",
+      "sub_role": "healer",
+      "priority": "utility"
+    },
+    "Jawhead": {
+      "role": "fighter",
+      "sub_role": "initiator",
+      "priority": "sustain"
+    },
+    "Lesley": {
+      "role": "marksman",
+      "sub_role": "carry",
+      "priority": "damage_dealer"
+    },
+    "Pharsa": {
+      "role": "mage",
+      "sub_role": "poke",
+      "priority": "damage_dealer"
+    },
+    "Helcurt": {
+      "role": "assassin",
+      "sub_role": "stealth",
+      "priority": "damage_dealer"
+    },
+    "Zhask": {
+      "role": "mage",
+      "sub_role": "control",
+      "priority": "damage_dealer"
+    },
+    "Hylos": {
+      "role": "tank",
+      "sub_role": "initiator",
+      "priority": "frontline"
+    },
+    "Diggie": {
+      "role": "support",
+      "sub_role": "utility",
+      "priority": "utility"
+    },
+    "Lancelot": {
+      "role": "assassin",
+      "sub_role": "mobility",
+      "priority": "damage_dealer"
+    },
+    "Hayabusa": {
+      "role": "assassin",
+      "sub_role": "stealth",
+      "priority": "damage_dealer"
+    },
+    "Irithel": {
+      "role": "marksman",
+      "sub_role": "carry",
+      "priority": "damage_dealer"
+    },
+    "Argus": {
+      "role": "fighter",
+      "sub_role": "sustain",
+      "priority": "sustain"
+    },
+    "Vexana": {
+      "role": "mage",
+      "sub_role": "control",
+      "priority": "damage_dealer"
+    },
+    "Roger": {
+      "role": "fighter",
+      "sub_role": "assassin",
+      "priority": "damage_dealer"
+    },
+    "Karrie": {
+      "role": "marksman",
+      "sub_role": "carry",
+      "priority": "damage_dealer"
+    },
+    "Aurora": {
+      "role": "mage",
+      "sub_role": "burst",
+      "priority": "damage_dealer"
+    },
+    "Lapu-Lapu": {
+      "role": "fighter",
+      "sub_role": "bruiser",
+      "priority": "sustain"
+    },
+    "Clint": {
+      "role": "marksman",
+      "sub_role": "carry",
+      "priority": "damage_dealer"
+    },
+    "Harley": {
+      "role": "mage",
+      "sub_role": "burst",
+      "priority": "damage_dealer"
+    },
+    "Grock": {
+      "role": "tank",
+      "sub_role": "initiator",
+      "priority": "frontline"
+    },
+    "Alpha": {
+      "role": "fighter",
+      "sub_role": "sustain",
+      "priority": "sustain"
+    },
+    "Yi Sun-shin": {
+      "role": "marksman",
+      "sub_role": "carry",
+      "priority": "damage_dealer"
+    },
+    "Moskov": {
+      "role": "marksman",
+      "sub_role": "carry",
+      "priority": "damage_dealer"
+    },
+    "Johnson": {
+      "role": "tank",
+      "sub_role": "initiator",
+      "priority": "frontline"
+    },
+    "Cyclops": {
+      "role": "mage",
+      "sub_role": "burst",
+      "priority": "damage_dealer"
+    },
+    "Estes": { "role": "support", "sub_role": "healer", "priority": "utility" },
+    "Fanny": {
+      "role": "assassin",
+      "sub_role": "mobility",
+      "priority": "damage_dealer"
+    },
+    "Natalia": {
+      "role": "assassin",
+      "sub_role": "stealth",
+      "priority": "damage_dealer"
+    },
+    "Minotaur": {
+      "role": "tank",
+      "sub_role": "initiator",
+      "priority": "frontline"
+    },
+    "Lolita": {
+      "role": "tank",
+      "sub_role": "support",
+      "priority": "frontline"
+    },
+    "Kagura": {
+      "role": "mage",
+      "sub_role": "burst",
+      "priority": "damage_dealer"
+    },
+    "Franco": {
+      "role": "tank",
+      "sub_role": "initiator",
+      "priority": "frontline"
+    },
+    "Bane": { "role": "fighter", "sub_role": "sustain", "priority": "sustain" },
+    "Alucard": {
+      "role": "fighter",
+      "sub_role": "assassin",
+      "priority": "damage_dealer"
+    },
+    "Ruby": { "role": "fighter", "sub_role": "sustain", "priority": "sustain" },
+    "Chou": {
+      "role": "fighter",
+      "sub_role": "assassin",
+      "priority": "damage_dealer"
+    },
+    "Sun": { "role": "fighter", "sub_role": "sustain", "priority": "sustain" },
+    "Freya": {
+      "role": "fighter",
+      "sub_role": "sustain",
+      "priority": "sustain"
+    },
+    "Gatotkaca": {
+      "role": "tank",
+      "sub_role": "initiator",
+      "priority": "frontline"
+    },
+    "Hilda": { "role": "tank", "sub_role": "sustain", "priority": "frontline" },
+    "Rafaela": {
+      "role": "support",
+      "sub_role": "healer",
+      "priority": "utility"
+    },
+    "Eudora": {
+      "role": "mage",
+      "sub_role": "burst",
+      "priority": "damage_dealer"
+    },
+    "Gord": {
+      "role": "mage",
+      "sub_role": "burst",
+      "priority": "damage_dealer"
+    },
+    "Zilong": {
+      "role": "fighter",
+      "sub_role": "assassin",
+      "priority": "damage_dealer"
+    },
+    "Nana": {
+      "role": "mage",
+      "sub_role": "control",
+      "priority": "damage_dealer"
+    },
+    "Tigreal": {
+      "role": "tank",
+      "sub_role": "initiator",
+      "priority": "frontline"
+    },
+    "Akai": {
+      "role": "tank",
+      "sub_role": "initiator",
+      "priority": "frontline"
+    },
+    "Saber": {
+      "role": "assassin",
+      "sub_role": "burst",
+      "priority": "damage_dealer"
+    },
+    "Alice": {
+      "role": "mage",
+      "sub_role": "sustain",
+      "priority": "damage_dealer"
+    },
+    "Miya": {
+      "role": "marksman",
+      "sub_role": "carry",
+      "priority": "damage_dealer"
+    },
+    "Bruno": {
+      "role": "marksman",
+      "sub_role": "carry",
+      "priority": "damage_dealer"
+    },
+    "Karina": {
+      "role": "assassin",
+      "sub_role": "burst",
+      "priority": "damage_dealer"
+    },
+    "Layla": {
+      "role": "marksman",
+      "sub_role": "carry",
+      "priority": "damage_dealer"
+    }
+  },
+  "role_definitions": {
+    "tank": {
+      "description": "Frontline initiators and damage soakers",
+      "key_metrics": [
+        "damage_taken",
+        "crowd_control",
+        "teamfight_participation"
+      ],
+      "evaluation_focus": "initiation_success, damage_absorption, peel_effectiveness"
+    },
+    "fighter": {
+      "description": "Versatile bruisers with sustain and damage",
+      "key_metrics": ["damage_dealt", "damage_taken", "sustain"],
+      "evaluation_focus": "damage_trade_efficiency, sustain_effectiveness, objective_control"
+    },
+    "assassin": {
+      "description": "High mobility burst damage dealers",
+      "key_metrics": ["damage_dealt", "elimination_efficiency", "mobility"],
+      "evaluation_focus": "target_elimination, survival_rate, snowball_potential"
+    },
+    "marksman": {
+      "description": "Ranged physical damage carries",
+      "key_metrics": ["damage_dealt", "positioning", "gold_efficiency"],
+      "evaluation_focus": "damage_consistency, positioning_safety, item_optimization"
+    },
+    "mage": {
+      "description": "Magical damage dealers and controllers",
+      "key_metrics": ["damage_dealt", "ability_accuracy", "mana_efficiency"],
+      "evaluation_focus": "burst_effectiveness, skill_accuracy, team_control"
+    },
+    "support": {
+      "description": "Utility providers and team enablers",
+      "key_metrics": ["assists", "utility_provided", "vision_control"],
+      "evaluation_focus": "team_enablement, utility_usage, map_control"
+    }
+  },
+  "sub_role_definitions": {
+    "burst": { "description": "High burst damage in short windows" },
+    "sustain": { "description": "Sustained damage and survivability" },
+    "mobility": { "description": "High mobility and positioning" },
+    "control": { "description": "Crowd control and area denial" },
+    "carry": { "description": "Late-game damage scaling" },
+    "initiator": { "description": "Team fight initiation" },
+    "stealth": { "description": "Stealth mechanics and surprise attacks" },
+    "healer": { "description": "Team healing and sustain" },
+    "utility": { "description": "Utility and team support" },
+    "poke": { "description": "Long-range harassment" },
+    "anti-mobility": { "description": "Counters mobile champions" },
+    "roamer": { "description": "Map mobility and roaming" },
+    "bruiser": { "description": "Tanky damage dealer" },
+    "assassin": { "description": "High single-target damage" },
+    "hybrid": { "description": "Multiple role capabilities" }
+  }
+}

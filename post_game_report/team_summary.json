@@ -1,0 +1,432 @@
+{
+  "match_id": "match_20250110_001",
+  "team_id": "team_alpha",
+  "analysis_timestamp": "2025-01-10T15:30:00Z",
+  "team_behavior": {
+    "synergy_level": "strong",
+    "coordination_pattern": "moderately_coordinated",
+    "role_overlap_severity": "minor_overlap",
+    "teamfight_spacing": {
+      "average_spread": 0.72,
+      "frontline_backline_separation": 0.85,
+      "flanking_effectiveness": 0.68,
+      "positioning_discipline": 0.79,
+      "spacing_score": 0.76
+    },
+    "objective_control": {
+      "lord_control_rate": 0.83,
+      "turtle_control_rate": 0.91,
+      "tower_push_coordination": 0.74,
+      "jungle_control_efficiency": 0.67,
+      "vision_control_score": 0.72,
+      "objective_timing_score": 0.82
+    },
+    "rotation_sync": {
+      "lane_rotation_timing": 0.69,
+      "gank_coordination_score": 0.78,
+      "recall_synchronization": 0.71,
+      "team_movement_cohesion": 0.74,
+      "rotation_efficiency": 0.73
+    },
+    "role_analysis": {
+      "role_distribution": {
+        "tank": 1,
+        "fighter": 1,
+        "assassin": 1,
+        "mage": 1,
+        "marksman": 1
+      },
+      "coverage_gaps": [],
+      "overlap_conflicts": [],
+      "role_effectiveness": {
+        "tank_0": 0.85,
+        "fighter_1": 0.72,
+        "assassin_2": 0.91,
+        "mage_3": 0.78,
+        "marksman_4": 0.83
+      },
+      "synergy_score": 0.82
+    },
+    "compatibility_matrix": [
+      {
+        "player_a": "TankMaster",
+        "player_b": "ADCPro",
+        "compatibility_score": 0.92,
+        "synergy_factors": [
+          "Complementary roles",
+          "Similar game tempo preferences",
+          "Excellent role synergy"
+        ],
+        "conflict_factors": [],
+        "playstyle_alignment": 0.89,
+        "coordination_rating": 0.91
+      },
+      {
+        "player_a": "JungleKing",
+        "player_b": "MidLaner",
+        "compatibility_score": 0.84,
+        "synergy_factors": [
+          "Good playstyle compatibility",
+          "Complementary roles"
+        ],
+        "conflict_factors": ["Different tempo preferences"],
+        "playstyle_alignment": 0.78,
+        "coordination_rating": 0.82
+      },
+      {
+        "player_a": "SupportMain",
+        "player_b": "ADCPro",
+        "compatibility_score": 0.95,
+        "synergy_factors": [
+          "Excellent role synergy",
+          "Perfect playstyle alignment",
+          "Similar risk profiles"
+        ],
+        "conflict_factors": [],
+        "playstyle_alignment": 0.94,
+        "coordination_rating": 0.93
+      },
+      {
+        "player_a": "TankMaster",
+        "player_b": "JungleKing",
+        "compatibility_score": 0.76,
+        "synergy_factors": [
+          "Good role compatibility",
+          "Complementary playstyles"
+        ],
+        "conflict_factors": ["Risk profile imbalance"],
+        "playstyle_alignment": 0.72,
+        "coordination_rating": 0.78
+      },
+      {
+        "player_a": "MidLaner",
+        "player_b": "SupportMain",
+        "compatibility_score": 0.88,
+        "synergy_factors": [
+          "Strong role synergy",
+          "Good tempo alignment",
+          "Complementary playstyles"
+        ],
+        "conflict_factors": [],
+        "playstyle_alignment": 0.85,
+        "coordination_rating": 0.87
+      },
+      {
+        "player_a": "FighterTop",
+        "player_b": "TankMaster",
+        "compatibility_score": 0.71,
+        "synergy_factors": ["Moderate role compatibility"],
+        "conflict_factors": [
+          "Similar roles with some overlap",
+          "Different tempo preferences"
+        ],
+        "playstyle_alignment": 0.68,
+        "coordination_rating": 0.73
+      },
+      {
+        "player_a": "FighterTop",
+        "player_b": "JungleKing",
+        "compatibility_score": 0.85,
+        "synergy_factors": [
+          "Excellent playstyle compatibility",
+          "Good role synergy",
+          "Similar tempo preferences"
+        ],
+        "conflict_factors": [],
+        "playstyle_alignment": 0.87,
+        "coordination_rating": 0.83
+      },
+      {
+        "player_a": "FighterTop",
+        "player_b": "MidLaner",
+        "compatibility_score": 0.73,
+        "synergy_factors": ["Moderate role compatibility"],
+        "conflict_factors": ["Different playstyles", "Tempo mismatch"],
+        "playstyle_alignment": 0.69,
+        "coordination_rating": 0.75
+      },
+      {
+        "player_a": "FighterTop",
+        "player_b": "ADCPro",
+        "compatibility_score": 0.79,
+        "synergy_factors": [
+          "Good role compatibility",
+          "Complementary playstyles"
+        ],
+        "conflict_factors": ["Some tempo differences"],
+        "playstyle_alignment": 0.76,
+        "coordination_rating": 0.81
+      },
+      {
+        "player_a": "FighterTop",
+        "player_b": "SupportMain",
+        "compatibility_score": 0.82,
+        "synergy_factors": [
+          "Good role synergy",
+          "Complementary playstyles",
+          "Similar coordination patterns"
+        ],
+        "conflict_factors": [],
+        "playstyle_alignment": 0.8,
+        "coordination_rating": 0.83
+      }
+    ],
+    "team_insights": [
+      {
+        "category": "Team Synergy",
+        "insight": "Team demonstrates strong synergy with excellent tank-ADC coordination",
+        "confidence": 0.89,
+        "severity": "positive",
+        "suggestions": [
+          "Leverage strong bot lane synergy for early objectives",
+          "Coordinate team fights around tank initiation"
+        ],
+        "affected_players": ["TankMaster", "ADCPro", "SupportMain"],
+        "timestamp_range": null
+      },
+      {
+        "category": "Team Coordination",
+        "insight": "Good rotation coordination but can improve objective timing",
+        "confidence": 0.78,
+        "severity": "medium",
+        "suggestions": [
+          "Practice synchronized recalls",
+          "Improve objective setup timing",
+          "Better communication for rotations"
+        ],
+        "affected_players": ["JungleKing", "MidLaner", "FighterTop"],
+        "timestamp_range": null
+      },
+      {
+        "category": "Role Distribution",
+        "insight": "Excellent role distribution with proper coverage",
+        "confidence": 0.94,
+        "severity": "positive",
+        "suggestions": [
+          "Maintain current role assignments",
+          "Focus on individual role mastery"
+        ],
+        "affected_players": [
+          "TankMaster",
+          "FighterTop",
+          "JungleKing",
+          "MidLaner",
+          "ADCPro"
+        ],
+        "timestamp_range": null
+      },
+      {
+        "category": "Individual Performance",
+        "insight": "All players show consistent performance with JungleKing leading",
+        "confidence": 0.85,
+        "severity": "positive",
+        "suggestions": [
+          "Continue aggressive jungle style",
+          "Support other lanes more consistently"
+        ],
+        "affected_players": ["JungleKing"],
+        "timestamp_range": null
+      },
+      {
+        "category": "Teamfight Positioning",
+        "insight": "Good teamfight spacing with strong frontline-backline separation",
+        "confidence": 0.81,
+        "severity": "positive",
+        "suggestions": [
+          "Maintain positioning discipline",
+          "Improve flanking coordination"
+        ],
+        "affected_players": [
+          "TankMaster",
+          "FighterTop",
+          "JungleKing",
+          "MidLaner",
+          "ADCPro"
+        ],
+        "timestamp_range": null
+      }
+    ],
+    "collective_feedback": "🌟 **Team Overview**: Your team demonstrates strong synergy with excellent tank-ADC coordination and solid role distribution. The team shows great potential with strong individual performances and good teamfight positioning.\n\n✅ **Key Strengths**: Your team excels in teamfight coordination, objective control, and role synergy. The bot lane combination is particularly strong.\n\n🎯 **Priority Focus**: Continue building on the strong foundation while improving rotation timing and objective setup coordination.\n\n💡 **Immediate Actions**: Practice synchronized team movements and improve communication during objective setups.\n\n📈 **Collective Recommendations**: Leverage the strong tank-ADC synergy for early game advantages, maintain excellent role distribution, and work on perfecting team rotation timings for maximum effectiveness.",
+    "team_coordination_score": 0.76,
+    "overall_synergy_score": 0.82,
+    "team_effectiveness_rating": 0.79,
+    "confidence_score": 0.87,
+    "players_analyzed": 5,
+    "analysis_duration": 2.34
+  },
+  "synergy_matrix": {
+    "team_id": "team_alpha",
+    "overall_team_synergy": 0.82,
+    "strongest_pairs": [
+      {
+        "player_a": "SupportMain",
+        "player_b": "ADCPro",
+        "score": 0.95
+      },
+      {
+        "player_a": "TankMaster",
+        "player_b": "ADCPro",
+        "score": 0.92
+      },
+      {
+        "player_a": "MidLaner",
+        "player_b": "SupportMain",
+        "score": 0.88
+      }
+    ],
+    "weakest_pairs": [
+      {
+        "player_a": "FighterTop",
+        "player_b": "TankMaster",
+        "score": 0.71
+      },
+      {
+        "player_a": "FighterTop",
+        "player_b": "MidLaner",
+        "score": 0.73
+      },
+      {
+        "player_a": "TankMaster",
+        "player_b": "JungleKing",
+        "score": 0.76
+      }
+    ],
+    "synergy_distribution": {
+      "excellent": 1,
+      "strong": 4,
+      "moderate": 4,
+      "weak": 1,
+      "incompatible": 0
+    },
+    "team_recommendations": [
+      "Excellent team synergy - maintain current dynamics",
+      "Focus on weak pairs for improvement",
+      "Leverage strong bot lane synergy"
+    ]
+  },
+  "formatted_output": {
+    "team_overview": {
+      "synergy_level": "Strong",
+      "coordination_pattern": "Moderately Coordinated",
+      "role_overlap_severity": "Minor Overlap",
+      "overall_effectiveness": "79.0%"
+    },
+    "key_insights": [
+      {
+        "category": "Team Synergy",
+        "insight": "Team demonstrates strong synergy with excellent tank-ADC coordination",
+        "severity": "Positive",
+        "recommendations": [
+          "Leverage strong bot lane synergy for early objectives",
+          "Coordinate team fights around tank initiation"
+        ]
+      },
+      {
+        "category": "Team Coordination",
+        "insight": "Good rotation coordination but can improve objective timing",
+        "severity": "Medium",
+        "recommendations": [
+          "Practice synchronized recalls",
+          "Improve objective setup timing"
+        ]
+      },
+      {
+        "category": "Role Distribution",
+        "insight": "Excellent role distribution with proper coverage",
+        "severity": "Positive",
+        "recommendations": [
+          "Maintain current role assignments",
+          "Focus on individual role mastery"
+        ]
+      },
+      {
+        "category": "Individual Performance",
+        "insight": "All players show consistent performance with JungleKing leading",
+        "severity": "Positive",
+        "recommendations": [
+          "Continue aggressive jungle style",
+          "Support other lanes more consistently"
+        ]
+      },
+      {
+        "category": "Teamfight Positioning",
+        "insight": "Good teamfight spacing with strong frontline-backline separation",
+        "severity": "Positive",
+        "recommendations": [
+          "Maintain positioning discipline",
+          "Improve flanking coordination"
+        ]
+      }
+    ],
+    "performance_metrics": {
+      "teamfight_spacing": "76.0%",
+      "objective_control": "82.0%",
+      "rotation_sync": "73.0%",
+      "role_synergy": "82.0%"
+    },
+    "player_compatibility": [
+      {
+        "players": "SupportMain & ADCPro",
+        "compatibility": "95.0%",
+        "top_synergy": "Excellent role synergy",
+        "top_conflict": "None"
+      },
+      {
+        "players": "TankMaster & ADCPro",
+        "compatibility": "92.0%",
+        "top_synergy": "Complementary roles",
+        "top_conflict": "None"
+      },
+      {
+        "players": "MidLaner & SupportMain",
+        "compatibility": "88.0%",
+        "top_synergy": "Strong role synergy",
+        "top_conflict": "None"
+      }
+    ],
+    "collective_feedback": "🌟 **Team Overview**: Your team demonstrates strong synergy with excellent tank-ADC coordination and solid role distribution. The team shows great potential with strong individual performances and good teamfight positioning.\n\n✅ **Key Strengths**: Your team excels in teamfight coordination, objective control, and role synergy. The bot lane combination is particularly strong.\n\n🎯 **Priority Focus**: Continue building on the strong foundation while improving rotation timing and objective setup coordination.\n\n💡 **Immediate Actions**: Practice synchronized team movements and improve communication during objective setups.\n\n📈 **Collective Recommendations**: Leverage the strong tank-ADC synergy for early game advantages, maintain excellent role distribution, and work on perfecting team rotation timings for maximum effectiveness.",
+    "synergy_analysis": {
+      "overall_synergy": "82.0%",
+      "strongest_pairs": [
+        {
+          "players": "SupportMain & ADCPro",
+          "synergy_score": "95.0%"
+        },
+        {
+          "players": "TankMaster & ADCPro",
+          "synergy_score": "92.0%"
+        },
+        {
+          "players": "MidLaner & SupportMain",
+          "synergy_score": "88.0%"
+        }
+      ],
+      "weakest_pairs": [
+        {
+          "players": "FighterTop & TankMaster",
+          "synergy_score": "71.0%"
+        },
+        {
+          "players": "FighterTop & MidLaner",
+          "synergy_score": "73.0%"
+        },
+        {
+          "players": "TankMaster & JungleKing",
+          "synergy_score": "76.0%"
+        }
+      ],
+      "synergy_distribution": {
+        "excellent": 1,
+        "strong": 4,
+        "moderate": 4,
+        "weak": 1,
+        "incompatible": 0
+      },
+      "recommendations": [
+        "Excellent team synergy - maintain current dynamics",
+        "Focus on weak pairs for improvement",
+        "Leverage strong bot lane synergy"
+      ]
+    }
+  }
+}

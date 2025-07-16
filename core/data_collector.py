@@ -65,8 +65,6 @@ class OCRReaderSingleton:
                         download_enabled=True,
                         detector=True,
                         recognizer=True,
-                        width_ths=0.7,    # Optimized for MLBB screenshots
-                        height_ths=0.7,   # Optimized for MLBB screenshots
                     )
                     
                     self._initialization_time = time.time() - start_time

@@ -1,0 +1,115 @@
+{
+  "player_ign": "Lesz XVII",
+  "video_path": "example_gameplay.mp4",
+  "analysis_timestamp": "2025-07-13T15:19:11.857636",
+  "post_game_summary": "Critical tactical issues identified (1). Focus on fundamental decision-making and risk management. Your carry-focused approach demonstrates strong mechanical skills. Consider balancing individual excellence with team coordination. Analysis detected 1 missed opportunities for greater impact. Focus on maintaining momentum after advantages. Think of MLBB like chess - every move should consider the next 2-3 moves. Your tactical awareness is developing well, but remember: positioning is like protecting your king, and rotations are like controlling the center. Primary focus areas: positioning safety, map awareness, and objective timing coordination.",
+  "tactical_findings": [
+    {
+      "timestamp": 320.1,
+      "event": "death_overextension",
+      "finding": "Death due to overextension in enemy_jungle at 320.1s. High-risk positioning without vision coverage.",
+      "suggestion": "Maintain vision control and communicate with team before extending to high-risk areas like enemy jungle.",
+      "severity": "critical",
+      "confidence": 0.92,
+      "game_phase": "early_game",
+      "event_type": "death_analysis",
+      "metadata": {
+        "location": "enemy_jungle",
+        "cause": "overextension"
+      }
+    },
+    {
+      "timestamp": 590.2,
+      "event": "death_positioning",
+      "finding": "Death due to poor positioning in lord_pit at 590.2s. Eliminated early in teamfight, reducing team's combat effectiveness.",
+      "suggestion": "Focus on staying behind tanks and identifying threats before engaging. Wait for tank initiation and position at maximum effective range.",
+      "severity": "high",
+      "confidence": 0.88,
+      "game_phase": "early_game",
+      "event_type": "positioning_analysis",
+      "metadata": {
+        "location": "lord_pit",
+        "teamfight_context": true
+      }
+    }
+  ],
+  "visual_overlays": [
+    {
+      "frame_path": "frame_017706_t590.20s.jpg",
+      "annotations": [
+        {
+          "type": "zone",
+          "region": "danger_zone",
+          "label": "High Risk Position",
+          "color": "red",
+          "opacity": 0.7
+        },
+        {
+          "type": "arrow",
+          "from_region": "current_position",
+          "to_region": "safe_position",
+          "label": "Suggested Position",
+          "color": "green",
+          "opacity": 0.8
+        }
+      ]
+    }
+  ],
+  "game_phase_breakdown": {
+    "early_game": [
+      {
+        "timestamp": 320.1,
+        "event": "death_overextension",
+        "finding": "Death due to overextension in enemy_jungle at 320.1s. High-risk positioning without vision coverage.",
+        "suggestion": "Maintain vision control and communicate with team before extending to high-risk areas like enemy jungle.",
+        "severity": "critical",
+        "confidence": 0.92,
+        "game_phase": "early_game",
+        "event_type": "death_analysis",
+        "metadata": {
+          "location": "enemy_jungle",
+          "cause": "overextension"
+        }
+      },
+      {
+        "timestamp": 590.2,
+        "event": "death_positioning",
+        "finding": "Death due to poor positioning in lord_pit at 590.2s. Eliminated early in teamfight, reducing team's combat effectiveness.",
+        "suggestion": "Focus on staying behind tanks and identifying threats before engaging. Wait for tank initiation and position at maximum effective range.",
+        "severity": "high",
+        "confidence": 0.88,
+        "game_phase": "early_game",
+        "event_type": "positioning_analysis",
+        "metadata": {
+          "location": "lord_pit",
+          "teamfight_context": true
+        }
+      }
+    ],
+    "mid_game": [],
+    "late_game": []
+  },
+  "opportunity_analysis": [
+    {
+      "timestamp": 512.3,
+      "event": "tower_destroyed",
+      "missed_action": "Not present for tower push after favorable team fight. Missed opportunity to secure map control and gold advantage.",
+      "alternative": "Rotate to tower immediately after team fight advantage at 497.3s. Focus on maintaining momentum.",
+      "impact_score": 0.8,
+      "reasoning": "Tower gold and map control are crucial for maintaining momentum. This missed opportunity cost approximately 320 gold and strategic positioning.",
+      "metadata": {
+        "tower_gold": 320,
+        "map_control_value": "high",
+        "team_coordination_issue": true
+      }
+    }
+  ],
+  "gamified_feedback": [
+    "\ud83c\udfaf Positioning Apprentice: One positioning issue identified \u2013 you're improving but stay vigilant!",
+    "\ud83d\ude80 Rotation Expert: Perfect rotation timing \u2013 excellent macro awareness and map control!",
+    "\ud83c\udf8a Consistent Performer: Few major tactical issues identified \u2013 maintain this level of gameplay excellence!"
+  ],
+  "overall_confidence": 0.9,
+  "processing_time": 2.5,
+  "insights_generated": 3
+}

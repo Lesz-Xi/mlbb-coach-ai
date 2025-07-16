@@ -1,0 +1,182 @@
+<View>
+  <!-- MLBB YOLO Dataset Annotation Interface -->
+  <!-- Comprehensive Label Studio configuration with color-coded classes and validation guidelines -->
+  
+  <Header value="MLBB Post-Match Screenshot Annotation"/>
+  
+  <!-- Annotation Instructions Panel -->
+  <View style="box-shadow: 2px 2px 5px #999; padding: 20px; margin-top: 5px; border-radius: 5px">
+    <Header value="📋 Annotation Guidelines"/>
+    <Text value="
+    📌 **PRIORITY ORDER**: 
+    1️⃣ HIGH: Hero icons, MVP badges, match results
+    2️⃣ MEDIUM: Statistics, UI elements  
+    3️⃣ LOW: Items, achievements, quality markers
+    
+    🎯 **BOUNDING BOX RULES**:
+    • Draw tight boxes around complete objects
+    • Include glow effects for medals/badges
+    • Exclude overlapping UI elements when possible
+    • Use position-based naming (ally_1-5, enemy_1-5)
+    
+    ⚠️ **QUALITY STANDARDS**:
+    • Only annotate clearly visible objects (80%+ visible)
+    • Minimum 20x20 pixels
+    • Hero icons: Nearly square (0.9-1.1 aspect ratio)
+    • Text elements: Include complete readable area
+    "/>
+  </View>
+
+  <!-- Image Display -->
+  <Image name="image" value="$image" zoom="true" zoomControl="true" rotateControl="true"/>
+
+  <!-- Team Layout Guide -->
+  <View style="display: flex; flex-direction: row; margin: 10px 0;">
+    <View style="border: 2px solid #4CAF50; padding: 10px; margin-right: 10px; border-radius: 5px;">
+      <Header value="🟢 ALLY TEAM (Green)"/>
+      <Text value="Position Layout:
+      ally_1  ally_2  ally_3
+      ally_4  ally_5"/>
+    </View>
+    <View style="border: 2px solid #F44336; padding: 10px; border-radius: 5px;">
+      <Header value="🔴 ENEMY TEAM (Red)"/>
+      <Text value="Position Layout:
+      enemy_1  enemy_2  enemy_3
+      enemy_4  enemy_5"/>
+    </View>
+  </View>
+
+  <!-- Annotation Interface -->
+  <RectangleLabels name="label" toName="image" strokeWidth="3" canRotate="false">
+    
+    <!-- ========== HIGH PRIORITY CLASSES ========== -->
+    <Header value="🔥 HIGH PRIORITY - Core Detection Targets"/>
+    
+    <!-- Hero Icons - Ally Team -->
+    <Label value="hero_icon_ally_1" background="#4CAF50" alias="A1 🦸‍♂️"/>
+    <Label value="hero_icon_ally_2" background="#66BB6A" alias="A2 🦸‍♀️"/>
+    <Label value="hero_icon_ally_3" background="#81C784" alias="A3 🦸‍♂️"/>
+    <Label value="hero_icon_ally_4" background="#A5D6A7" alias="A4 🦸‍♀️"/>
+    <Label value="hero_icon_ally_5" background="#C8E6C9" alias="A5 🦸‍♂️"/>
+    
+    <!-- Hero Icons - Enemy Team -->
+    <Label value="hero_icon_enemy_1" background="#F44336" alias="E1 🦹‍♂️"/>
+    <Label value="hero_icon_enemy_2" background="#EF5350" alias="E2 🦹‍♀️"/>
+    <Label value="hero_icon_enemy_3" background="#E57373" alias="E3 🦹‍♂️"/>
+    <Label value="hero_icon_enemy_4" background="#EF9A9A" alias="E4 🦹‍♀️"/>
+    <Label value="hero_icon_enemy_5" background="#FFCDD2" alias="E5 🦹‍♂️"/>
+    
+    <!-- Performance Indicators -->
+    <Label value="mvp_badge" background="#FFD700" alias="👑 MVP Win"/>
+    <Label value="mvp_loss_badge" background="#C0C0C0" alias="🥈 MVP Loss"/>
+    <Label value="medal_gold" background="#FFD700" alias="🥇 Gold Medal"/>
+    <Label value="medal_silver" background="#C0C0C0" alias="🥈 Silver Medal"/>
+    <Label value="medal_bronze" background="#CD7F32" alias="🥉 Bronze Medal"/>
+    
+    <!-- Match Information -->
+    <Label value="match_type_classic" background="#2196F3" alias="⚔️ Classic"/>
+    <Label value="match_type_ranked" background="#FF9800" alias="🏆 Ranked"/>
+    <Label value="match_type_brawl" background="#9C27B0" alias="💥 Brawl"/>
+    <Label value="match_type_custom" background="#607D8B" alias="🎮 Custom"/>
+    <Label value="victory_text" background="#4CAF50" alias="✅ VICTORY"/>
+    <Label value="defeat_text" background="#F44336" alias="❌ DEFEAT"/>
+    
+    <!-- ========== MEDIUM PRIORITY CLASSES ========== -->
+    <Header value="⚡ MEDIUM PRIORITY - Statistics & UI"/>
+    
+    <!-- Core Statistics -->
+    <Label value="kda_display" background="#FF5722" alias="⚔️ KDA (5/2/8)"/>
+    <Label value="player_name" background="#3F51B5" alias="👤 Player Name"/>
+    
+    <!-- Economic Stats -->
+    <Label value="gold_amount" background="#FFC107" alias="💰 Gold Total"/>
+    <Label value="gpm_display" background="#FFEB3B" alias="💸 GPM"/>
+    
+    <!-- Combat Statistics -->
+    <Label value="damage_dealt" background="#E91E63" alias="⚔️ DMG Dealt"/>
+    <Label value="damage_taken" background="#9E9E9E" alias="🛡️ DMG Taken"/>
+    <Label value="healing_done" background="#4CAF50" alias="💚 Healing"/>
+    
+    <!-- Performance Metrics -->
+    <Label value="participation_rate" background="#00BCD4" alias="🤝 Participation %"/>
+    <Label value="turret_damage" background="#795548" alias="🏰 Turret DMG"/>
+    <Label value="match_duration" background="#607D8B" alias="⏱️ Duration"/>
+    
+    <!-- UI Elements -->
+    <Label value="team_indicator_ally" background="#8BC34A" alias="🟢 Ally Section"/>
+    <Label value="team_indicator_enemy" background="#FF7043" alias="🔴 Enemy Section"/>
+    <Label value="scoreboard_container" background="#546E7A" alias="📊 Scoreboard"/>
+    
+    <!-- ========== LOW PRIORITY CLASSES ========== -->
+    <Header value="📦 LOW PRIORITY - Items & Extras"/>
+    
+    <!-- Equipment Items -->
+    <Label value="item_icon_1" background="#673AB7" alias="🎒 Item 1"/>
+    <Label value="item_icon_2" background="#673AB7" alias="🎒 Item 2"/>
+    <Label value="item_icon_3" background="#673AB7" alias="🎒 Item 3"/>
+    <Label value="item_icon_4" background="#673AB7" alias="🎒 Item 4"/>
+    <Label value="item_icon_5" background="#673AB7" alias="🎒 Item 5"/>
+    <Label value="item_icon_6" background="#673AB7" alias="🎒 Item 6"/>
+    
+    <!-- Battle Spells -->
+    <Label value="battle_spell_1" background="#E91E63" alias="✨ Spell 1"/>
+    <Label value="battle_spell_2" background="#E91E63" alias="✨ Spell 2"/>
+    
+    <!-- Achievements -->
+    <Label value="savage_indicator" background="#D32F2F" alias="💀 SAVAGE"/>
+    <Label value="maniac_indicator" background="#FF5722" alias="🔥 MANIAC"/>
+    <Label value="legendary_indicator" background="#FF9800" alias="⭐ LEGENDARY"/>
+    
+    <!-- Role Information -->
+    <Label value="role_indicator" background="#795548" alias="🎭 Role"/>
+    <Label value="position_rank" background="#607D8B" alias="📈 Rank"/>
+    
+    <!-- Quality Markers -->
+    <Label value="ui_complete" background="#4CAF50" alias="✅ UI Complete"/>
+    <Label value="text_readable" background="#2196F3" alias="📖 Text Clear"/>
+    <Label value="icons_clear" background="#FF9800" alias="🖼️ Icons Clear"/>
+    
+  </RectangleLabels>
+
+  <!-- Annotation Workflow Guide -->
+  <View style="background-color: #f0f0f0; padding: 15px; margin-top: 20px; border-radius: 5px;">
+    <Header value="🎯 Annotation Workflow"/>
+    <Text value="
+    **STEP 1**: Start with HIGH priority classes
+    • Identify all visible hero icons (ally_1-5, enemy_1-5)
+    • Mark MVP badges and performance medals
+    • Annotate match type and result text
+    
+    **STEP 2**: Add MEDIUM priority elements
+    • Capture player names and KDA displays
+    • Mark damage statistics and economic data
+    • Identify UI containers and team sections
+    
+    **STEP 3**: Include LOW priority items (if time permits)
+    • Equipment items and battle spells
+    • Achievement indicators (Savage, Maniac, etc.)
+    • Quality validation markers
+    
+    **QUALITY CHECKS**:
+    ✅ Tight bounding boxes
+    ✅ Complete team coverage (10 heroes when visible)
+    ✅ No overlapping annotations
+    ✅ Consistent position numbering
+    "/>
+  </View>
+
+  <!-- Validation Reminders -->
+  <View style="background-color: #fff3cd; border: 1px solid #ffeaa7; padding: 10px; margin-top: 10px; border-radius: 5px;">
+    <Header value="⚠️ Quality Validation"/>
+    <Text value="
+    **BEFORE SUBMITTING**:
+    🔍 Check all hero positions are numbered correctly
+    📐 Verify aspect ratios (heroes ~1:1, text ~wide)
+    📏 Ensure minimum sizes (heroes >50px, medals >30px)
+    🎯 Remove low-quality or unclear annotations
+    
+    **REMEMBER**: Quality over quantity! Better to have fewer accurate annotations than many poor ones.
+    "/>
+  </View>
+
+</View> 

@@ -15,6 +15,12 @@ ffmpeg-python==0.2.0
 fuzzywuzzy==0.18.0
 python-Levenshtein==0.21.1
 
+# Redis and Job Queue Dependencies
+rq==1.15.1
+redis==5.0.1
+python-dotenv==1.0.0
+upstash-redis==0.15.0
+
 # YOLOv8 Dependencies
 ultralytics==8.0.196
 supervision==0.18.0

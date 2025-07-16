@@ -1,0 +1,545 @@
+# MLBB YOLO Dataset Class Definitions
+# Comprehensive class hierarchy with annotation priorities and validation metadata
+
+classes:
+  # ============================================================================
+  # HERO DETECTION CLASSES (Priority: HIGH)
+  # ============================================================================
+  hero_icons:
+    priority: 1
+    description: "Hero portraits for team composition analysis"
+
+    ally_team:
+      - id: 0
+        name: "hero_icon_ally_1"
+        description: "Ally team hero position 1 (top-left or first in row)"
+        color: "#4CAF50" # Green
+        validation:
+          min_size: [50, 50]
+          max_size: [150, 150]
+          aspect_ratio: [0.9, 1.1]
+
+      - id: 1
+        name: "hero_icon_ally_2"
+        description: "Ally team hero position 2"
+        color: "#66BB6A"
+        validation:
+          min_size: [50, 50]
+          max_size: [150, 150]
+          aspect_ratio: [0.9, 1.1]
+
+      - id: 2
+        name: "hero_icon_ally_3"
+        description: "Ally team hero position 3"
+        color: "#81C784"
+        validation:
+          min_size: [50, 50]
+          max_size: [150, 150]
+          aspect_ratio: [0.9, 1.1]
+
+      - id: 3
+        name: "hero_icon_ally_4"
+        description: "Ally team hero position 4"
+        color: "#A5D6A7"
+        validation:
+          min_size: [50, 50]
+          max_size: [150, 150]
+          aspect_ratio: [0.9, 1.1]
+
+      - id: 4
+        name: "hero_icon_ally_5"
+        description: "Ally team hero position 5 (bottom-right or last in row)"
+        color: "#C8E6C9"
+        validation:
+          min_size: [50, 50]
+          max_size: [150, 150]
+          aspect_ratio: [0.9, 1.1]
+
+    enemy_team:
+      - id: 5
+        name: "hero_icon_enemy_1"
+        description: "Enemy team hero position 1 (top-left or first in row)"
+        color: "#F44336" # Red
+        validation:
+          min_size: [50, 50]
+          max_size: [150, 150]
+          aspect_ratio: [0.9, 1.1]
+
+      - id: 6
+        name: "hero_icon_enemy_2"
+        description: "Enemy team hero position 2"
+        color: "#EF5350"
+        validation:
+          min_size: [50, 50]
+          max_size: [150, 150]
+          aspect_ratio: [0.9, 1.1]
+
+      - id: 7
+        name: "hero_icon_enemy_3"
+        description: "Enemy team hero position 3"
+        color: "#E57373"
+        validation:
+          min_size: [50, 50]
+          max_size: [150, 150]
+          aspect_ratio: [0.9, 1.1]
+
+      - id: 8
+        name: "hero_icon_enemy_4"
+        description: "Enemy team hero position 4"
+        color: "#EF9A9A"
+        validation:
+          min_size: [50, 50]
+          max_size: [150, 150]
+          aspect_ratio: [0.9, 1.1]
+
+      - id: 9
+        name: "hero_icon_enemy_5"
+        description: "Enemy team hero position 5 (bottom-right or last in row)"
+        color: "#FFCDD2"
+        validation:
+          min_size: [50, 50]
+          max_size: [150, 150]
+          aspect_ratio: [0.9, 1.1]
+
+  # ============================================================================
+  # PERFORMANCE INDICATORS (Priority: HIGH)
+  # ============================================================================
+  performance_badges:
+    priority: 1
+    description: "MVP and performance recognition badges"
+
+    mvp_indicators:
+      - id: 10
+        name: "mvp_badge"
+        description: "MVP crown/badge for winning team"
+        color: "#FFD700" # Gold
+        validation:
+          min_size: [30, 30]
+          max_size: [100, 100]
+          aspect_ratio: [0.8, 1.2]
+
+      - id: 11
+        name: "mvp_loss_badge"
+        description: "MVP badge for losing team"
+        color: "#C0C0C0" # Silver
+        validation:
+          min_size: [30, 30]
+          max_size: [100, 100]
+          aspect_ratio: [0.8, 1.2]
+
+    performance_medals:
+      - id: 12
+        name: "medal_gold"
+        description: "Gold performance medal"
+        color: "#FFD700"
+        validation:
+          min_size: [30, 30]
+          max_size: [100, 100]
+          aspect_ratio: [0.8, 1.2]
+
+      - id: 13
+        name: "medal_silver"
+        description: "Silver performance medal"
+        color: "#C0C0C0"
+        validation:
+          min_size: [30, 30]
+          max_size: [100, 100]
+          aspect_ratio: [0.8, 1.2]
+
+      - id: 14
+        name: "medal_bronze"
+        description: "Bronze performance medal"
+        color: "#CD7F32"
+        validation:
+          min_size: [30, 30]
+          max_size: [100, 100]
+          aspect_ratio: [0.8, 1.2]
+
+  # ============================================================================
+  # MATCH INFORMATION (Priority: HIGH)
+  # ============================================================================
+  match_info:
+    priority: 1
+    description: "Match type and outcome indicators"
+
+    game_modes:
+      - id: 15
+        name: "match_type_classic"
+        description: "Classic match mode indicator"
+        color: "#2196F3" # Blue
+        validation:
+          min_size: [50, 25]
+          max_size: [150, 75]
+
+      - id: 16
+        name: "match_type_ranked"
+        description: "Ranked match mode indicator"
+        color: "#FF9800" # Orange
+        validation:
+          min_size: [50, 25]
+          max_size: [150, 75]
+
+      - id: 17
+        name: "match_type_brawl"
+        description: "Brawl mode indicator"
+        color: "#9C27B0" # Purple
+        validation:
+          min_size: [50, 25]
+          max_size: [150, 75]
+
+      - id: 18
+        name: "match_type_custom"
+        description: "Custom game mode indicator"
+        color: "#607D8B" # Blue Grey
+        validation:
+          min_size: [50, 25]
+          max_size: [150, 75]
+
+    match_results:
+      - id: 19
+        name: "victory_text"
+        description: "Victory result text"
+        color: "#4CAF50" # Green
+        validation:
+          min_size: [200, 50]
+          max_size: [400, 100]
+
+      - id: 20
+        name: "defeat_text"
+        description: "Defeat result text"
+        color: "#F44336" # Red
+        validation:
+          min_size: [200, 50]
+          max_size: [400, 100]
+
+  # ============================================================================
+  # PLAYER STATISTICS (Priority: MEDIUM)
+  # ============================================================================
+  statistics:
+    priority: 2
+    description: "Player performance statistics"
+
+    core_stats:
+      - id: 21
+        name: "kda_display"
+        description: "Kill/Death/Assist display (e.g., 5/2/8)"
+        color: "#FF5722" # Deep Orange
+        validation:
+          min_size: [60, 20]
+          max_size: [150, 50]
+          aspect_ratio: [2.0, 8.0]
+
+      - id: 22
+        name: "player_name"
+        description: "Player IGN display"
+        color: "#3F51B5" # Indigo
+        validation:
+          min_size: [80, 20]
+          max_size: [200, 40]
+          aspect_ratio: [2.0, 10.0]
+
+    economic_stats:
+      - id: 23
+        name: "gold_amount"
+        description: "Total gold earned"
+        color: "#FFC107" # Amber
+        validation:
+          min_size: [60, 15]
+          max_size: [120, 40]
+
+      - id: 24
+        name: "gpm_display"
+        description: "Gold per minute"
+        color: "#FFEB3B" # Yellow
+        validation:
+          min_size: [60, 15]
+          max_size: [120, 40]
+
+    combat_stats:
+      - id: 25
+        name: "damage_dealt"
+        description: "Damage dealt to heroes"
+        color: "#E91E63" # Pink
+        validation:
+          min_size: [60, 15]
+          max_size: [150, 40]
+
+      - id: 26
+        name: "damage_taken"
+        description: "Damage taken"
+        color: "#9E9E9E" # Grey
+        validation:
+          min_size: [60, 15]
+          max_size: [150, 40]
+
+      - id: 27
+        name: "healing_done"
+        description: "Healing provided"
+        color: "#4CAF50" # Green
+        validation:
+          min_size: [60, 15]
+          max_size: [150, 40]
+
+    performance_metrics:
+      - id: 28
+        name: "participation_rate"
+        description: "Team fight participation percentage"
+        color: "#00BCD4" # Cyan
+        validation:
+          min_size: [40, 15]
+          max_size: [100, 40]
+
+      - id: 29
+        name: "turret_damage"
+        description: "Damage to structures"
+        color: "#795548" # Brown
+        validation:
+          min_size: [60, 15]
+          max_size: [150, 40]
+
+      - id: 30
+        name: "match_duration"
+        description: "Game length display"
+        color: "#607D8B" # Blue Grey
+        validation:
+          min_size: [60, 15]
+          max_size: [120, 40]
+
+  # ============================================================================
+  # UI ELEMENTS (Priority: MEDIUM)
+  # ============================================================================
+  ui_elements:
+    priority: 2
+    description: "User interface elements and containers"
+
+    team_indicators:
+      - id: 31
+        name: "team_indicator_ally"
+        description: "Ally team section marker"
+        color: "#8BC34A" # Light Green
+        validation:
+          min_size: [100, 30]
+          max_size: [400, 80]
+
+      - id: 32
+        name: "team_indicator_enemy"
+        description: "Enemy team section marker"
+        color: "#FF7043" # Deep Orange
+        validation:
+          min_size: [100, 30]
+          max_size: [400, 80]
+
+    interface_containers:
+      - id: 33
+        name: "scoreboard_container"
+        description: "Main statistics display area"
+        color: "#546E7A" # Blue Grey
+        validation:
+          min_size: [300, 200]
+          max_size: [800, 600]
+
+  # ============================================================================
+  # ITEMS & EQUIPMENT (Priority: LOW)
+  # ============================================================================
+  equipment:
+    priority: 3
+    description: "Items and equipment displays"
+
+    item_slots:
+      - id: 34
+        name: "item_icon_1"
+        description: "Equipment slot 1 (leftmost)"
+        color: "#673AB7" # Deep Purple
+        validation:
+          min_size: [25, 25]
+          max_size: [80, 80]
+          aspect_ratio: [0.8, 1.2]
+
+      - id: 35
+        name: "item_icon_2"
+        description: "Equipment slot 2"
+        color: "#673AB7"
+        validation:
+          min_size: [25, 25]
+          max_size: [80, 80]
+          aspect_ratio: [0.8, 1.2]
+
+      - id: 36
+        name: "item_icon_3"
+        description: "Equipment slot 3"
+        color: "#673AB7"
+        validation:
+          min_size: [25, 25]
+          max_size: [80, 80]
+          aspect_ratio: [0.8, 1.2]
+
+      - id: 37
+        name: "item_icon_4"
+        description: "Equipment slot 4"
+        color: "#673AB7"
+        validation:
+          min_size: [25, 25]
+          max_size: [80, 80]
+          aspect_ratio: [0.8, 1.2]
+
+      - id: 38
+        name: "item_icon_5"
+        description: "Equipment slot 5"
+        color: "#673AB7"
+        validation:
+          min_size: [25, 25]
+          max_size: [80, 80]
+          aspect_ratio: [0.8, 1.2]
+
+      - id: 39
+        name: "item_icon_6"
+        description: "Equipment slot 6 (rightmost)"
+        color: "#673AB7"
+        validation:
+          min_size: [25, 25]
+          max_size: [80, 80]
+          aspect_ratio: [0.8, 1.2]
+
+    battle_spells:
+      - id: 40
+        name: "battle_spell_1"
+        description: "First battle spell slot"
+        color: "#E91E63" # Pink
+        validation:
+          min_size: [25, 25]
+          max_size: [60, 60]
+          aspect_ratio: [0.8, 1.2]
+
+      - id: 41
+        name: "battle_spell_2"
+        description: "Second battle spell slot"
+        color: "#E91E63"
+        validation:
+          min_size: [25, 25]
+          max_size: [60, 60]
+          aspect_ratio: [0.8, 1.2]
+
+  # ============================================================================
+  # ACHIEVEMENTS & SPECIAL INDICATORS (Priority: LOW)
+  # ============================================================================
+  achievements:
+    priority: 3
+    description: "Special achievements and role indicators"
+
+    kill_achievements:
+      - id: 42
+        name: "savage_indicator"
+        description: "Savage kill achievement badge"
+        color: "#D32F2F" # Red
+        validation:
+          min_size: [40, 20]
+          max_size: [120, 60]
+
+      - id: 43
+        name: "maniac_indicator"
+        description: "Maniac kill achievement badge"
+        color: "#FF5722" # Deep Orange
+        validation:
+          min_size: [40, 20]
+          max_size: [120, 60]
+
+      - id: 44
+        name: "legendary_indicator"
+        description: "Legendary kill streak badge"
+        color: "#FF9800" # Orange
+        validation:
+          min_size: [40, 20]
+          max_size: [120, 60]
+
+    role_info:
+      - id: 45
+        name: "role_indicator"
+        description: "Player role badge/text"
+        color: "#795548" # Brown
+        validation:
+          min_size: [30, 20]
+          max_size: [100, 50]
+
+      - id: 46
+        name: "position_rank"
+        description: "Ranking within role"
+        color: "#607D8B" # Blue Grey
+        validation:
+          min_size: [30, 20]
+          max_size: [100, 50]
+
+  # ============================================================================
+  # QUALITY MARKERS (Priority: LOW)
+  # ============================================================================
+  quality_control:
+    priority: 3
+    description: "Quality validation markers"
+
+    validation_markers:
+      - id: 47
+        name: "ui_complete"
+        description: "Interface fully loaded indicator"
+        color: "#4CAF50" # Green
+        validation:
+          min_size: [50, 30]
+          max_size: [200, 100]
+
+      - id: 48
+        name: "text_readable"
+        description: "Text clearly legible marker"
+        color: "#2196F3" # Blue
+        validation:
+          min_size: [50, 30]
+          max_size: [200, 100]
+
+      - id: 49
+        name: "icons_clear"
+        description: "Icons properly rendered marker"
+        color: "#FF9800" # Orange
+        validation:
+          min_size: [50, 30]
+          max_size: [200, 100]
+
+# ============================================================================
+# ANNOTATION METADATA
+# ============================================================================
+metadata:
+  total_classes: 50
+  version: "1.0"
+  created_date: "2024-01-15"
+
+  priority_distribution:
+    high_priority: 21 # Classes 0-20 (Hero icons, MVP badges, match info)
+    medium_priority: 13 # Classes 21-33 (Statistics, UI elements)
+    low_priority: 16 # Classes 34-49 (Items, achievements, quality markers)
+
+  annotation_targets:
+    minimum_per_class:
+      high_priority: 200
+      medium_priority: 100
+      low_priority: 50
+
+    recommended_per_class:
+      high_priority: 500
+      medium_priority: 300
+      low_priority: 150
+
+  quality_standards:
+    minimum_resolution: "1080p"
+    supported_formats: ["jpg", "jpeg", "png"]
+    annotation_accuracy_target: 95
+    inter_annotator_agreement: 90
+
+# ============================================================================
+# EXPORT CONFIGURATION
+# ============================================================================
+export_config:
+  yolo_format:
+    class_mapping: "sequential" # 0-49 in order
+    coordinate_format: "normalized" # 0-1 range
+    bbox_format: "center_width_height" # x_center, y_center, width, height
+
+  label_studio_format:
+    include_metadata: true
+    color_scheme: "category_based"
+    export_confidence: true

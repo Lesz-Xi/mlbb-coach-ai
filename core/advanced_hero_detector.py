@@ -239,7 +239,7 @@ class AdvancedHeroDetector:
             gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
             
             # Get all text with lower confidence threshold
-            ocr_results = reader.readtext(gray, detail=0, width_ths=0.7, height_ths=0.7)
+            ocr_results = reader.readtext(gray, detail=0)
             all_text = " ".join(ocr_results)
             debug_info["all_text"] = all_text[:200]  # Limit for debug
             
