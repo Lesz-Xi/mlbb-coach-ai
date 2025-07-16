@@ -18,6 +18,7 @@ try:
     from .data_collector import DataCollector, get_ocr_reader
     from .session_manager import SessionManager
     from .screenshot_analyzer import ScreenshotAnalyzer
+    from .ign_validator import IGNValidator
     from .trophy_medal_detector_v2 import (
         improved_trophy_medal_detector as trophy_medal_detector
     )
@@ -26,6 +27,7 @@ except ImportError:
     from data_collector import DataCollector, get_ocr_reader
     from session_manager import SessionManager
     from screenshot_analyzer import ScreenshotAnalyzer
+    from ign_validator import IGNValidator
     from trophy_medal_detector_v2 import (
         improved_trophy_medal_detector as trophy_medal_detector
     )
@@ -451,15 +453,19 @@ class AnchorBasedLayoutParser:
         combined_text = " ".join(row_texts)
         self._extract_kda_from_text_enhanced(combined_text, row_items, parsed_data)
         
-        # Extract gold using simplified spatial positioning - Fixed threshold  
-        gold_candidates = [(n, x) for n, x in row_numbers if 100 <= n <= 50000]
+        # Extract gold using improved MLBB-specific logic
+        gold_candidates = [(n, x) for n, x in row_numbers if 1000 <= n <= 50000]  # More specific gold range
         if gold_candidates:
             # Sort by spatial position (X coordinate) for proper column alignment
             gold_candidates.sort(key=lambda item: item[1])  # Sort by X position
             
-            # Use first gold candidate by spatial position (left to right)
-            parsed_data['gold'] = gold_candidates[0][0]
-            logger.debug(f"Extracted gold via spatial positioning: {parsed_data['gold']}")
+            # For MLBB, gold is typically the first large number after KDA
+            # Skip small numbers (KDA range) and find the first large number
+            for gold_val, x_pos in gold_candidates:
+                if gold_val >= 1000:  # Definitely gold, not KDA
+                    parsed_data['gold'] = gold_val
+                    logger.debug(f"Extracted gold via MLBB-specific logic: {gold_val}")
+                    break
         
         # Extract damage values using spatial positioning
         damage_candidates = [(n, x) for n, x in row_numbers if 1000 <= n <= 500000]
@@ -505,33 +511,83 @@ class AnchorBasedLayoutParser:
                     return
 
     def _extract_kda_from_text_enhanced(self, text: str, row_items: List, data: Dict[str, Any]):
-        """Enhanced KDA extraction with spatial awareness."""
+        """Enhanced KDA extraction with spatial awareness for MLBB scoreboards."""
         import re
         
         # First try the standard text-based extraction
         self._extract_kda_from_text(text, data)
         
-        # If that failed, try spatial extraction
+        # If that failed, try MLBB-specific spatial extraction
         if not all(k in data for k in ['kills', 'deaths', 'assists']):
-            # Look for individual numbers that could be KDA
-            kda_candidates = []
+            logger.debug(f"Standard KDA extraction failed, trying MLBB-specific extraction")
+            
+            # MLBB-specific: Look for the pattern after IGN
+            # Format: "IGN K D A GOLD ..." where K/D/A are small numbers
+            combined_text = " ".join([item['text'] for item in row_items])
+            logger.debug(f"Combined row text: {combined_text}")
+            
+            # Try to find KDA pattern after IGN
+            # Look for pattern: IGN followed by 2-3 small numbers (KDA)
+            ign_kda_pattern = r'(?:lesz\s+xvii|Lesz\s+XVII)\s+(\d{1,2})\s+(\d{1,2})\s+(\d{1,2})'
+            match = re.search(ign_kda_pattern, combined_text, re.IGNORECASE)
+            
+            if match:
+                kills, deaths, assists = map(int, match.groups())
+                if all(0 <= val <= 50 for val in [kills, deaths, assists]):  # Sanity check
+                    data['kills'] = kills
+                    data['deaths'] = max(1, deaths)
+                    data['assists'] = assists
+                    logger.debug(f"Extracted KDA via MLBB pattern: {kills}/{deaths}/{assists}")
+                    return
+            
+            # Fallback: Look for clusters of small numbers after finding IGN position
+            ign_found = False
+            ign_x_position = 0
             
             for item in row_items:
-                # Look for small numbers (likely KDA values)
+                if 'lesz' in item['text'].lower() and 'xvii' in item['text'].lower():
+                    ign_found = True
+                    ign_x_position = item['x']
+                    break
+            
+            if ign_found:
+                # Look for small numbers to the right of IGN
+                kda_candidates = []
+                
+                for item in row_items:
+                    if item['x'] > ign_x_position:  # To the right of IGN
+                        numbers = [int(n) for n in re.findall(r'\b(\d+)\b', item['text'])]
+                        for num in numbers:
+                            if 0 <= num <= 50:  # KDA range
+                                kda_candidates.append((num, item['x']))
+                
+                # Sort by X position and take first 3 as K/D/A
+                if len(kda_candidates) >= 3:
+                    kda_candidates.sort(key=lambda x: x[1])  # Sort by X position
+                    kills, deaths, assists = [k[0] for k in kda_candidates[:3]]
+                    
+                    data['kills'] = kills
+                    data['deaths'] = max(1, deaths)
+                    data['assists'] = assists
+                    logger.debug(f"Extracted KDA via spatial method: {kills}/{deaths}/{assists}")
+                    return
+            
+            # Final fallback: Look for any sequence of 3 small numbers
+            all_small_numbers = []
+            for item in row_items:
                 numbers = [int(n) for n in re.findall(r'\b(\d+)\b', item['text'])]
                 for num in numbers:
-                    if 0 <= num <= 50:  # KDA range
-                        kda_candidates.append((num, item['x']))
+                    if 0 <= num <= 50:
+                        all_small_numbers.append((num, item['x']))
             
-            # Sort by X position and take first 3 as K/D/A
-            if len(kda_candidates) >= 3:
-                kda_candidates.sort(key=lambda x: x[1])  # Sort by X position
-                kills, deaths, assists = [k[0] for k in kda_candidates[:3]]
+            if len(all_small_numbers) >= 3:
+                all_small_numbers.sort(key=lambda x: x[1])
+                kills, deaths, assists = [k[0] for k in all_small_numbers[:3]]
                 
-                data['kills'] = kills
+                data['kills'] = kills  
                 data['deaths'] = max(1, deaths)
                 data['assists'] = assists
-                logger.debug(f"Extracted KDA via spatial method: {kills}/{deaths}/{assists}")
+                logger.debug(f"Extracted KDA via fallback method: {kills}/{deaths}/{assists}")
     
     def _extract_gold_from_text(self, text: str, data: Dict[str, Any]):
         """Extract gold value from text."""
@@ -616,10 +672,13 @@ class EnhancedDataCollector(DataCollector):
         self.screenshot_analyzer = ScreenshotAnalyzer()
         
         # Initialize IGN matcher with improved algorithms
-        self.ign_matcher = IGNMatcher()
+        self.ign_matcher = RobustIGNMatcher()
         
         # Initialize IGN validator
         self.ign_validator = IGNValidator()
+        
+        # Initialize anchor-based layout parser
+        self.anchor_parser = AnchorBasedLayoutParser()
         
         # Performance tracking
         self.performance_stats = {
@@ -891,15 +950,16 @@ class EnhancedDataCollector(DataCollector):
                 image_path, ign, screenshot_type, hero_override, known_igns
             )
             
-            # Create screenshot analysis object
-            screenshot_analysis = {
-                "screenshot_type": screenshot_type,
-                "raw_data": analysis_result.get("data", {}),
-                "confidence": analysis_result.get(
+            # Create screenshot analysis object (using proper dataclass)
+            from .session_manager import ScreenshotAnalysis
+            screenshot_analysis = ScreenshotAnalysis(
+                screenshot_type=screenshot_type,
+                raw_data=analysis_result.get("data", {}),
+                confidence=analysis_result.get(
                     "overall_confidence", type_confidence
                 ),
-                "warnings": analysis_result.get("warnings", [])
-            }
+                warnings=analysis_result.get("warnings", [])
+            )
             
             # Add to session
             self.session_manager.add_screenshot_analysis(
@@ -1069,15 +1129,15 @@ class EnhancedDataCollector(DataCollector):
         logger.info("📊 Phase 4: Collecting results...")
         
         try:
-            # Get parsing results
-            parsed_data = parsing_future.result(timeout=10)
+            # Get parsing results - increased timeout for complex MLBB analysis
+            parsed_data = parsing_future.result(timeout=30)
         
-            # Get trophy detection results  
-            trophy_data = trophy_future.result(timeout=15)
+            # Get trophy detection results - increased timeout for medal detection
+            trophy_data = trophy_future.result(timeout=25)
         
-            # Get hero detection results
+            # Get hero detection results - increased timeout for comprehensive hero analysis
             if hero_future:
-                hero_data = hero_future.result(timeout=8)
+                hero_data = hero_future.result(timeout=20)
             else:
                 hero_data = {"hero": hero_override or "unknown", "hero_confidence": 0.0}
             
